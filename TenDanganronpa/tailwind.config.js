@@ -18,7 +18,7 @@ module.exports = {
       },
       fontFamily: {
         sans: ['Noto Sans TC', 'Noto Sans JP', 'sans-serif'],
-        serif: ['新細明體', 'serif'],
+        serif: ['Noto Serif TC', 'Noto Serif JP', 'serif'],
       },
     },
   },
