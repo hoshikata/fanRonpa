@@ -1,0 +1,17 @@
+{
+  "editor.tokenColorCustomizations" : { "semanticHighlighting" : true }, 
+  "editor.rulers": [80, 120], // 編輯器參考線
+  "editor.wordWrap": "on", // 編輯視窗自動換行
+  "editor.tabSize": 2, // TAB的大小
+  "editor.minimap.maxColumn": 90, // 迷你地圖的大小
+  "editor.minimap.renderCharacters": false, // 迷你地圖要不要真實渲染
+  "editor.fontSize": 13.5, // 字形大小
+  "editor.fontFamily": "'Fira Code', 'Source Code Pro'", // 字形設定
+  "editor.fontLigatures": "'ss01', 'ss02', 'ss03', 'ss04', 'ss05', 'ss06'", // Fira Code 的連號符設定
+  "emmet.triggerExpansionOnTab": true,
+  // prettier 的設定
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // 是否用 prettier
+  "editor.formatOnSave": false, // 要不要儲存時自動prettier
+  // tailwind 的設定
+  "tailwindCSS.emmetCompletions": true,
+}

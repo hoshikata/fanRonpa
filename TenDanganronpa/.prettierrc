@@ -1,0 +1,13 @@
+{
+  "printWidth": 120,
+  "tabWidth": 2,
+  "singleQuote": true,
+  "semi": true,
+  "trailingComma": "all",
+  "bracketSpacing": true,
+  "arrowParens": "always",
+  "vueIndentScriptAndStyle": true,
+  "pugSingleQuote": false,
+  "plugins": ["@prettier/plugin-pug", "prettier-plugin-tailwindcss"],
+  "pluginSearchDirs": false
+}
