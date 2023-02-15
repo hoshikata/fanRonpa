@@ -18,11 +18,11 @@
   };
 
   const header = ref(null);
-  onMounted(() => {
-    setTimeout(() => {
-      header.value.classList.add('jumbotron-header');
-    }, 5000);
-  });
+  // onMounted(() => {
+  //   setTimeout(() => {
+  //     header.value.classList.add('jumbotron-header');
+  //   }, 5000);
+  // });
 </script>
 
 <template lang="pug">

@@ -1,16 +1,16 @@
 <script setup>
   import ArrowLeft from '~icons/ic/outline-arrow-circle-left';
   import ArrowRight from '~icons/ic/outline-arrow-circle-right';
-  import data from '../../data/data.json';
+  // import data from '../../data/data.json';
   import axios from 'axios';
   import { computed, onMounted, ref } from 'vue';
 
   //== get data
   const characterData = ref([]);
   const getData = async () => {
-    // const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
-    // characterData.value = data.data;
-    characterData.value = data;
+    const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
+    characterData.value = data.data;
+    // characterData.value = data;。
   };
   onMounted(getData);
 
