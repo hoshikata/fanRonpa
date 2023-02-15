@@ -13,7 +13,8 @@ module.exports = {
         xxl: { max: '1600px' },
       },
       colors: {
-        primary: '#BE3482',
+        primary: '#30D5C8',
+        secondary: '#2B5EAB',
         back: '#000100',
       },
       fontFamily: {
