@@ -1,12 +1,20 @@
 <script setup>
+  import IconClose from '~icons/ic/round-close';
   import Jumbotron from './views/Jumbotron.vue';
-  import Character from './views/Character.vue';
+  import CharacterInfo from './views/CharacterInfo.vue';
 </script>
 
 <template lang="pug">
 #app
   //- Jumbotron/
-  Character/
+
+  section.relative.h-full.min-h-screen.w-full
+    p 10212323112313
+    .fixed.top-0.left-0.h-full.w-full.cursor-pointer.p-14(class="bg-back/50 md:p-10")
+      button.absolute.right-0.top-0.text-gray-400(class="hover:text-gray-600")
+        IconClose.m-2.h-12.w-12(class="md:w-8 h-8")
+      .h-full.w-full.cursor-auto.overflow-hidden.rounded-xl.bg-back
+        CharacterInfo/
 </template>
 
 <style lang="scss" scoped>

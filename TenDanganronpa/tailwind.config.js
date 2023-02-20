@@ -21,6 +21,10 @@ module.exports = {
         sans: ['Noto Sans TC', 'Noto Sans JP', 'sans-serif'],
         serif: ['Noto Serif TC', 'Noto Serif JP', 'serif'],
       },
+      boxShadow: {
+        info: '10px 10px 0 rgba(0, 0, 0)',
+        'info-sm': '6px 6px 0 rgba(0, 0, 0)',
+      },
     },
   },
   plugins: [],

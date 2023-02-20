@@ -6,3 +6,7 @@
 * {
   @apply font-serif;
 }
+
+.scrollbar {
+  scrollbar-width: thin;
+}
