@@ -5,7 +5,7 @@
 
 <template lang="pug">
 #app
-  Jumbotron/
+  //- Jumbotron/
   Character/
 </template>
 
