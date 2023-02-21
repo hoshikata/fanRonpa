@@ -63,7 +63,7 @@
 </script>
 
 <template lang="pug">
-section.character.scrollbar.overflow-y-auto
+section.character.scrollbar.overflow-y-auto.overscroll-none
   .character_container
     .character_author.left-0.bg-top(src="../assets/profile_2.png")
     .character_author.right-0.bg-bottom(src="../assets/profile_2.png") 
@@ -72,7 +72,7 @@ section.character.scrollbar.overflow-y-auto
       .character_title
         .flex.justify-center
           p.mx-5(v-for="name of charName")
-            h1.whitespace-nowrap.text-7xl.font-semibold {{ name[0] }}
+            h1.text-7xl.font-semibold {{ name[0] }}
             h2.text-primary {{ name[1] }}
         h3.mt-3.flex.flex-wrap.justify-center.text-2xl(class="md:mt-2 md:text-xl")
           span(v-for="ability of charAbility") {{ ability }}
@@ -87,7 +87,7 @@ section.character.scrollbar.overflow-y-auto
         .scrollbar.h-0.min-h-full.w-full.overflow-y-auto
           p(v-for="text of charDesc") {{ text }}
 
-    .relative.flex.min-h-full.grow.overflow-hidden(class="md:min-h-0 md:grow-0")
+    .character_aside
       .character_mantra
         div
           p.whitespace-nowrap= "あ、ごめんなさい！"
@@ -105,7 +105,7 @@ section.character.scrollbar.overflow-y-auto
   .character {
     @apply relative flex h-full w-full flex-col items-stretch tracking-widest text-white;
     @apply bg-cover bg-center bg-no-repeat;
-    background-image: url('../assets/profile_bg.png');
+    background-image: url('../assets/image/profile_bg.png');
 
     &_container {
       @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em];
@@ -113,9 +113,12 @@ section.character.scrollbar.overflow-y-auto
       @apply xl:px-14;
       @apply lg:px-10;
       @apply md:flex-col-reverse md:px-8 md:text-base;
+      &:before {
+        @apply absolute top-0 left-0 h-full w-full bg-gradient-to-l from-primary to-transparent opacity-20 content-[''];
+      }
     }
     &_title {
-      @apply text-center;
+      @apply whitespace-nowrap text-center;
       h1 {
         @apply xl:text-5xl;
         @apply md:text-4xl;
@@ -126,19 +129,28 @@ section.character.scrollbar.overflow-y-auto
     }
     &_table {
       @apply flex items-center px-4 py-3.5;
+      @apply lg:py-3;
       @apply md:py-2.5;
     }
     &_th {
       @apply relative mr-9 py-1 px-6;
       @apply xxl:px-5;
-      @apply mr-6 md:px-4;
+      @apply lg:py-0.5;
+      @apply md:mr-6 md:px-4;
       &::before {
         @apply absolute top-0 left-0 h-full w-full -skew-x-[40deg] bg-primary shadow-info content-[''];
       }
     }
     &_description {
-      @apply my-2 mr-3 grow leading-10 xxl:min-h-[200px];
+      @apply my-2 mr-3 grow leading-10 xxl:min-h-[250px];
       @apply md:my-1 lg:leading-8;
+    }
+    &_aside {
+      @apply relative flex min-h-full grow overflow-hidden;
+      @apply md:min-h-0 md:grow-0;
+      mask: url('../assets/image/char_clip.png') repeat-x;
+      mask-size: contain;
+      mask-position: bottom right;
     }
     &_mantra {
       @apply flex shrink-0 justify-center py-5 px-4 text-3xl leading-10;
@@ -160,9 +172,11 @@ section.character.scrollbar.overflow-y-auto
       @apply lg:w-[75%];
     }
     &_author {
-      @apply absolute top-0 h-full w-56 bg-contain bg-no-repeat mix-blend-multiply;
+      @apply absolute top-0 h-full w-56 bg-contain bg-no-repeat opacity-80 mix-blend-multiply;
+      @apply xl:w-40;
       @apply md:w-32;
-      background-image: url('../assets/profile_zoe.png');
+      @apply sm:w-28;
+      background-image: url('../assets/image/profile_zoe.png');
     }
     &_next {
       @apply absolute top-0 z-10 h-full w-20 px-3 text-white/50 opacity-0 hover:opacity-100;

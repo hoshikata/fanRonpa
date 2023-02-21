@@ -10,3 +10,16 @@
 .scrollbar {
   scrollbar-width: thin;
 }
+.scrollbar::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+.scrollbar::-webkit-scrollbar-thumb {
+  background-color: #cdcdcd80;
+}
+.scrollbar::-webkit-scrollbar-thumb:hover {
+  background-color: #a6a6a6d6;
+}
