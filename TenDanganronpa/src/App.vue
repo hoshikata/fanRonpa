@@ -8,17 +8,32 @@
 #app
   Jumbotron/
 
-  section.relative.h-full.min-h-screen.w-full
-    .fixed.top-0.left-0.h-full.w-full.cursor-pointer.p-14(class="bg-back/50 md:p-10")
-      button.absolute.right-0.top-0.text-gray-400(class="hover:text-gray-600")
-        IconClose.m-2.h-12.w-12.h-8(class="md:w-8")
-      .h-full.w-full.cursor-auto.overflow-hidden.rounded-xl.bg-back
+  section.characters
+    .characters_popup
+      button.characters_close
+        IconClose
+      .characters_window
         CharacterInfo/
 </template>
 
 <style lang="scss" scoped>
   #app {
     @apply min-h-screen w-full bg-back text-white;
+  }
+  .characters {
+    @apply relative h-full min-h-screen w-full;
+    &_popup {
+      @apply fixed top-0 left-0 h-full w-full cursor-pointer bg-back/50 p-14 xl:p-12 md:p-10 sm:p-8;
+    }
+    &_close {
+      @apply absolute right-0 top-0 text-gray-400 hover:text-gray-600;
+      svg {
+        @apply m-2 h-12 w-12 xl:h-10 xl:w-10 md:h-8 md:w-8 sm:h-6 sm:w-6;
+      }
+    }
+    &_window {
+      @apply h-full w-full cursor-auto overflow-hidden rounded-xl bg-back;
+    }
   }
 </style>
 

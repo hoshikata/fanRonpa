@@ -20,6 +20,7 @@
   onMounted(getData);
 
   //== char
+  const charContainer = ref(null);
   const activeId = ref(4);
   const activeChar = computed(() => {
     const target = characterData.value.find((datum) => datum.id === activeId.value) ?? {};
@@ -28,11 +29,17 @@
     return result;
   });
   const changeChar = (num) => {
-    const last = characterData.value.length;
-    let newId = activeId.value + num;
-    if (newId < 0) newId = last + newId;
-    if (newId >= last) newId = last - newId;
-    activeId.value = newId;
+    const container = charContainer.value;
+    container.classList.add('opacity-0');
+    setTimeout(() => {
+      const last = characterData.value.length;
+      let newId = activeId.value + num;
+      if (newId < 0) newId = last + newId;
+      if (newId >= last) newId = last - newId;
+      activeId.value = newId;
+      container.parentNode.scrollTo(0, 0);
+      container.classList.remove('opacity-0');
+    }, 500);
   };
   const charName = computed(() => {
     const { name, spell } = activeChar.value;
@@ -64,9 +71,9 @@
 
 <template lang="pug">
 section.character.scrollbar.overflow-y-auto.overscroll-none
-  .character_container
-    .character_author.left-0.bg-top(src="../assets/profile_2.png")
-    .character_author.right-0.bg-bottom(src="../assets/profile_2.png") 
+  .character_container(ref="charContainer")
+    .character_author.left-0(src="../assets/profile_2.png")
+    .character_author.right-0.rotate-180(src="../assets/profile_2.png") 
 
     .relative.z-10.flex.shrink-0.flex-col.py-5(class="lg:w-4/7 w-1/2 md:w-full")
       .character_title
@@ -84,12 +91,12 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
           p {{ activeChar[info.dataName] }}
       .hr
       .character_description
-        .scrollbar.h-0.min-h-full.w-full.overflow-y-auto
+        .scrollbar.h-0.min-h-full.w-full.overflow-y-auto.pr-2
           p(v-for="text of charDesc") {{ text }}
 
     .character_aside
       .character_mantra
-        div
+        .text-white(:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
           p.whitespace-nowrap= "あ、ごめんなさい！"
           p.whitespace-nowrap= "私また宇宙の話に"
           p.whitespace-nowrap= "夢中になっちゃいました..."
@@ -105,10 +112,10 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
   .character {
     @apply relative flex h-full w-full flex-col items-stretch tracking-widest text-white;
     @apply bg-cover bg-center bg-no-repeat;
-    background-image: url('../assets/image/profile_bg.png');
+    background-image: url('/image/profile_bg.png');
 
     &_container {
-      @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em];
+      @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[400ms];
       @apply xxl:px-16 xxl:text-lg xxl:tracking-[0.15em];
       @apply xl:px-14;
       @apply lg:px-10;
@@ -142,13 +149,13 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       }
     }
     &_description {
-      @apply my-2 mr-3 grow leading-10 xxl:min-h-[250px];
-      @apply md:my-1 lg:leading-8;
+      @apply my-2 mr-2 grow leading-10 xxl:min-h-[250px];
+      @apply lg:leading-8 md:my-1;
     }
     &_aside {
       @apply relative flex min-h-full grow overflow-hidden;
       @apply md:min-h-0 md:grow-0;
-      mask: url('../assets/image/char_clip.png') repeat-x;
+      mask: url('/image/char_clip.png') repeat-x;
       mask-size: contain;
       mask-position: bottom right;
     }
@@ -159,11 +166,11 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply lg:text-xl;
       @apply md:px-2 md:text-lg;
       writing-mode: vertical-rl;
-      p:nth-child(2):before {
-        content: '　　　';
+      p:nth-child(2) {
+        @apply indent-[3em] md:indent-[2em];
       }
-      p:nth-child(3):before {
-        content: '　　　　　　';
+      p:nth-child(3) {
+        @apply indent-[6em] md:indent-[4em];
       }
     }
     &_image {
@@ -172,11 +179,12 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply lg:w-[75%];
     }
     &_author {
-      @apply absolute top-0 h-full w-56 bg-contain bg-no-repeat opacity-80 mix-blend-multiply;
+      @apply absolute top-0 h-full w-56 opacity-80 mix-blend-multiply;
+      @apply bg-contain bg-top bg-no-repeat;
       @apply xl:w-40;
       @apply md:w-32;
       @apply sm:w-28;
-      background-image: url('../assets/image/profile_zoe.png');
+      background-image: url('/image/profile_zoe.png');
     }
     &_next {
       @apply absolute top-0 z-10 h-full w-20 px-3 text-white/50 opacity-0 hover:opacity-100;

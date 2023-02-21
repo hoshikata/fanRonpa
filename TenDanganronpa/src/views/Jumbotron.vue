@@ -47,7 +47,7 @@ section.jumbotron(ref="header")
   }
   .logo {
     @apply relative h-2/3 w-2/3 overflow-hidden bg-contain bg-center bg-no-repeat;
-    mask: url('../assets/image/LOGO_MONOKURO-12.svg') no-repeat center center;
+    mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
     &_color {
       @apply h-full w-full bg-gradient-to-t from-primary to-secondary;
     }

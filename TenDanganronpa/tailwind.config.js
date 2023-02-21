@@ -3,15 +3,15 @@ module.exports = {
   mode: 'jit',
   content: ['./index.html', './src/**/*.{vue,js,ts,jsx,tsx,html.pug}'],
   theme: {
+    screens: {
+      xxl: { max: '1600px' },
+      xl: { max: '1200px' },
+      lg: { max: '992px' },
+      md: { max: '768px' },
+      sm: { max: '576px' },
+      xs: { max: '360px' },
+    },
     extend: {
-      screens: {
-        xs: { max: '360px' },
-        sm: { max: '576px' },
-        md: { max: '768px' },
-        lg: { max: '992px' },
-        xl: { max: '1200px' },
-        xxl: { max: '1600px' },
-      },
       colors: {
         primary: '#30D5C8',
         secondary: '#2B5EAB',
