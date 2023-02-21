@@ -1,7 +1,7 @@
 <script setup>
   import IconArrow from '~icons/ic/baseline-double-arrow';
   import axios from 'axios';
-  // import data from '../../data/data.json';
+  import data from '../../data/data.json';
   import { computed, watch, onMounted, ref } from 'vue';
 
   const props = defineProps({
@@ -13,9 +13,9 @@
 
   const characterData = ref([]);
   const getData = async () => {
-    const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
-    characterData.value = data.data;
-    // characterData.value = data;
+    // const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
+    // characterData.value = data.data;
+    characterData.value = data;
   };
   onMounted(getData);
 
@@ -39,7 +39,7 @@
       activeId.value = newId;
       container.parentNode.scrollTo(0, 0);
       container.classList.remove('opacity-0');
-    }, 500);
+    }, 700);
   };
   const charName = computed(() => {
     const { name, spell } = activeChar.value;
@@ -49,6 +49,7 @@
   });
   const charAbility = computed(() => activeChar.value.ability?.split('\n'));
   const charDesc = computed(() => activeChar.value.description?.split('\n'));
+  const charMantra = computed(() => activeChar.value.mantra?.split('\n'));
 
   //== table
   const tableList = [
@@ -72,8 +73,9 @@
 <template lang="pug">
 section.character.scrollbar.overflow-y-auto.overscroll-none
   .character_container(ref="charContainer")
-    .character_author.left-0(src="../assets/profile_2.png")
-    .character_author.right-0.rotate-180(src="../assets/profile_2.png") 
+    img.character_school(src="/image/KIKUTERAZONO-19.svg")
+    .character_author.left-0(src="/image/profile_2.png")
+    .character_author.right-0.rotate-180(src="/image/profile_2.png") 
 
     .relative.z-10.flex.shrink-0.flex-col.py-5(class="lg:w-4/7 w-1/2 md:w-full")
       .character_title
@@ -97,9 +99,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     .character_aside
       .character_mantra
         .text-white(:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
-          p.whitespace-nowrap= "あ、ごめんなさい！"
-          p.whitespace-nowrap= "私また宇宙の話に"
-          p.whitespace-nowrap= "夢中になっちゃいました..."
+          p.whitespace-nowrap(v-for="mantra of charMantra") {{ mantra }}
       img.character_image(src="https://images.plurk.com/1Ozqkemya7dEFGj7LXPCQO.png")
 
     button.character_next.left-0.-scale-100(@click="changeChar(-1)")
@@ -115,14 +115,14 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     background-image: url('/image/profile_bg.png');
 
     &_container {
-      @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[400ms];
+      @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[600ms];
       @apply xxl:px-16 xxl:text-lg xxl:tracking-[0.15em];
       @apply xl:px-14;
       @apply lg:px-10;
       @apply md:flex-col-reverse md:px-8 md:text-base;
-      &:before {
-        @apply absolute top-0 left-0 h-full w-full bg-gradient-to-l from-primary to-transparent opacity-20 content-[''];
-      }
+      // &:before {
+      //   @apply absolute top-0 left-0 h-full w-full bg-gradient-to-l from-primary to-transparent opacity-20 content-[''];
+      // }
     }
     &_title {
       @apply whitespace-nowrap text-center;
@@ -160,11 +160,11 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       mask-position: bottom right;
     }
     &_mantra {
-      @apply flex shrink-0 justify-center py-5 px-4 text-3xl leading-10;
-      @apply bg-gradient-to-b from-back via-back to-transparent opacity-80;
-      @apply xl:justify-start xl:text-2xl;
+      @apply box-content flex w-[4em] shrink-0 items-center justify-start px-4 pt-10 text-3xl leading-10 opacity-80;
+      @apply bg-gradient-to-b from-back via-back to-transparent;
+      @apply xl:text-2xl;
       @apply lg:text-xl;
-      @apply md:px-2 md:text-lg;
+      @apply md:px-2 md:py-5 md:text-lg md:h-[500px];
       writing-mode: vertical-rl;
       p:nth-child(2) {
         @apply indent-[3em] md:indent-[2em];
@@ -174,9 +174,18 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       }
     }
     &_image {
-      @apply absolute right-0 top-5 w-[85%] object-contain;
-      @apply xl:w-[80%];
+      @apply absolute right-5 top-5 w-[95%] object-contain;
+      @apply xl:right-0 xl:w-[80%];
       @apply lg:w-[75%];
+    }
+    &_school {
+      @apply absolute right-24 top-16 w-[18%] opacity-100;
+      @apply xl:right-5;
+      @apply sm:w-[25%];
+      filter: drop-shadow(0 0 2px black);
+      mask: url('/image/char_clip.png') repeat-x;
+      mask-size: cover;
+      mask-position: bottom right;
     }
     &_author {
       @apply absolute top-0 h-full w-56 opacity-80 mix-blend-multiply;

@@ -1,4 +1,47 @@
 <script setup>
+  import { ref } from 'vue';
+  import { useMousePosition } from '../composable/useMousePosition.js';
+  const { pageX, pageY } = useMousePosition();
+
+  const jumbotron = ref(null);
+  const setMove = (num, bd = 0) => {
+    const w = jumbotron.value?.clientWidth ?? 0;
+    const h = jumbotron.value?.clientHeight ?? 0;
+    const top = (pageY.value - h / 2) * 0.001 * num;
+    const left = (pageX.value - w / 2) * 0.001 * num;
+    return [`top: calc(${top ?? 0}% + ${bd}px)`, `left: calc(${left}% + ${bd}px)`];
+  };
+</script>
+
+<template lang="pug">
+.jumbotron(ref="jumbotron")
+  img.jumbotron_bg(src="/jumbotron/logo_bg05.png", class="!relative", :style="setMove(1)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg04.png", :style="setMove(2)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg03.png", :style="setMove(4)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg02.png", :style="setMove(6)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg01.png", :style="setMove(8)")
+  .jumbotron_cover(:style="setMove(8, -2000)")
+  .jumbotron_logo
+</template>
+
+<style lang="scss" scoped>
+  .jumbotron {
+    @apply relative flex w-full items-center justify-center overflow-hidden bg-jumbotron;
+
+    &_bg {
+      @apply absolute top-0 left-0 h-full w-full object-cover object-center;
+    }
+    &_cover {
+      @apply absolute box-content h-full w-full border-[2000px] border-jumbotron;
+    }
+    &_logo {
+      @apply absolute h-[60%] w-[60%] bg-white/80;
+      mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
+    }
+  }
+</style>
+
+<!-- <script setup>
   import { onMounted, ref } from 'vue';
 
   const bubbleStyle = (num) => {
@@ -108,4 +151,4 @@ section.jumbotron(ref="header")
       transform: rotate(360deg);
     }
   }
-</style>
+</style> -->

@@ -15,6 +15,7 @@ module.exports = {
       colors: {
         primary: '#30D5C8',
         secondary: '#2B5EAB',
+        jumbotron: '#14244D',
         back: '#000100',
       },
       fontFamily: {
