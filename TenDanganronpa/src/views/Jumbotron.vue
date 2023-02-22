@@ -1,17 +1,28 @@
 <script setup>
   import { ref } from 'vue';
-  import { useMousePosition } from '../composable/useMousePosition.js';
-  const { pageX, pageY } = useMousePosition();
+  import { usePosition } from '../composable/usePosition.js';
+  const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
   const jumbotron = ref(null);
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
     const h = jumbotron.value?.clientHeight ?? 2;
-    const top = (pageY.value - h / 2) * 0.001 * num;
-    const left = (pageX.value - w / 2) * 0.001 * num;
-    const isOver = pageY.value >= h || pageX.value >= w;
-    return isOver ? [] : [`top: calc(50% + ${top}%)`, `left: calc(50% + ${left}%)`];
+    if (isMobile) {
+      const scrollT = (scrollY.value / h) * -3 * num;
+      const isScrollOver = scrollY.value >= h;
+      return isScrollOver ? [] : [`top: calc(50% + ${scrollT}%)`];
+    } else {
+      const mouseT = (mouseY.value - h / 2) * 0.001 * num;
+      const mouseL = (mouseX.value - w / 2) * 0.001 * num;
+      const isMouseOver = mouseY.value >= h || mouseX.value >= w;
+      return isMouseOver ? [] : [`top: calc(50% + ${mouseT}%)`, `left: calc(50% + ${mouseL}%)`];
+    }
   };
+  const mountedEvent = () => {
+    if (isMobile) windowScrolling();
+    else windowMousing();
+  };
+  mountedEvent();
 </script>
 
 <template lang="pug">

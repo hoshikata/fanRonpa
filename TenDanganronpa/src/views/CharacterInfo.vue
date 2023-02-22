@@ -1,7 +1,7 @@
 <script setup>
   import IconArrow from '~icons/ic/baseline-double-arrow';
   import axios from 'axios';
-  import data from '../../data/data.json';
+  // import data from '../../data/data.json';
   import { computed, watch, onMounted, ref } from 'vue';
 
   const props = defineProps({
@@ -13,9 +13,9 @@
 
   const characterData = ref([]);
   const getData = async () => {
-    // const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
-    // characterData.value = data.data;
-    characterData.value = data;
+    const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
+    characterData.value = data.data;
+    // characterData.value = data;
   };
   onMounted(getData);
 
@@ -112,7 +112,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
   .character {
     @apply relative flex h-full w-full flex-col items-stretch tracking-widest text-white;
     @apply bg-cover bg-center bg-no-repeat;
-    background-image: url('/image/profile_bg.png');
+    background-image: url('../assets/image/profile_bg.png');
 
     &_container {
       @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[600ms];
@@ -155,7 +155,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     &_aside {
       @apply relative flex min-h-full grow overflow-hidden;
       @apply md:min-h-0 md:grow-0;
-      mask: url('/image/char_clip.png') repeat-x;
+      mask: url('../assets/image/profile_clip.png') repeat-x;
       mask-size: contain;
       mask-position: bottom right;
     }
@@ -183,7 +183,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply xl:right-5;
       @apply sm:w-[25%];
       filter: drop-shadow(0 0 2px black);
-      mask: url('/image/char_clip.png') repeat-x;
+      mask: url('../assets/image/profile_clip.png') repeat-x;
       mask-size: cover;
       mask-position: bottom right;
     }
@@ -193,7 +193,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply xl:w-40;
       @apply md:w-32;
       @apply sm:w-28;
-      background-image: url('/image/profile_zoe.png');
+      background-image: url('../assets/image/profile_zoe.png');
     }
     &_next {
       @apply absolute top-0 z-10 h-full w-20 px-3 text-white/50 opacity-0 hover:opacity-100;
