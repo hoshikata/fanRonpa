@@ -37,7 +37,6 @@
       if (newId < 0) newId = last + newId;
       if (newId >= last) newId = last - newId;
       activeId.value = newId;
-      container.parentNode.scrollTo(0, 0);
       container.classList.remove('opacity-0');
     }, 700);
   };
@@ -63,6 +62,9 @@
     { title: '嫌いなもの', dataName: 'unlike', size: 'w-full' },
   ];
 
+  watch(activeId, () => {
+    charContainer.value?.parentNode.scrollTo(0, 0);
+  });
   watch(
     () => props.id,
     () => (activeId.value = props.id),
@@ -119,6 +121,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply xl:px-14;
       @apply lg:px-10;
       @apply md:flex-col-reverse md:px-8 md:text-base;
+      @apply sm:px-5;
       // &:before {
       //   @apply absolute top-0 left-0 h-full w-full bg-gradient-to-l from-primary to-transparent opacity-20 content-[''];
       // }
@@ -141,15 +144,15 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     &_th {
       @apply relative mr-9 py-1 px-6;
       @apply xxl:px-5;
-      @apply lg:py-0.5;
-      @apply md:mr-6 md:px-4;
+      @apply lg:mr-7 lg:px-4 lg:py-0.5;
+      @apply md:mr-5 md:px-3;
       &::before {
         @apply absolute top-0 left-0 h-full w-full -skew-x-[40deg] bg-primary shadow-info content-[''];
       }
     }
     &_description {
       @apply my-2 mr-2 h-0 w-full grow overflow-y-auto pr-2 leading-10;
-      @apply xxl:min-h-[250px] lg:leading-8 md:my-1 md:min-h-full;
+      @apply xxl:min-h-[250px] lg:leading-8 md:my-1 md:h-auto md:min-h-0;
     }
     &_aside {
       @apply relative flex min-h-full grow overflow-hidden;
@@ -204,6 +207,6 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     }
   }
   .hr {
-    @apply my-3 h-0.5 w-full bg-gradient-to-r from-primary via-primary to-transparent;
+    @apply my-3 h-0.5 w-full shrink-0 bg-gradient-to-r from-primary via-primary to-transparent;
   }
 </style>

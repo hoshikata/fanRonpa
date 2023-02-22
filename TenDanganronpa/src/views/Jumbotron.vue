@@ -33,31 +33,31 @@
   img.jumbotron_bg(src="/jumbotron/logo_bg05.png")
 
   .jumbotron_bg(:style="setMove(1)")
-    img.jumbotron_fish(src="/jumbotron/fish10.png", class="top-[60%] left-[30%] h-[15%] w-[15%]")
+    img.jumbotron_fish.fish-10(src="/jumbotron/fish10.png")
   .jumbotron_bg(:style="setMove(1)")
-    img.jumbotron_fish(src="/jumbotron/fish09.png", class="top-[14%] left-[2%] h-[42%] w-[42%]")
+    img.jumbotron_fish.fish-9(src="/jumbotron/fish09.png")
   .jumbotron_bg(:style="setMove(1)")
-    img.jumbotron_fish(src="/jumbotron/fish08.png", class="top-[30%] left-[72%] h-[15%] w-[15%]")
+    img.jumbotron_fish.fish-8(src="/jumbotron/fish08.png")
   img.jumbotron_bg(src="/jumbotron/logo_bg04.png", :style="setMove(2)")
 
   .jumbotron_bg(:style="setMove(3)")
-    img.jumbotron_fish(src="/jumbotron/fish07.png", class="top-[14%] left-[48%] h-[18%] w-[18%]")
+    img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png")
   .jumbotron_bg(:style="setMove(3)")
-    img.jumbotron_fish(src="/jumbotron/fish06.png", class="top-[70%] left-[43%] h-[10%] w-[10%]")
+    img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png")
   img.jumbotron_bg(src="/jumbotron/logo_bg03.png", :style="setMove(4)")
 
   .jumbotron_bg(:style="setMove(5)")
-    img.jumbotron_fish(src="/jumbotron/fish05.png", class="top-[66%] left-[18%] h-[12%] w-[12%]")
+    img.jumbotron_fish.fish-5(src="/jumbotron/fish05.png")
   .jumbotron_bg(:style="setMove(6)")
-    img.jumbotron_fish(src="/jumbotron/fish04.png", class="top-[77%] left-[42%] h-[15%] w-[15%]")
+    img.jumbotron_fish.fish-4(src="/jumbotron/fish04.png")
   .jumbotron_bg(:style="setMove(7)")
-    img.jumbotron_fish(src="/jumbotron/fish03.png", class="top-[55%] left-[60%] h-[20%] w-[20%]")
+    img.jumbotron_fish.fish-3(src="/jumbotron/fish03.png")
   img.jumbotron_bg(src="/jumbotron/logo_bg02.png", :style="setMove(8)")
 
   .jumbotron_bg(:style="setMove(10)")
-    img.jumbotron_fish(src="/jumbotron/fish02.png", class="top-[22%] left-[0px] h-[25%] w-[25%]")
+    img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png")
   .jumbotron_bg(:style="setMove(12)")
-    img.jumbotron_fish(src="/jumbotron/fish01.png", class="top-[69%] left-[66%] h-[25%] w-[25%]")
+    img.jumbotron_fish.fish-1(src="/jumbotron/fish01.png")
   img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01.png", :style="setMove(14)")
 
   .jumbotron_logo
@@ -74,7 +74,7 @@
       }
     }
     &_fish {
-      @apply absolute object-contain;
+      @apply absolute object-contain ease-linear;
     }
     &_cover {
       @apply box-content border-[2000px] border-jumbotron;
@@ -85,6 +85,57 @@
       @apply md:h-[80%] md:w-[80%];
       @apply sm:h-[90%] sm:w-[90%];
       mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
+    }
+  }
+  .fish {
+    &-1 {
+      @apply top-[69%] left-[66%] h-[25%] w-[25%];
+      animation: fish1 90s -10s infinite;
+    }
+    &-2 {
+      @apply top-[22%] left-[0px] h-[25%] w-[25%];
+      animation: fish2 60s -16s infinite;
+    }
+    &-3 {
+      @apply top-[55%] left-[60%] h-[20%] w-[20%];
+    }
+    &-4 {
+      @apply top-[77%] left-[42%] h-[15%] w-[15%];
+    }
+    &-5 {
+      @apply top-[66%] left-[18%] h-[12%] w-[12%];
+    }
+    &-6 {
+      @apply top-[70%] left-[43%] h-[10%] w-[10%];
+    }
+    &-7 {
+      @apply top-[14%] left-[48%] h-[18%] w-[18%];
+    }
+    &-8 {
+      @apply top-[30%] left-[72%] h-[15%] w-[15%];
+    }
+    &-9 {
+      @apply top-[14%] left-[2%] h-[42%] w-[42%];
+    }
+    &-10 {
+      @apply top-[60%] left-[30%] h-[15%] w-[15%];
+    }
+  }
+
+  @keyframes fish1 {
+    0% {
+      @apply translate-x-[80%] -translate-y-[5%];
+    }
+    100% {
+      @apply -translate-x-[300%] translate-y-[20%];
+    }
+  }
+  @keyframes fish2 {
+    0% {
+      @apply -translate-x-[50%] translate-y-[150%];
+    }
+    100% {
+      @apply translate-x-[50%] -translate-y-[150%];
     }
   }
 </style>
