@@ -92,9 +92,8 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
             span.relative.z-10.whitespace-nowrap.font-bold.text-back {{ info.title }}
           p {{ activeChar[info.dataName] }}
       .hr
-      .character_description
-        .scrollbar.h-0.min-h-full.w-full.overflow-y-auto.pr-2
-          p(v-for="text of charDesc") {{ text }}
+      .character_description.scrollbar
+        p(v-for="text of charDesc") {{ text }}
 
     .character_aside
       .character_mantra
@@ -149,8 +148,8 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       }
     }
     &_description {
-      @apply my-2 mr-2 grow leading-10 xxl:min-h-[250px];
-      @apply lg:leading-8 md:my-1;
+      @apply my-2 mr-2 h-0 w-full grow overflow-y-auto pr-2 leading-10;
+      @apply xxl:min-h-[250px] lg:leading-8 md:my-1 md:min-h-full;
     }
     &_aside {
       @apply relative flex min-h-full grow overflow-hidden;
@@ -164,7 +163,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply bg-gradient-to-b from-back via-back to-transparent;
       @apply xl:text-2xl;
       @apply lg:text-xl;
-      @apply md:px-2 md:py-5 md:text-lg md:h-[500px];
+      @apply md:h-[500px] md:px-2 md:py-5 md:text-lg;
       writing-mode: vertical-rl;
       p:nth-child(2) {
         @apply indent-[3em] md:indent-[2em];
@@ -179,7 +178,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply lg:w-[75%];
     }
     &_school {
-      @apply absolute right-24 top-16 w-[18%] opacity-100;
+      @apply absolute right-24 top-16 w-[18%];
       @apply xl:right-5;
       @apply sm:w-[25%];
       filter: drop-shadow(0 0 2px black);
