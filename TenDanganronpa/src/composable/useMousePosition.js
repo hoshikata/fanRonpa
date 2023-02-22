@@ -1,29 +1,27 @@
 import { ref, onMounted, onUnmounted } from 'vue';
 
 export const useMousePosition = () => {
+  const isMobile = /android|webos|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+    navigator.userAgent.toLowerCase(),
+  );
+  const events = ref(isMobile ? 'touchmove' : 'mousemove');
+
   const pageX = ref(0);
   const pageY = ref(0);
+
   const mousePosition = (e) => {
-    pageX.value = e.pageX;
-    pageY.value = e.pageY;
+    e.preventDefault();
+    const target = isMobile ? e.changedTouches[0] : e;
+    pageX.value = target.pageX;
+    pageY.value = target.pageY;
   };
+
   onMounted(() => {
-    window.addEventListener('mousemove', mousePosition);
+    window.addEventListener('touchmove', mousePosition);
   });
   onUnmounted(() => {
-    window.removeEventListener('mousemove', mousePosition);
+    window.removeEventListener('touchmove', mousePosition);
   });
-
-  // const scrollTop = ref(0);
-  // const scrollPosition = (e) => {
-  //   scrollTop.value = window.pageYOffset;
-  // };
-  // onMounted(() => {
-  //   window.addEventListener('scroll', scrollPosition);
-  // });
-  // onUnmounted(() => {
-  //   window.removeEventListener('scroll', scrollPosition);
-  // });
 
   return { pageX, pageY };
 };

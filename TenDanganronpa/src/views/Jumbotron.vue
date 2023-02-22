@@ -4,23 +4,23 @@
   const { pageX, pageY } = useMousePosition();
 
   const jumbotron = ref(null);
-  const setMove = (num, bd = 0) => {
-    const w = jumbotron.value?.clientWidth ?? 0;
-    const h = jumbotron.value?.clientHeight ?? 0;
+  const setMove = (num) => {
+    const w = jumbotron.value?.clientWidth ?? 2;
+    const h = jumbotron.value?.clientHeight ?? 2;
     const top = (pageY.value - h / 2) * 0.001 * num;
     const left = (pageX.value - w / 2) * 0.001 * num;
-    return [`top: calc(${top ?? 0}% + ${bd}px)`, `left: calc(${left}% + ${bd}px)`];
+    const isOver = pageY.value >= h || pageX.value >= w;
+    return isOver ? [] : [`top: calc(50% + ${top}%)`, `left: calc(50% + ${left}%)`];
   };
 </script>
 
 <template lang="pug">
 .jumbotron(ref="jumbotron")
-  img.jumbotron_bg(src="/jumbotron/logo_bg05.png", class="!relative", :style="setMove(1)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg05.png")
   img.jumbotron_bg(src="/jumbotron/logo_bg04.png", :style="setMove(2)")
   img.jumbotron_bg(src="/jumbotron/logo_bg03.png", :style="setMove(4)")
-  img.jumbotron_bg(src="/jumbotron/logo_bg02.png", :style="setMove(6)")
-  img.jumbotron_bg(src="/jumbotron/logo_bg01.png", :style="setMove(8)")
-  .jumbotron_cover(:style="setMove(8, -2000)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg02.png", :style="setMove(8)")
+  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01.png", :style="setMove(14)")
   .jumbotron_logo
 </template>
 
@@ -29,13 +29,18 @@
     @apply relative flex w-full items-center justify-center overflow-hidden bg-jumbotron;
 
     &_bg {
-      @apply absolute top-0 left-0 h-full w-full object-cover object-center;
+      @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-75;
+      &:first-child {
+        @apply relative top-0 left-0 min-h-screen translate-x-0 translate-y-0;
+      }
     }
     &_cover {
-      @apply absolute box-content h-full w-full border-[2000px] border-jumbotron;
+      @apply box-content border-[2000px] border-jumbotron;
     }
     &_logo {
       @apply absolute h-[60%] w-[60%] bg-white/80;
+      @apply md:h-[75%] md:w-[75%];
+      @apply xs:h-[90%] xs:w-[90%];
       mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
     }
   }
