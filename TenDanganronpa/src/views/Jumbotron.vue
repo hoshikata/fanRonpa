@@ -5,9 +5,6 @@
 
   const jumbotron = ref(null);
 
-  const setAnimation = computed(() => {
-    return { 'no-animation': isMobile };
-  });
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
     const h = jumbotron.value?.clientHeight ?? 2;
@@ -33,7 +30,7 @@
 </script>
 
 <template lang="pug">
-.jumbotron(:class="setAnimation", ref="jumbotron")
+.jumbotron(ref="jumbotron")
   img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png")
 
   .jumbotron_bg(:style="setMove(0.8)")
@@ -50,7 +47,7 @@
   .jumbotron_bg(:style="setMove(3)")
     img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png")
   .jumbotron_bg(:style="setMove(3)")
-    img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png")
+    //- img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png")
   img.jumbotron_bg(src="/jumbotron/logo_bg03.png", :style="setMove(4)")
 
   .jumbotron_bg(:style="setMove(5)")
@@ -65,7 +62,7 @@
     img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png")
   .jumbotron_bg(:style="setMove(12)")
     img.jumbotron_fish.fish-1(src="/jumbotron/fish01.png")
-  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01-2.png", :style="setMove(14)")
+  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01-3.png", :style="setMove(14)")
 
   .jumbotron_logo
 </template>
@@ -82,9 +79,6 @@
     }
     &_fish {
       @apply absolute object-contain;
-      @at-root .no-animation & {
-        // animation: none !important;
-      }
     }
     &_cage {
       @apply absolute top-[64.75%] left-[46%] h-[3%] w-[3%] object-contain opacity-70;
@@ -94,45 +88,85 @@
     }
     &_logo {
       @apply absolute h-[60%] w-[60%] bg-white/80;
-      @apply lg:h-[70%] lg:w-[70%];
-      @apply md:h-[80%] md:w-[80%];
-      @apply sm:h-[90%] sm:w-[90%];
+      @apply lg:h-[75%] lg:w-[75%];
+      @apply md:h-[90%] md:w-[90%];
+      @apply sm:h-[95%] sm:w-[95%];
       mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
     }
   }
 
+  @mixin mobile {
+    @media only screen and (max-width: 576px) {
+      @content;
+    }
+  }
   .fish {
     &-1 {
       @apply top-[69%] left-[66%] h-[25%] w-[25%];
       animation: fish1 90s -19s infinite linear;
+      @include mobile {
+        @apply top-[60%] left-[65%] h-[40%] w-[40%];
+      }
     }
     &-2 {
       @apply top-[22%] left-[0px] h-[25%] w-[25%];
-      animation: fish2 60s -17.5s infinite linear;
+      animation: fish2 60s -34s infinite linear;
+      @include mobile {
+        @apply top-[22%] left-[0px] h-[30%] w-[30%];
+      }
     }
     &-3 {
       @apply top-[55%] left-[60%] h-[20%] w-[20%];
+      animation: fish3 150s -37.5s infinite linear;
+      @include mobile {
+        @apply top-[47%] left-[60%] h-[40%] w-[40%];
+      }
     }
     &-4 {
       @apply top-[77%] left-[42%] h-[15%] w-[15%];
+      // animation: fish4 200s -100s infinite linear;
+      @include mobile {
+        @apply top-[70%] left-[42%] h-[25%] w-[25%];
+      }
     }
     &-5 {
       @apply top-[66%] left-[18%] h-[12%] w-[12%];
+      animation: fish5 150s -40s infinite linear;
+      @include mobile {
+        @apply top-[60%] left-[15%] h-[18%] w-[18%];
+      }
     }
     &-6 {
       @apply top-[70%] left-[43%] h-[10%] w-[10%];
+      // animation: fish6 250s -125s infinite linear;
     }
     &-7 {
       @apply top-[14%] left-[48%] h-[18%] w-[18%];
+      // animation: fish7 300s -25s infinite linear;
+      @include mobile {
+        @apply top-[12%] left-[45%] h-[25%] w-[25%];
+      }
     }
     &-8 {
       @apply top-[30%] left-[72%] h-[15%] w-[15%];
+      // animation: fish8 100s -22s infinite linear;
+      @include mobile {
+        @apply top-[28%] left-[83%] h-[20%] w-[20%];
+      }
     }
     &-9 {
       @apply top-[14%] left-[2%] h-[42%] w-[42%];
+      animation: fish9 300s -130s infinite linear;
+      @include mobile {
+        @apply top-[3%] left-[-22%] h-[60%] w-[60%];
+      }
     }
     &-10 {
       @apply top-[60%] left-[30%] h-[15%] w-[15%];
+      animation: fish10 200s -115s infinite linear;
+      @include mobile {
+        @apply top-[53%] left-[25%] h-[25%] w-[25%];
+      }
     }
   }
 
@@ -146,10 +180,77 @@
   }
   @keyframes fish2 {
     0% {
-      transform: translate(-50%, 150%);
+      transform: translate(-65%, 195%);
     }
     100% {
       transform: translate(50%, -150%);
+    }
+  }
+  @keyframes fish3 {
+    0% {
+      transform: translate(100%, -5%);
+    }
+    100% {
+      transform: translate(-305%, 10%);
+    }
+  }
+  @keyframes fish4 {
+    0% {
+      transform: translate(150%, 0%);
+    }
+    100% {
+      transform: translate(-150%, 0%);
+    }
+  }
+  @keyframes fish5 {
+    0% {
+      transform: translate(-170%, 2%);
+    }
+    100% {
+      transform: translate(470%, -5%);
+    }
+  }
+  @keyframes fish6 {
+    0% {
+      transform: translate(320%, 20%);
+    }
+    50% {
+      transform: translate(0%, 0%);
+    }
+    100% {
+      transform: translate(-280%, 20%);
+    }
+  }
+  @keyframes fish7 {
+    0% {
+      transform: translate(25%, -25%);
+    }
+    100% {
+      transform: translate(-260%, 260%);
+    }
+  }
+  @keyframes fish8 {
+    0% {
+      transform: translate(25%, 30%);
+    }
+    100% {
+      transform: translate(-90%, -100%);
+    }
+  }
+  @keyframes fish9 {
+    0% {
+      transform: translate(-85%, 62%);
+    }
+    100% {
+      transform: translate(105%, -78%);
+    }
+  }
+  @keyframes fish10 {
+    0% {
+      transform: translate(-150%, -30%);
+    }
+    100% {
+      transform: translate(110%, 30%);
     }
   }
 </style>

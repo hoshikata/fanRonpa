@@ -27,7 +27,9 @@
 
 <template lang="pug">
 section.characters
-  button.border.border-current.px-5.py-3(@click="openPopup", class="hover:bg-white/20") 角色介紹
+  button.relative.border.border-current.px-5.py-3(@click="openPopup", class="hover:bg-white/20")
+    span 角色介紹
+
   .characters_popup(v-show="popup", @click="closePopup", ref="charPopup")
     button.characters_close
       IconClose
