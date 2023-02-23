@@ -2,13 +2,19 @@
   import Jumbotron from './views/Jumbotron.vue';
   import Character from './views/Character.vue';
   import { ref } from 'vue';
-
 </script>
 
 <template lang="pug">
 #app
   Jumbotron/
-  Character/
+  .bg-gradient-to-b.from-jumbotron
+    header
+    Character/
+    section.story.min-h-screen
+    section.prediction.min-h-screen
+    section.special.min-h-screen
+    section.staff.min-h-screen
+    footer
 </template>
 
 <style lang="scss" scoped>

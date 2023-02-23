@@ -1,9 +1,13 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { usePosition } from '../composable/usePosition.js';
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
   const jumbotron = ref(null);
+
+  const setAnimation = computed(() => {
+    return { 'no-animation': isMobile };
+  });
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
     const h = jumbotron.value?.clientHeight ?? 2;
@@ -29,8 +33,11 @@
 </script>
 
 <template lang="pug">
-.jumbotron(ref="jumbotron")
-  img.jumbotron_bg(src="/jumbotron/logo_bg05.png")
+.jumbotron(:class="setAnimation", ref="jumbotron")
+  img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png")
+
+  .jumbotron_bg(:style="setMove(0.8)")
+    img.jumbotron_cage(src="/jumbotron/torikago_big.png")
 
   .jumbotron_bg(:style="setMove(1)")
     img.jumbotron_fish.fish-10(src="/jumbotron/fish10.png")
@@ -38,7 +45,7 @@
     img.jumbotron_fish.fish-9(src="/jumbotron/fish09.png")
   .jumbotron_bg(:style="setMove(1)")
     img.jumbotron_fish.fish-8(src="/jumbotron/fish08.png")
-  img.jumbotron_bg(src="/jumbotron/logo_bg04.png", :style="setMove(2)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg04-2.png", :style="setMove(2)")
 
   .jumbotron_bg(:style="setMove(3)")
     img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png")
@@ -58,7 +65,7 @@
     img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png")
   .jumbotron_bg(:style="setMove(12)")
     img.jumbotron_fish.fish-1(src="/jumbotron/fish01.png")
-  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01.png", :style="setMove(14)")
+  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01-2.png", :style="setMove(14)")
 
   .jumbotron_logo
 </template>
@@ -69,12 +76,18 @@
 
     &_bg {
       @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-75;
-      &:first-child {
+      &.bg {
         @apply relative top-0 left-0 min-h-screen translate-x-0 translate-y-0;
       }
     }
     &_fish {
-      @apply absolute object-contain ease-linear;
+      @apply absolute object-contain;
+      @at-root .no-animation & {
+        // animation: none !important;
+      }
+    }
+    &_cage {
+      @apply absolute top-[64.75%] left-[46%] h-[3%] w-[3%] object-contain opacity-70;
     }
     &_cover {
       @apply box-content border-[2000px] border-jumbotron;
@@ -87,14 +100,15 @@
       mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
     }
   }
+
   .fish {
     &-1 {
       @apply top-[69%] left-[66%] h-[25%] w-[25%];
-      animation: fish1 90s -10s infinite;
+      animation: fish1 90s -19s infinite linear;
     }
     &-2 {
       @apply top-[22%] left-[0px] h-[25%] w-[25%];
-      animation: fish2 60s -16s infinite;
+      animation: fish2 60s -17.5s infinite linear;
     }
     &-3 {
       @apply top-[55%] left-[60%] h-[20%] w-[20%];
@@ -124,18 +138,18 @@
 
   @keyframes fish1 {
     0% {
-      @apply translate-x-[80%] -translate-y-[5%];
+      transform: translate(80%, -5%);
     }
     100% {
-      @apply -translate-x-[300%] translate-y-[20%];
+      transform: translate(-302%, 22%);
     }
   }
   @keyframes fish2 {
     0% {
-      @apply -translate-x-[50%] translate-y-[150%];
+      transform: translate(-50%, 150%);
     }
     100% {
-      @apply translate-x-[50%] -translate-y-[150%];
+      transform: translate(50%, -150%);
     }
   }
 </style>
