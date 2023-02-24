@@ -8,8 +8,27 @@
   scroll-behavior: smooth;
 }
 
+.scrollBody {
+  scrollbar-width: thin;
+  scrollbar-color: #2B5EAB80 #14244D;
+}
+.scrollBody::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+.scrollBody::-webkit-scrollbar-track {
+  background-color: #14244D;
+}
+.scrollBody::-webkit-scrollbar-thumb {
+  background-color: #2B5EAB80;
+}
+.scrollBody::-webkit-scrollbar-thumb:hover {
+  background-color: #2B5EABd6;
+}
+
 .scrollbar {
   scrollbar-width: thin;
+  scrollbar-color: #cdcdcd80 transparent;
 }
 .scrollbar::-webkit-scrollbar {
   width: 8px;

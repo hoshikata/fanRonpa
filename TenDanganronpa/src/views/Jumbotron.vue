@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, computed } from 'vue';
+  import { ref } from 'vue';
   import { usePosition } from '../composable/usePosition.js';
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
@@ -48,7 +48,7 @@
     img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png")
   .jumbotron_bg(:style="setMove(3)")
     //- img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png")
-  img.jumbotron_bg(src="/jumbotron/logo_bg03.png", :style="setMove(4)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg03-2.png", :style="setMove(4)")
 
   .jumbotron_bg(:style="setMove(5)")
     img.jumbotron_fish.fish-5(src="/jumbotron/fish05.png")
@@ -56,7 +56,7 @@
     img.jumbotron_fish.fish-4(src="/jumbotron/fish04.png")
   .jumbotron_bg(:style="setMove(7)")
     img.jumbotron_fish.fish-3(src="/jumbotron/fish03.png")
-  img.jumbotron_bg(src="/jumbotron/logo_bg02.png", :style="setMove(8)")
+  img.jumbotron_bg(src="/jumbotron/logo_bg02-2.png", :style="setMove(8)")
 
   .jumbotron_bg(:style="setMove(10)")
     img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png")
@@ -136,10 +136,10 @@
         @apply top-[60%] left-[15%] h-[18%] w-[18%];
       }
     }
-    &-6 {
-      @apply top-[70%] left-[43%] h-[10%] w-[10%];
-      // animation: fish6 250s -125s infinite linear;
-    }
+    // &-6 {
+    //   @apply top-[70%] left-[43%] h-[10%] w-[10%];
+    //   animation: fish6 250s -125s infinite linear;
+    // }
     &-7 {
       @apply top-[14%] left-[48%] h-[18%] w-[18%];
       // animation: fish7 300s -25s infinite linear;
@@ -194,14 +194,14 @@
       transform: translate(-305%, 10%);
     }
   }
-  @keyframes fish4 {
-    0% {
-      transform: translate(150%, 0%);
-    }
-    100% {
-      transform: translate(-150%, 0%);
-    }
-  }
+  // @keyframes fish4 {
+  //   0% {
+  //     transform: translate(150%, 0%);
+  //   }
+  //   100% {
+  //     transform: translate(-150%, 0%);
+  //   }
+  // }
   @keyframes fish5 {
     0% {
       transform: translate(-170%, 2%);
@@ -210,33 +210,33 @@
       transform: translate(470%, -5%);
     }
   }
-  @keyframes fish6 {
-    0% {
-      transform: translate(320%, 20%);
-    }
-    50% {
-      transform: translate(0%, 0%);
-    }
-    100% {
-      transform: translate(-280%, 20%);
-    }
-  }
-  @keyframes fish7 {
-    0% {
-      transform: translate(25%, -25%);
-    }
-    100% {
-      transform: translate(-260%, 260%);
-    }
-  }
-  @keyframes fish8 {
-    0% {
-      transform: translate(25%, 30%);
-    }
-    100% {
-      transform: translate(-90%, -100%);
-    }
-  }
+  // @keyframes fish6 {
+  //   0% {
+  //     transform: translate(320%, 20%);
+  //   }
+  //   50% {
+  //     transform: translate(0%, 0%);
+  //   }
+  //   100% {
+  //     transform: translate(-280%, 20%);
+  //   }
+  // }
+  // @keyframes fish7 {
+  //   0% {
+  //     transform: translate(25%, -25%);
+  //   }
+  //   100% {
+  //     transform: translate(-260%, 260%);
+  //   }
+  // }
+  // @keyframes fish8 {
+  //   0% {
+  //     transform: translate(25%, 30%);
+  //   }
+  //   100% {
+  //     transform: translate(-90%, -100%);
+  //   }
+  // }
   @keyframes fish9 {
     0% {
       transform: translate(-85%, 62%);
