@@ -1,20 +1,12 @@
 <script setup>
-  import Jumbotron from './views/Jumbotron.vue';
-  import Character from './views/Character.vue';
-  import { ref } from 'vue';
+  import Footer from './components/Footer.vue';
+  import { RouterView } from 'vue-router';
 </script>
 
 <template lang="pug">
 #app
-  Jumbotron/
-  .bg-gradient-to-b.from-jumbotron
-    header
-    Character/
-    section.story.min-h-screen
-    section.prediction.min-h-screen
-    section.special.min-h-screen
-    section.staff.min-h-screen
-    footer
+  RouterView/
+  Footer/
 </template>
 
 <style lang="scss" scoped>

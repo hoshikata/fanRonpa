@@ -1,8 +1,13 @@
 <script setup>
   import IconArrow from '~icons/ic/baseline-double-arrow';
-  import axios from 'axios';
-  // import data from '../../data/data.json';
-  import { computed, watch, onMounted, ref } from 'vue';
+  import { ref, computed, watch } from 'vue';
+  import { storeToRefs } from 'pinia';
+  import { useLang } from '../stores/useLang.js';
+  import { useCharacter } from '../composable/useCharacter.js';
+
+  const store = useLang();
+  const { lang } = storeToRefs(store);
+  const { characterData, abilityText } = useCharacter();
 
   const props = defineProps({
     id: {
@@ -11,17 +16,9 @@
     },
   });
 
-  const characterData = ref([]);
-  const getData = async () => {
-    const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
-    characterData.value = data.data;
-    // characterData.value = data;
-  };
-  onMounted(getData);
-
   //== char
   const charContainer = ref(null);
-  const activeId = ref(4);
+  const activeId = ref(0);
   const activeChar = computed(() => {
     const target = characterData.value.find((datum) => datum.id === activeId.value) ?? {};
     const result = JSON.parse(JSON.stringify(target));
@@ -46,20 +43,21 @@
     const [firstS, lastS] = spell?.split?.(' ') ?? [];
     return { first: [firstN, firstS], last: [lastN, lastS] };
   });
-  const charAbility = computed(() => activeChar.value.ability?.split('\n'));
   const charDesc = computed(() => activeChar.value.description?.split('\n'));
   const charMantra = computed(() => activeChar.value.mantra?.split('\n'));
+  const chatSchool = computed(() => `/school/${activeChar.value.school_img}.svg`);
 
   //== table
   const tableList = [
-    { title: '身長', dataName: 'height', size: 'w-1/2 lg:w-full' },
-    { title: '体重', dataName: 'weight', size: 'w-1/2 lg:w-full' },
-    { title: '胸囲', dataName: 'chest', size: 'w-1/2 lg:w-full' },
-    { title: '血液型', dataName: 'blood', size: 'w-1/2 lg:w-full' },
-    { title: '誕生日', dataName: 'birth', size: 'w-1/2 xxl:w-full' },
-    { title: '原作者', dataName: 'author', size: 'w-1/2 xxl:w-full xxl:order-2' },
-    { title: '好きなもの', dataName: 'like', size: 'w-full' },
-    { title: '嫌いなもの', dataName: 'unlike', size: 'w-full' },
+    { title_zh: '身高', title_jp: '身長', dataName: 'height', size: 'w-1/2 lg:w-full' },
+    { title_zh: '體重', title_jp: '体重', dataName: 'weight', size: 'w-1/2 lg:w-full' },
+    { title_zh: '胸圍', title_jp: '胸囲', dataName: 'chest', size: 'w-1/2 lg:w-full' },
+    { title_zh: '血型', title_jp: '血液型', dataName: 'blood', size: 'w-1/2 lg:w-full' },
+    { title_zh: '生日', title_jp: '誕生日', dataName: 'birth', size: 'w-1/2 xxl:w-full' },
+    { title_zh: '原作者', title_jp: '原作者', dataName: 'author', size: 'w-1/2 xxl:w-full xxl:order-2' },
+    { title_zh: '喜歡的東西', title_jp: '好きなもの', dataName: 'like', size: 'w-full' },
+    { title_zh: '討厭的東西', title_jp: '嫌いなもの', dataName: 'unlike', size: 'w-full' },
+    { title_zh: '原學校', title_jp: '元学校', dataName: 'school', size: 'w-full' },
   ];
 
   watch(activeId, () => {
@@ -75,7 +73,7 @@
 <template lang="pug">
 section.character.scrollbar.overflow-y-auto.overscroll-none
   .character_container(ref="charContainer")
-    img.character_school(src="/image/KIKUTERAZONO-19.svg")
+    img.character_school(:src="chatSchool")
     .character_author.left-0(src="/image/profile_2.png")
     .character_author.right-0.rotate-180(src="/image/profile_2.png") 
 
@@ -86,13 +84,15 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
             h1.text-7xl.font-semibold {{ name[0] }}
             h2.text-primary {{ name[1] }}
         h3.mt-3.flex.flex-wrap.justify-center.text-2xl(class="md:mt-2 md:text-xl")
-          span(v-for="ability of charAbility") {{ ability }}
+          span {{ abilityText }}
+          span {{ activeChar.ability }}
       .hr
       .character_info
         .character_table(v-for="info of tableList", :class="info.size")
           p.character_th
-            span.relative.z-10.whitespace-nowrap.font-bold.text-back {{ info.title }}
+            span.relative.z-10.whitespace-nowrap.font-bold.text-back {{ info[`title_${lang}`] }}
           p {{ activeChar[info.dataName] }}
+            span(v-if="info.dataName === 'birth'", :title="activeChar.birth_remark") ({{ activeChar.star_sign }}座)
       .hr
       .character_description.scrollbar
         p(v-for="text of charDesc") {{ text }}
@@ -101,7 +101,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       .character_mantra
         .text-white(:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
           p.whitespace-nowrap(v-for="mantra of charMantra") {{ mantra }}
-      img.character_image(src="https://images.plurk.com/1Ozqkemya7dEFGj7LXPCQO.png")
+      img.character_image(src="/image/shape_test.png")
 
     button.character_next.left-0.-scale-100(@click="changeChar(-1)")
       IconArrow
@@ -181,7 +181,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       @apply lg:w-[75%];
     }
     &_school {
-      @apply absolute right-24 top-16 w-[18%];
+      @apply absolute right-24 top-16 max-h-[30%] w-[18%] object-left-top;
       @apply xl:right-5;
       @apply sm:w-[25%];
       filter: drop-shadow(0 0 2px black);

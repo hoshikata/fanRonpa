@@ -91,7 +91,7 @@
       @apply lg:h-[75%] lg:w-[75%];
       @apply md:h-[90%] md:w-[90%];
       @apply sm:h-[95%] sm:w-[95%];
-      mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
+      mask: url('/image/LOGO.svg') no-repeat center center;
     }
   }
 
@@ -304,7 +304,7 @@ section.jumbotron(ref="header")
   }
   .logo {
     @apply relative h-2/3 w-2/3 overflow-hidden bg-contain bg-center bg-no-repeat;
-    mask: url('/image/LOGO_MONOKURO-12.svg') no-repeat center center;
+    mask: url('/image/LOGO.svg') no-repeat center center;
     &_color {
       @apply h-full w-full bg-gradient-to-t from-primary to-secondary;
     }

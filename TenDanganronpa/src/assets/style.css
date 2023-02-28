@@ -7,23 +7,26 @@
   @apply font-serif;
   scroll-behavior: smooth;
 }
+::selection {
+  @apply bg-highlight text-secondary;
+}
 
 .scrollBody {
   scrollbar-width: thin;
-  scrollbar-color: #2B5EAB80 #14244D;
+  scrollbar-color: #2b5eab80 #14244d;
 }
 .scrollBody::-webkit-scrollbar {
   width: 8px;
   height: 8px;
 }
 .scrollBody::-webkit-scrollbar-track {
-  background-color: #14244D;
+  background-color: #14244d;
 }
 .scrollBody::-webkit-scrollbar-thumb {
-  background-color: #2B5EAB80;
+  background-color: #2b5eab80;
 }
 .scrollBody::-webkit-scrollbar-thumb:hover {
-  background-color: #2B5EABd6;
+  background-color: #2b5eabd6;
 }
 
 .scrollbar {
