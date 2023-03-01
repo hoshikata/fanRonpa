@@ -27,7 +27,7 @@
 </script>
 
 <template lang="pug">
-img.wave.bg-back(src="../assets/image/wave_4.svg")
+//- img.wave.bg-back(src="../assets/image/wave_4.svg")
 section.products
   .products_container
     img.w-80(src="/image/37f.jpg")

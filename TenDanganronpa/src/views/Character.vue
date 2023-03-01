@@ -36,7 +36,8 @@ section.characters.bg-jumbotron-800
   .relative.py-10.px-12
     .absolute.top-0.left-0.h-full.w-full.blur-sm
     .p-10
-      h2.mb-16.font-sans.text-6xl Character
+      //- h2.mb-16.font-sans.text-6xl Character
+      h2.title.mb-10 CHARACTER
       .mx-10.flex(class="lg:hidden")
         .characters_group.group(
           v-for="charData in characterData",

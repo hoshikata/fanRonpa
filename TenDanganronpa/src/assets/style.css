@@ -70,3 +70,21 @@
   mask: url('../assets/image/wave_4.svg') no-repeat top center;
   mask-size: cover;
 }
+
+
+.title {
+  @apply relative z-10 inline-block py-2 px-5 font-sans text-6xl font-bold tracking-wider;
+  text-shadow: 8px 8px 0 #000;
+  transform-style: preserve-3d;
+  transform-origin: left top;
+  transform: perspective(200px) rotateY(20deg) rotateZ(-2deg);
+}
+.title::before {
+  @apply absolute top-0 left-0 -z-10 h-32 w-32 -translate-x-1/3 -translate-y-1/3 bg-highlight content-[''];
+  mask: url('../assets/image/dansou.svg') no-repeat center;
+  filter: drop-shadow(10px 10px 0 #000);
+}
+.title::after {
+  @apply absolute top-0 left-0 -z-10 h-full w-full -skew-x-12 bg-secondary content-[''];
+  box-shadow: 10px 10px 0 #000;
+}

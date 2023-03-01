@@ -28,7 +28,9 @@ export const useCharacter = () => {
     // const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
     // characterData.value = data.data;
     const result = data.map(getLangData);
-    result.sort((a, b) => a.id - b.id);
+    result.sort((a, b) => b.id - a.id);
+    const first = result.pop();
+    result.unshift(first);
     characterData.value = result;
   };
   onMounted(getData);

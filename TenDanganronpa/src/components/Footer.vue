@@ -1,6 +1,6 @@
 <script setup>
   import IconTwitter from './icons/IconTwitter.vue';
-  const twitterList = ['DRDS_Ooinn', 'DRDS_hanji', 'Zoexiao27', 'yajirusi_dr'];
+  const twitterList = ['yajirusi_dr', 'DRDS_Ooinn', 'DRDS_hanji', 'Zoexiao27'];
 </script>
 
 <template lang="pug">
