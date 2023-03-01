@@ -43,7 +43,7 @@ section.characters.bg-jumbotron-800
           v-for="charData in characterData",
           :title="abilityText + charData.ability + '　' + charData.name"
         )
-          .characters_img(style="background-image: url('/image/shape_test.png')", class="group-hover:bg-none")
+          .characters_img(:style="`background-image: url('/image/shape_test.png')`", class="group-hover:bg-none")
             img.invisible(src="/image/shape_test1.png", class="group-hover:visible")
           //- .characters_detail
             p {{ abilityText }}{{ charData.ability }}
