@@ -19,11 +19,12 @@ main.prediction
       .flex.flex-wrap.p-1(class="max-w-[992px]")
         .z-10(v-for="charData of characterData", class="w-1/4")
           .relative.m-1
-            img.absolute.top-0.-z-10.w-full(:src="`/school/${charData.school_img}.svg`", class="left-1/2 -translate-x-1/2")
             img.mx-auto.w-full(:src="`/prediction/${charData.img_name}.png`")
-            .relative.z-10.-mt-20.flex.h-20.flex-col.items-center.justify-center.bg-back.tracking-widest
-              p {{ abilityText }}{{ charData.ability }}
-              p.text-2xl {{ charData.name }}
+            img.absolute.top-0.-z-10.w-full(:src="`/school/${charData.school_img}.svg`", class="left-1/2 -translate-x-1/2")
+            .absolute.bottom-0.left-0.w-full.bg-back.py-1.px-2.tracking-widest
+              //- p.text-xs {{ abilityText }}
+              p.text-xs {{ charData.ability }}
+              p.mt-px.text-right {{ charData.name }}
 </template>
 
 <style lang="scss" scoped>

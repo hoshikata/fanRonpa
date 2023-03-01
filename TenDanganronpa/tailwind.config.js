@@ -15,7 +15,12 @@ module.exports = {
       colors: {
         primary: '#30D5C8',
         secondary: '#2B5EAB',
-        jumbotron: '#14244D',
+        jumbotron: {
+          900: '#050913',
+          800: '#0a1227',
+          700: '#0f1b3a;',
+          DEFAULT: '#14244D',
+        },
         highlight: '#EBC22C',
         back: '#000100',
       },

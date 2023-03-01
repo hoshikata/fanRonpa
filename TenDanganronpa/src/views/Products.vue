@@ -27,6 +27,7 @@
 </script>
 
 <template lang="pug">
+img.wave.bg-back(src="../assets/image/wave_4.svg")
 section.products
   .products_container
     img.w-80(src="/image/37f.jpg")
@@ -38,6 +39,9 @@ section.products
 </template>
 
 <style lang="scss" scoped>
+  .wrap {
+    @apply bg-back;
+  }
   .products {
     @apply relative flex min-h-screen items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat;
     background-image: linear-gradient(0deg, #00000080, #00000080), url('/image/37f.jpg');

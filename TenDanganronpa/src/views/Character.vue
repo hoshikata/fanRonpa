@@ -31,8 +31,9 @@
 </script>
 
 <template lang="pug">
-section.characters
-  .relative.py-10.px-12(class="bg-back/50")
+img.wave.bg-jumbotron-800(src="../assets/image/wave_2.svg")
+section.characters.bg-jumbotron-800
+  .relative.py-10.px-12
     .absolute.top-0.left-0.h-full.w-full.blur-sm
     .p-10
       h2.mb-16.font-sans.text-6xl Character
@@ -63,7 +64,7 @@ section.characters
 
 <style lang="scss" scoped>
   .characters {
-    @apply relative h-full min-h-screen w-full bg-back/10 py-40;
+    @apply relative h-full min-h-screen w-full;
 
     &_group {
       @apply relative -mx-10 cursor-pointer px-1;
