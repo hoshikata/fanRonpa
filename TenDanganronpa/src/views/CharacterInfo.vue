@@ -4,10 +4,12 @@
   import { storeToRefs } from 'pinia';
   import { useLang } from '../stores/useLang.js';
   import { useCharacter } from '../composable/useCharacter.js';
+  import { useImage } from '../composable/useImage.js';
 
   const store = useLang();
   const { lang } = storeToRefs(store);
   const { characterData, abilityText } = useCharacter();
+  const { publicSrc } = useImage();
 
   const props = defineProps({
     id: {
@@ -45,7 +47,7 @@
   });
   const charDesc = computed(() => activeChar.value.description?.split('\n'));
   const charMantra = computed(() => activeChar.value.mantra?.split('\n'));
-  const chatSchool = computed(() => `/school/${activeChar.value.school_img}.svg`);
+  const chatSchool = computed(() => publicSrc(`/school/${activeChar.value.school_img}.svg`));
 
   //== table
   const tableList = [

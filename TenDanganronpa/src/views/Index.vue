@@ -10,10 +10,10 @@
 <template lang="pug">
 Jumbotron/
 //- .bg-gradient-to-b.from-jumbotron
-header
-Story/
+//- header
+//- Story/
 Character/
-Special/
+//- Special/
 Products/
 </template>
 

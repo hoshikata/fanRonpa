@@ -11,7 +11,8 @@
 
 <style lang="scss" scoped>
   #app {
-    @apply min-h-screen w-full bg-back text-white;
+    @apply min-h-screen w-full;
+    @apply bg-back text-white;
   }
 </style>
 

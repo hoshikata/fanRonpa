@@ -3,8 +3,10 @@
   import { RouterLink } from 'vue-router';
   import { ref, computed, watch } from 'vue';
   import { useCharacter } from '../composable/useCharacter.js';
+  import { useImage } from '../composable/useImage.js';
 
   const { characterData, abilityText } = useCharacter();
+  const { publicSrc } = useImage();
 
   const statusList = () => {
     const result = [];
@@ -14,8 +16,6 @@
     return result;
   };
   const status = ref(statusList());
-
-  const imageSrc = (name) => `/prediction/${name}.png`;
 
   const changeStatus = (id) => {
     const target = status.value.find((item) => item.id === id);
@@ -42,12 +42,12 @@ main.prediction
       .flex.flex-wrap.p-1(class="max-w-[992px]")
         .z-10(v-for="charData of characterData", class="w-1/4")
           .test.group.relative.z-10.m-1
-            img.relative.-z-10.h-full.w-full.invisible(src="/prediction_x/IEIBG-42.png")
+            img.invisible.relative.-z-10.h-full.w-full(src="/prediction_x/IEIBG-42.png")
             //- img.absolute.top-0.-z-10.w-full(
             //-   :src="`/school/${charData.school_img}.svg`",
             //-   class="left-1/2 -translate-x-1/2 group-hover:invisible"
             //- )
-            img.absolute.top-0.h-full.w-full.object-contain(:src="imageSrc(charData.img_name)")
+            img.absolute.top-0.h-full.w-full.object-contain(:src="publicSrc(`/prediction/${charData.img_name}.png`)")
             img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="/prediction_x/IEIWAKU-02.png")
             izayoi.absolute.top-0.h-full.w-full(:class="pickStyle(charData.id)")
             img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="/prediction_x/IEI-03.png")
