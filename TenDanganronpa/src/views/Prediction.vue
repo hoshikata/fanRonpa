@@ -15,6 +15,8 @@
   };
   const status = ref(statusList());
 
+  const imageSrc = (name) => `/prediction/${name}.png`;
+
   const changeStatus = (id) => {
     const target = status.value.find((item) => item.id === id);
     target.status += 1;
@@ -40,15 +42,15 @@ main.prediction
       .flex.flex-wrap.p-1(class="max-w-[992px]")
         .z-10(v-for="charData of characterData", class="w-1/4")
           .test.group.relative.z-10.m-1
-            img.relative.-z-10.h-full.w-full.invisible(:src="`/prediction_x/IEIBG-42.png`")
+            img.relative.-z-10.h-full.w-full.invisible(src="/prediction_x/IEIBG-42.png")
             //- img.absolute.top-0.-z-10.w-full(
             //-   :src="`/school/${charData.school_img}.svg`",
             //-   class="left-1/2 -translate-x-1/2 group-hover:invisible"
             //- )
-            img.absolute.top-0.h-full.w-full.object-contain(:src="`/prediction/${charData.img_name}.png`")
-            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", :src="`/prediction_x/IEIWAKU-02.png`")
+            img.absolute.top-0.h-full.w-full.object-contain(:src="imageSrc(charData.img_name)")
+            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="/prediction_x/IEIWAKU-02.png")
             izayoi.absolute.top-0.h-full.w-full(:class="pickStyle(charData.id)")
-            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", :src="`/prediction_x/IEI-03.png`")
+            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="/prediction_x/IEI-03.png")
             button.absolute.top-0.h-full.w-full(@click="changeStatus(charData.id)")
 
             .absolute.bottom-0.left-0.w-full.py-1.px-2.text-center.tracking-widest(class="bg-back/75")
