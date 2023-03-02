@@ -47,7 +47,11 @@
   });
   const charDesc = computed(() => activeChar.value.description?.split('\n'));
   const charMantra = computed(() => activeChar.value.mantra?.split('\n'));
-  const chatSchool = computed(() => publicSrc(`/school/${activeChar.value.school_img}.svg`));
+  const chatSchool = computed(() => {
+    const name = activeChar.value.school_img;
+    const src = publicSrc(`/school/${name}.svg`);
+    return name ? src : '';
+  });
 
   //== table
   const tableList = [

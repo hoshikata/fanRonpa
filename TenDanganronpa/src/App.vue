@@ -12,7 +12,7 @@
 <style lang="scss" scoped>
   #app {
     @apply min-h-screen w-full;
-    @apply bg-back text-white;
+    // @apply bg-back text-white;
   }
 </style>
 

@@ -1,6 +1,7 @@
 <script setup>
   import IconClose from '~icons/ic/round-close';
   import CharacterInfo from './CharacterInfo.vue';
+  import CharacterCard from './CharacterCard.vue';
   import { ref } from 'vue';
   import { RouterLink } from 'vue-router';
   import { useCharacter } from '../composable/useCharacter.js';
@@ -25,7 +26,7 @@
 
   const closePopup = (e) => {
     const target = e.target;
-    const window = target.matches('.characters_window, .characters_window * ');
+    const window = target.matches('.characters_window, .characters_window *');
     if (!window) {
       popup.value = false;
       document.body.classList.remove('overflow-hidden');
@@ -34,21 +35,17 @@
 </script>
 
 <template lang="pug">
-section.characters.bg-jumbotron-800
+section.characters.bg-jumbotron-800.text-white
   .relative.py-10.px-12
-    .absolute.top-0.left-0.h-full.w-full.blur-sm
-    .p-10
-      h2.title.mb-10 CHARACTER
+    //- h2.title.mb-10 CHARACTER
 
-      .carousel
+    CharacterCard.-mx-12(@open="openPopup")
 
-
-
-      .mt-10.flex.justify-start
-        button.characters_button(@click="openPopup(0)")
-          span 角色介紹
-        RouterLink.characters_button(to="/prediction")
-          span 生死預測表 →
+    .mt-10.flex.justify-start
+      //- button.characters_button(@click="openPopup(0)")
+        span 角色介紹
+      RouterLink.characters_button.ml-auto(to="/prediction")
+        span 生死預測表 →
 
   .characters_popup(@click="closePopup", v-show="popup", ref="charPopup")
     button.characters_close
@@ -66,7 +63,7 @@ section.characters.bg-jumbotron-800
     }
 
     &_popup {
-      @apply fixed top-0 left-0 z-20 h-full w-full cursor-pointer bg-back/80 p-14 duration-300 xl:p-12 md:p-10 sm:p-8;
+      @apply fixed top-0 left-0 z-20 h-full w-full cursor-pointer bg-back p-14 duration-300 xl:p-12 md:p-10 sm:p-8;
     }
     &_close {
       @apply absolute right-0 top-0 text-gray-400 hover:text-gray-600;
