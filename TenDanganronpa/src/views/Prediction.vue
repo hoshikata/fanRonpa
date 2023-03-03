@@ -42,15 +42,15 @@ main.prediction
       .flex.flex-wrap.p-1(class="max-w-[992px]")
         .z-10(v-for="charData of characterData", class="w-1/4")
           .test.group.relative.z-10.m-1
-            img.invisible.relative.-z-10.h-full.w-full(src="/prediction_x/IEIBG-42.png")
+            img.invisible.relative.-z-10.h-full.w-full(src="../assets/image/iei_bg.png")
             //- img.absolute.top-0.-z-10.w-full(
             //-   :src="`/school/${charData.school_img}.svg`",
             //-   class="left-1/2 -translate-x-1/2 group-hover:invisible"
             //- )
             img.absolute.top-0.h-full.w-full.object-contain(:src="publicSrc(`/prediction/${charData.img_name}.png`)")
-            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="/prediction_x/IEIWAKU-02.png")
+            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="../assets/image/iei_frame.png")
             izayoi.absolute.top-0.h-full.w-full(:class="pickStyle(charData.id)")
-            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="/prediction_x/IEI-03.png")
+            img.invisible.absolute.top-0.h-full.w-full(class="group-hover:visible", src="../assets/image/iei_ribbon.png")
             button.absolute.top-0.h-full.w-full(@click="changeStatus(charData.id)")
 
             .absolute.bottom-0.left-0.w-full.py-1.px-2.text-center.tracking-widest(class="bg-back/75")
@@ -61,9 +61,9 @@ main.prediction
 
 <style lang="scss" scoped>
   .test {
-    background: url('/prediction_x/IEI-44.png') no-repeat center;
+    background: url('../assets/image/iei_bg_shape.png') no-repeat center;
     background-size: contain;
-    mask: url('/prediction_x/IEI_shape-43.svg') no-repeat center;
+    mask: url('../assets/image/iei_shape.svg') no-repeat center;
     mask-size: cover;
   }
   .prediction {

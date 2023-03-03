@@ -35,7 +35,7 @@
 </script>
 
 <template lang="pug">
-section.characters.bg-jumbotron-800.text-white
+section.characters.bg-stone-100
   .relative.py-10.px-12
     //- h2.title.mb-10 CHARACTER
 
