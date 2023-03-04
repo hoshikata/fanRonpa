@@ -24,7 +24,7 @@
 
   const cardStyle = (color) => `color: ${color};`;
   const cardImg = (name, id) => {
-    const hasImg = [0, 7, 9].includes(id * 1);
+    const hasImg = [0, 7, 9, 12].includes(id * 1);
     return publicSrc(`/ability/${hasImg ? name : 'shape_test'}.png`);
   };
   const schoolMask = (name) => {
@@ -118,6 +118,10 @@ div
     &_9 .splide_img {
       @apply -translate-x-[57%] -translate-y-[2%];
       transform-origin: 70% 30%;
+    }
+    &_12 .splide_img {
+      @apply -translate-x-[32%] translate-y-[0%];
+      transform-origin: 45% 20%;
     }
   }
 </style>
