@@ -11,7 +11,7 @@
 
 <style lang="scss" scoped>
   #app {
-    @apply min-h-screen w-full;
+    @apply min-h-screen w-full bg-jumbotron-700;
     // @apply bg-back text-white;
   }
 </style>

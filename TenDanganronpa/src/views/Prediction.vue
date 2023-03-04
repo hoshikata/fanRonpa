@@ -67,8 +67,9 @@ main.prediction
     mask-size: cover;
   }
   .prediction {
-    @apply min-h-screen bg-cover bg-center bg-no-repeat text-white;
-    background-image: url('/jumbotron/logo_bg05.png');
+    @apply min-h-screen bg-back text-white;
+    @apply bg-cover bg-center bg-no-repeat;
+    // background-image: url('/jumbotron/logo_bg05.png');
 
     * {
       @apply font-sans;

@@ -1,4 +1,5 @@
 <script setup>
+  import Navigation from '../components/Navigation.vue';
   import Jumbotron from './Jumbotron.vue';
   import Story from './Story.vue';
   import Character from './Character.vue';
@@ -10,8 +11,8 @@
 <template lang="pug">
 Jumbotron/
 //- .bg-gradient-to-b.from-jumbotron
-//- header
-//- Story/
+Navigation/
+Story/
 Character/
 //- Special/
 Products/

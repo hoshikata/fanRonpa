@@ -107,7 +107,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       .character_mantra
         .text-white(:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
           p.whitespace-nowrap(v-for="mantra of charMantra") {{ mantra }}
-      img.character_image(src="/image/shape_test.png")
+      img.character_image(src="/ability/shape_test.png")
 
     button.character_next.left-0.-scale-100(@click="changeChar(-1)")
       IconArrow

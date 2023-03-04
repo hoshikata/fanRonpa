@@ -21,17 +21,35 @@
     pagination: false,
     autoScroll: { speed: 0.8 },
   };
+
   const cardStyle = (color) => `color: ${color};`;
+  const cardImg = (name, id) => {
+    const hasImg = [0, 7, 9].includes(id * 1);
+    return publicSrc(`/ability/${hasImg ? name : 'shape_test'}.png`);
+  };
+  const schoolMask = (name) => {
+    const src = publicSrc(`/school/${name}.svg`);
+    return `mask-image: url(${src}); -webkit-mask-image: url(${src});`;
+  };
+
+  const cardOpen = (id) => {
+    console.log(id);
+    emit('open', id);
+  };
 </script>
 
 <template lang="pug">
 div
   Splide(:options="splideOption", :extensions="{ AutoScroll }")
     SplideSlide.splide_box(v-for="charData of characterData")
-      .splide_card.group(:style="cardStyle(charData.color)")
-        .splide_shool(:style="`mask-image: url(${publicSrc('/school/' + charData.school_img + '.svg')})`")
-        img.splide_img(:src="publicSrc('/image/shape_test.png')")
-        button.splide_button(@click="emit('open', charData.id)")
+      .splide_card.group(
+        @click="cardOpen(charData.id)",
+        :class="`splide_card_${charData.id}`",
+        :style="cardStyle(charData.color)"
+      )
+        .splide_school(:style="schoolMask(charData.school_img)")
+        img.splide_img(:src="cardImg(charData.img_name, charData.id)")
+        button.splide_button
           span.splide_ability {{ charData.ability }}
           span.splide_name {{ charData.name }}
 </template>
@@ -45,10 +63,8 @@ div
       }
     }
     &_card {
-      @apply relative h-[600px] w-48 overflow-hidden duration-300;
-      @apply border-2 border-current bg-current;
-      // @apply bg-gradient-to-b from-current to-transparent;
-      // @apply bg-gradient-to-t from-jumbotron-800 via-jumbotron to-secondary;
+      @apply relative z-10 h-[600px] w-48 overflow-hidden border-2 border-current duration-300;
+      @apply bg-gradient-to-b from-current to-transparent;
       @apply lg:h-[500px] lg:w-40;
       @apply sm:h-[400px] sm:w-32;
       box-shadow: 0 0 15px #00000029, inset 0 0 0 8px white;
@@ -56,30 +72,52 @@ div
         box-shadow: 0 0 0 transparent;
       }
     }
-    &_shool {
-      @apply absolute top-2 left-2 w-full bg-gray-100 pt-[100%] opacity-100 duration-300 group-hover:scale-110;
+    &_school {
+      @apply absolute top-2 left-2 -z-10 w-full bg-white pt-[100%] opacity-100 duration-300 group-hover:scale-110;
       mask-position: -50%;
       mask-size: 90%;
       mask-repeat: no-repeat;
     }
     &_img {
-      @apply w-[200%] max-w-none -translate-x-[8%] duration-300 group-hover:scale-125;
+      @apply h-[200%] max-w-none -translate-x-[8%] duration-300 group-hover:scale-125;
       transform-origin: center 20%;
     }
     &_button {
       @apply absolute top-0 left-0 z-10 flex h-full w-full items-end justify-start bg-back/50 opacity-0 duration-300 group-hover:opacity-100;
     }
     &_ability {
-      @apply absolute bottom-0 left-0 -z-10 pl-10 pb-12 text-4xl font-bold text-black;
-      writing-mode: vertical-lr;
-      // text-shadow: -1px 0 white, 0 1px white, 1px 0 white, 0 -1px white;
-    }
-    &_name {
-      @apply p-8 text-4xl font-bold tracking-widest text-white;
-      @apply lg:p-6 lg:text-3xl;
-      @apply sm:p-3 sm:text-2xl;
+      @apply absolute top-0 right-0 -z-10 pr-6 pt-5 text-5xl font-bold tracking-widest text-white;
+      @apply lg:pr-5 lg:pt-4 lg:text-4xl;
+      @apply sm:pr-3 sm:pt-2 sm:text-3xl;
       writing-mode: vertical-lr;
       text-shadow: 0 0 5px #000;
+    }
+    &_name {
+      @apply pl-6 pb-5 text-4xl font-bold tracking-widest text-white;
+      @apply lg:pl-5 lg:pb-4 lg:text-3xl;
+      @apply sm:pl-3 sm:pb-2 sm:text-2xl;
+      writing-mode: vertical-lr;
+      text-shadow: 0 0 5px #000;
+    }
+  }
+
+  .splide_card {
+    &_0 .splide_img {
+      @apply -translate-x-[38%] -translate-y-[5%];
+      transform-origin: 60% 30%;
+    }
+    &_7 {
+      .splide_school {
+        mask-position: 50%;
+      }
+      .splide_img {
+        @apply -translate-x-[48%] -translate-y-[8%];
+        transform-origin: 50% 48%;
+      }
+    }
+    &_9 .splide_img {
+      @apply -translate-x-[57%] -translate-y-[2%];
+      transform-origin: 70% 30%;
     }
   }
 </style>

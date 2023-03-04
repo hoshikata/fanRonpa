@@ -3,6 +3,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@100;300;400;500;700;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@200;300;400;500;600;700;900&display=swap');
 
+@import url('https://fonts.googleapis.com/css2?family=Economica:wght@400;700&display=swap');
+
 * {
   @apply font-serif;
   scroll-behavior: smooth;
@@ -48,7 +50,7 @@
 }
 
 .wave {
-  @apply object-fill -mt-px;
+  @apply -mt-px object-fill;
 }
 .wave_1 {
   @apply h-40;
@@ -71,8 +73,7 @@
   mask-size: cover;
 }
 
-
-.title {
+/* .title {
   @apply relative z-10 inline-block py-2 px-5 font-sans text-6xl font-bold tracking-wider;
   text-shadow: 8px 8px 0 #000;
   transform-style: preserve-3d;
@@ -87,4 +88,23 @@
 .title::after {
   @apply absolute top-0 left-0 -z-10 h-full w-full -skew-x-12 bg-secondary content-[''];
   box-shadow: 10px 10px 0 #000;
+} */
+
+.title {
+  @apply relative z-10 mx-auto mb-8 inline-block py-1 text-center font-Economica text-5xl font-bold tracking-wider;
+  @apply lg:mb-6 lg:text-4xl sm:mb-5 sm:text-2xl;
+}
+.title::before {
+  @apply absolute bottom-0 left-1/2 h-0.5 w-[120%] -translate-x-1/2 bg-current content-[''];
+}
+.title::after {
+  @apply absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 translate-y-1/2 scale-150 opacity-20;
+  content: attr(title);
+}
+
+.wrapper {
+  @apply relative w-full py-16 px-12 lg:p-10 sm:px-8;
+}
+.wrapper_hash {
+  @apply absolute top-0 left-0 h-0 w-full -translate-y-full md:h-[64px];
 }

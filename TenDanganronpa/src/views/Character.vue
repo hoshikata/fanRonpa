@@ -35,17 +35,16 @@
 </script>
 
 <template lang="pug">
-section.characters.bg-stone-100
-  .relative.py-10.px-12
-    //- h2.title.mb-10 CHARACTER
+section.characters.wrapper
+  #characters.wrapper_hash
 
-    CharacterCard.-mx-12(@open="openPopup")
+  .mb-5.flex(class="lg:mb-3")
+    h2.title.text-gray-500(title="CHARACTER") CHARACTER
+  .mb-10.flex(class="lg:mb-8 sm:mb-5")
+    RouterLink.characters_button(to="/prediction")
+      span 生死預測表 →
 
-    .mt-10.flex.justify-start
-      //- button.characters_button(@click="openPopup(0)")
-        span 角色介紹
-      RouterLink.characters_button.ml-auto(to="/prediction")
-        span 生死預測表 →
+  CharacterCard.-mx-12(@open="openPopup", class="lg:-mx-10 sm:-mx-8")
 
   .characters_popup(@click="closePopup", v-show="popup", ref="charPopup")
     button.characters_close
@@ -56,14 +55,15 @@ section.characters.bg-stone-100
 
 <style lang="scss" scoped>
   .characters {
-    @apply relative h-full min-h-screen w-full;
+    @apply bg-stone-100;
 
     &_button {
-      @apply relative border border-current px-5 py-3 hover:bg-white/20;
+      @apply relative ml-auto border border-current px-5 py-3 tracking-wide hover:bg-jumbotron/10;
+      @apply lg:px-3 lg:py-2;
     }
 
     &_popup {
-      @apply fixed top-0 left-0 z-20 h-full w-full cursor-pointer bg-back p-14 duration-300 xl:p-12 md:p-10 sm:p-8;
+      @apply fixed top-0 left-0 z-50 h-full w-full cursor-pointer bg-back p-14 duration-300 xl:p-12 md:p-10 sm:p-8;
     }
     &_close {
       @apply absolute right-0 top-0 text-gray-400 hover:text-gray-600;
