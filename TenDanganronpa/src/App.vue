@@ -11,7 +11,7 @@
 
 <style lang="scss" scoped>
   #app {
-    @apply min-h-screen w-full overflow-clip;
+    @apply relative min-h-screen w-full overflow-clip;
     // contain: paint;
   }
 </style>

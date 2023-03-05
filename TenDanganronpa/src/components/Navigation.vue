@@ -61,7 +61,7 @@ header.header
     @apply md:bg-gradient-to-b md:from-jumbotron md:to-jumbotron-700;
 
     &_hr {
-      @apply relative -mb-[88px] w-full bg-jumbotron-700 md:hidden;
+      @apply relative z-30 -mb-[88px] w-full bg-jumbotron-700 md:hidden;
       &::before {
         @apply absolute top-0 left-0 h-full w-full opacity-50 content-[''];
         @apply bg-cover bg-top bg-no-repeat;

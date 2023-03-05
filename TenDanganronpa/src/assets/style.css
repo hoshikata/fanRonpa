@@ -49,30 +49,6 @@
   background-color: #a6a6a6d6;
 }
 
-.wave {
-  @apply -mt-px object-fill;
-}
-.wave_1 {
-  @apply h-40;
-  mask: url('../assets/image/wave_1.svg') no-repeat top center;
-  mask-size: cover;
-}
-.wave_2 {
-  @apply h-40;
-  mask: url('../assets/image/wave_2.svg') no-repeat top center;
-  mask-size: cover;
-}
-.wave_3 {
-  @apply h-40;
-  mask: url('../assets/image/wave_3.svg') no-repeat top center;
-  mask-size: cover;
-}
-.wave_4 {
-  @apply h-40;
-  mask: url('../assets/image/wave_4.svg') no-repeat top center;
-  mask-size: cover;
-}
-
 .wrapper {
   @apply relative w-full py-16 px-12 lg:p-10 sm:px-8;
 }

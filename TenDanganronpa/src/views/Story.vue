@@ -20,10 +20,7 @@ section.story.wrapper
 
 <style lang="scss" scoped>
   .story {
-    @apply min-h-screen bg-jumbotron-700 bg-contain bg-no-repeat;
-    // background-image: url('../assets/image/circle_2.svg'), url('../assets/image/circle_1.svg');
-    background-image: url('../assets/image/circle_4.svg'), url('../assets/image/circle_5.svg');
-    background-position: top, bottom;
+    @apply min-h-screen bg-jumbotron-700;
 
     &_container {
       @apply relative mx-auto max-w-[1000px] px-12 py-8 text-justify text-lg text-gray-100 sm:text-base;
@@ -32,7 +29,7 @@ section.story.wrapper
 
     &_hr {
       @apply relative z-10 bg-stone-100 bg-contain bg-bottom bg-no-repeat;
-      background-image: url('../assets/image/circle_3.svg');
+      background-image: url('../assets/image/circle.svg');
       &::before {
         @apply absolute top-0 left-0 -z-10 h-4 w-full bg-jumbotron-700 content-[''];
       }

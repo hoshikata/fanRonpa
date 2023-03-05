@@ -69,7 +69,7 @@
 
 <style lang="scss" scoped>
   .jumbotron {
-    @apply relative flex w-full items-center justify-center overflow-hidden bg-jumbotron;
+    @apply relative z-20 flex w-full items-center justify-center overflow-hidden bg-jumbotron;
 
     &_bg {
       @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-[0.05s];

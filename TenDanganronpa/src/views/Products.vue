@@ -42,7 +42,6 @@
 </script>
 
 <template lang="pug">
-//- img.wave.bg-back(src="../assets/image/wave_4.svg")
 section.products.wrapper
   #product.wrapper_hash
 
@@ -60,7 +59,7 @@ section.products.wrapper
 
 <style lang="scss" scoped>
   .products {
-    @apply z-20 flex min-h-screen flex-col items-center justify-center overflow-hidden bg-cover bg-no-repeat;
+    @apply flex min-h-screen flex-col items-center justify-center overflow-hidden bg-cover bg-no-repeat;
     background-image: linear-gradient(0deg, #00000080, #00000080), url('/image/cover2.png');
     background-position: center 45%;
     background-attachment: fixed;
@@ -70,7 +69,7 @@ section.products.wrapper
       backdrop-filter: blur(10px);
     }
     &_container {
-      @apply relative z-10 flex items-center justify-center bg-back/75 py-8 px-16;
+      @apply relative z-20 flex items-center justify-center bg-back/75 py-8 px-16;
       @apply lg:flex-col lg:px-8;
       // &::before {
       //   @apply absolute top-0 left-0 h-32 w-full -translate-y-full bg-back/75 content-[''];
