@@ -100,15 +100,15 @@ div
 
   .splide_card {
     &_0 .splide_img {
-      @apply -translate-x-[38%] -translate-y-[5%];
-      transform-origin: 60% 30%;
+      @apply -translate-x-[39%] -translate-y-[4%];
+      transform-origin: 55% 22%;
     }
     &_7 .splide_img {
       @apply -translate-x-[48%] -translate-y-[10%];
-      transform-origin: 50% 45%;
+      transform-origin: 50% 35%;
     }
     &_9 .splide_img {
-      @apply -translate-x-[57%] -translate-y-[2%];
+      @apply -translate-x-[58%] -translate-y-[2%];
       transform-origin: 70% 30%;
     }
     &_12 .splide_img {
