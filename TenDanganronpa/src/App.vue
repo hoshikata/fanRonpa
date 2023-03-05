@@ -11,7 +11,7 @@
 
 <style lang="scss" scoped>
   #app {
-    @apply min-h-screen w-full overflow-clip bg-jumbotron-700;
+    @apply min-h-screen w-full overflow-clip;
     // contain: paint;
   }
 </style>

@@ -25,17 +25,14 @@
   const cardStyle = (color) => `color: ${color};`;
   const cardImg = (name, id) => {
     const hasImg = [0, 7, 9, 12].includes(id * 1);
-    return publicSrc(`/ability/${hasImg ? name : 'shape_test'}.png`);
+    return hasImg ? publicSrc(`/ability/${name}.png`) : '';
   };
   const schoolMask = (name) => {
     const src = publicSrc(`/school/${name}.svg`);
     return `mask-image: url(${src}); -webkit-mask-image: url(${src});`;
   };
 
-  const cardOpen = (id) => {
-    console.log(id);
-    emit('open', id);
-  };
+  const cardOpen = (id) => emit('open', id);
 </script>
 
 <template lang="pug">
@@ -73,8 +70,8 @@ div
       }
     }
     &_school {
-      @apply absolute top-2 left-2 -z-10 w-full bg-white pt-[100%] opacity-100 duration-300 group-hover:scale-110;
-      mask-position: -50%;
+      @apply absolute top-2 left-2 -z-10 w-full bg-white pt-[100%] opacity-90 duration-300 group-hover:scale-110;
+      mask-position: -50% center;
       mask-size: 90%;
       mask-repeat: no-repeat;
     }
@@ -106,22 +103,23 @@ div
       @apply -translate-x-[38%] -translate-y-[5%];
       transform-origin: 60% 30%;
     }
-    &_7 {
-      .splide_school {
-        mask-position: 50%;
-      }
-      .splide_img {
-        @apply -translate-x-[48%] -translate-y-[8%];
-        transform-origin: 50% 48%;
-      }
+    &_7 .splide_img {
+      @apply -translate-x-[48%] -translate-y-[10%];
+      transform-origin: 50% 45%;
     }
     &_9 .splide_img {
       @apply -translate-x-[57%] -translate-y-[2%];
       transform-origin: 70% 30%;
     }
     &_12 .splide_img {
-      @apply -translate-x-[32%] translate-y-[0%];
+      @apply -translate-x-[32%] translate-y-[1%];
       transform-origin: 45% 20%;
+    }
+  }
+
+  .splide_card {
+    &_7 .splide_school {
+      mask-position: 50% center;
     }
   }
 </style>

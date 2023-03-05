@@ -1,6 +1,6 @@
 import axios from 'axios';
 import data from '../../data/data.json';
-import { ref, onMounted, computed } from 'vue';
+import { ref, computed, watch, onMounted } from 'vue';
 import { storeToRefs } from 'pinia';
 import { useLang } from '../stores/useLang.js';
 
@@ -8,7 +8,12 @@ export const useCharacter = () => {
   const store = useLang();
   const { lang } = storeToRefs(store);
 
-  const characterData = ref([]);
+  const abilityText = computed(() => {
+    const at = lang.value === 'zh' ? '的' : 'の';
+    return `超高校級${at}`;
+  });
+
+  const characterRef = ref([]);
 
   const getLangData = (data) => {
     const result = {};
@@ -19,19 +24,18 @@ export const useCharacter = () => {
     }
     return JSON.parse(JSON.stringify(result));
   };
-  const abilityText = computed(() => {
-    const at = lang.value === 'zh' ? '的' : 'の';
-    return `超高校級${at}`;
+  const characterData = computed(() => {
+    const result = characterRef.value.map(getLangData);
+    result.sort((a, b) => b.id - a.id);
+    const first = result.pop();
+    if (first) result.unshift(first);
+    return result;
   });
 
   const getData = async () => {
     // const data = await axios.get('https://hoshikata.github.io/TenDanganronpa/data.json');
-    // characterData.value = data.data;
-    const result = data.map(getLangData);
-    result.sort((a, b) => b.id - a.id);
-    const first = result.pop();
-    result.unshift(first);
-    characterData.value = result;
+    // characterRef.value = data.data;
+    characterRef.value = data;
   };
   onMounted(getData);
 

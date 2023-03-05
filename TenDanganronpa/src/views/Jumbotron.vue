@@ -3,6 +3,7 @@
   import { usePosition } from '../composable/usePosition.js';
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
+  const hasAnimate = ref(true);
   const jumbotron = ref(null);
 
   const setMove = (num) => {
@@ -19,8 +20,7 @@
       const isMouseOver = mouseY.value >= h || mouseX.value >= w;
       if (!isMouseOver) style = [`top: calc(50% + ${mouseT}%)`, `left: calc(50% + ${mouseL}%)`];
     }
-    // return [];
-    return style;
+    return hasAnimate.value ? style : [];
   };
   const mountedEvent = () => {
     if (isMobile) windowScrolling();
@@ -30,7 +30,7 @@
 </script>
 
 <template lang="pug">
-.jumbotron(ref="jumbotron")
+#home.jumbotron(ref="jumbotron")
   img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png")
 
   .jumbotron_bg(:style="setMove(0.8)")
@@ -72,7 +72,7 @@
     @apply relative flex w-full items-center justify-center overflow-hidden bg-jumbotron;
 
     &_bg {
-      @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-75;
+      @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-[0.05s];
       &.bg {
         @apply relative top-0 left-0 min-h-screen translate-x-0 translate-y-0;
       }

@@ -31,11 +31,11 @@
 <template lang="pug">
 main.prediction
   .prediction_side
-    RouterLink.prediction_logo(to="/")
-    ul.flex.items-center.self-end
-      li.my-3.mx-5 中文
-      li.my-3.mx-5 日本語
-      li.my-3.mx-5 English
+    RouterLink.logo(to="/")
+    .flex.items-center.self-end
+      button.prediction_lang 中文
+      button.prediction_lang 日本語
+      button.prediction_lang English
 
   .flex.grow.items-center.justify-center.p-10
     .flex
@@ -68,19 +68,17 @@ main.prediction
   }
   .prediction {
     @apply min-h-screen bg-back text-white;
-    @apply bg-cover bg-center bg-no-repeat;
+    // @apply bg-cover bg-center bg-no-repeat;
     // background-image: url('/jumbotron/logo_bg05.png');
 
     * {
       @apply font-sans;
     }
     &_side {
-      @apply flex justify-between bg-jumbotron p-4;
-      backdrop-filter: blur(10px);
+      @apply flex items-center bg-jumbotron py-1 px-5;
     }
-    &_logo {
-      @apply block h-24 w-64 bg-white;
-      mask: url('/image/LOGO.svg') no-repeat center;
+    &_lang {
+      @apply m-3 px-2 font-medium hover:text-primary;
     }
   }
 </style>

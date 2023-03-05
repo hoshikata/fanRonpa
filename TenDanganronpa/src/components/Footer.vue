@@ -4,7 +4,7 @@
 </script>
 
 <template lang="pug">
-footer.bg-jumbotron.text-white
+footer.relative.z-20.bg-jumbotron.text-white
   .mx-auto.flex.items-center.justify-between.py-3.px-10(class="max-w-[1200px] sm:flex-col sm:px-5")
     .m-3.grow
       .-mx-2.flex.flex-wrap(class="sm:justify-center")

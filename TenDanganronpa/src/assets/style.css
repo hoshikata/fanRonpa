@@ -73,6 +73,19 @@
   mask-size: cover;
 }
 
+.wrapper {
+  @apply relative w-full py-16 px-12 lg:p-10 sm:px-8;
+}
+.wrapper_hash {
+  @apply absolute top-0 left-0 h-0 w-full -translate-y-full md:h-[64px];
+}
+
+.logo {
+  @apply mr-auto block h-20 w-44 bg-current;
+  @apply md:h-14 md:w-32;
+  mask: url('/image/LOGO.svg') no-repeat center;
+}
+
 /* .title {
   @apply relative z-10 inline-block py-2 px-5 font-sans text-6xl font-bold tracking-wider;
   text-shadow: 8px 8px 0 #000;
@@ -95,16 +108,9 @@
   @apply lg:mb-6 lg:text-4xl sm:mb-5 sm:text-2xl;
 }
 .title::before {
-  @apply absolute bottom-0 left-1/2 h-0.5 w-[120%] -translate-x-1/2 bg-current content-[''];
+  @apply absolute bottom-0 left-1/2 h-0.5 w-[125%] -translate-x-1/2 bg-current content-[''];
 }
 .title::after {
-  @apply absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 translate-y-1/2 scale-150 opacity-20;
+  @apply absolute bottom-0 left-1/2 -z-10 -translate-x-1/2 translate-y-1/3 scale-150 opacity-20;
   content: attr(title);
-}
-
-.wrapper {
-  @apply relative w-full py-16 px-12 lg:p-10 sm:px-8;
-}
-.wrapper_hash {
-  @apply absolute top-0 left-0 h-0 w-full -translate-y-full md:h-[64px];
 }

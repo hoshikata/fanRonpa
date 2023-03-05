@@ -27,7 +27,7 @@ module.exports = {
       fontFamily: {
         sans: ['Noto Sans TC', 'Noto Sans JP', 'sans-serif'],
         serif: ['Noto Serif TC', 'Noto Serif JP', 'serif'],
-        Economica: ['Economica', 'sans-serif'],
+        Economica: ['Economica', 'Noto Sans TC', 'Noto Sans JP', 'sans-serif'],
       },
       boxShadow: {
         info: '10px 10px 0 rgba(0, 0, 0)',

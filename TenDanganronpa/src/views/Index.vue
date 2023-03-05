@@ -1,5 +1,6 @@
 <script setup>
   import Navigation from '../components/Navigation.vue';
+  import Snow from '../components/Snow.vue';
   import Jumbotron from './Jumbotron.vue';
   import Story from './Story.vue';
   import Character from './Character.vue';
@@ -9,6 +10,7 @@
 </script>
 
 <template lang="pug">
+Snow/
 Jumbotron/
 //- .bg-gradient-to-b.from-jumbotron
 Navigation/

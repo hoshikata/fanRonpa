@@ -59,12 +59,10 @@ section.products.wrapper
 </template>
 
 <style lang="scss" scoped>
-  .wrap {
-    @apply bg-back;
-  }
   .products {
-    @apply relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-cover bg-center bg-no-repeat;
+    @apply z-20 flex min-h-screen flex-col items-center justify-center overflow-hidden bg-cover bg-no-repeat;
     background-image: linear-gradient(0deg, #00000080, #00000080), url('/image/cover2.png');
+    background-position: center 45%;
     background-attachment: fixed;
 
     &::before {

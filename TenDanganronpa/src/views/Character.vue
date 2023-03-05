@@ -3,9 +3,14 @@
   import CharacterInfo from './CharacterInfo.vue';
   import CharacterCard from './CharacterCard.vue';
   import { ref } from 'vue';
+  import { storeToRefs } from 'pinia';
   import { RouterLink } from 'vue-router';
+  import { useLang } from '../stores/useLang.js';
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
+
+  const store = useLang();
+  const { lang } = storeToRefs(store);
 
   const { characterData, abilityText } = useCharacter();
   const { publicSrc } = useImage();
@@ -23,7 +28,6 @@
       charPopup.value.classList.remove('opacity-0', 'blur-2xl');
     }, 100);
   };
-
   const closePopup = (e) => {
     const target = e.target;
     const window = target.matches('.characters_window, .characters_window *');
@@ -42,7 +46,7 @@ section.characters.wrapper
     h2.title.text-gray-500(title="CHARACTER") CHARACTER
   .mb-10.flex(class="lg:mb-8 sm:mb-5")
     RouterLink.characters_button(to="/prediction")
-      span 生死預測表 →
+      span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
 
   CharacterCard.-mx-12(@open="openPopup", class="lg:-mx-10 sm:-mx-8")
 
