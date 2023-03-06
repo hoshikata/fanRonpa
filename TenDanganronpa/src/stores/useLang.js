@@ -1,18 +1,28 @@
 import { defineStore } from 'pinia';
-import { ref, onMounted } from 'vue';
+import { useRoute, useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
 
 export const useLang = defineStore('lang', () => {
+  const route = useRoute();
+  const router = useRouter();
   const lang = ref('jp');
+  const langKey = '10mins_lang';
 
-  const changeLang = (val) => {
+  const changeLang = (val, hash) => {
     lang.value = val;
-    localStorage.setItem('10mins_lang', val);
+    localStorage.setItem(langKey, val);
+    router.push({ name: route.name ?? 'index', query: { lang: val } });
   };
 
-  onMounted(() => {
-    const langOld = localStorage.getItem('10mins_lang');
-    lang.value = langOld ?? 'jp';
-  });
+  watch(
+    () => route.fullPath,
+    () => {
+      const ls = localStorage.getItem(langKey);
+      const query = route.query.lang;
+      changeLang(query ?? ls ?? 'jp');
+    },
+    { immediate: true },
+  );
 
-  return { lang, changeLang };
+  return { lang, langKey, changeLang };
 });

@@ -2,18 +2,21 @@
   import IconClose from '~icons/ic/round-close';
   import CharacterInfo from './CharacterInfo.vue';
   import CharacterCard from './CharacterCard.vue';
-  import { ref } from 'vue';
   import { storeToRefs } from 'pinia';
   import { RouterLink } from 'vue-router';
+  import { ref, computed } from 'vue';
   import { useLang } from '../stores/useLang.js';
+  import { useNav } from '../stores/useNav.js';
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
 
-  const store = useLang();
-  const { lang } = storeToRefs(store);
+  const langStore = useLang();
+  const { lang } = storeToRefs(langStore);
 
-  const { characterData, abilityText } = useCharacter();
+  const { characterData } = useCharacter();
   const { publicSrc } = useImage();
+
+  const navText = computed(() => useNav().getNavItem('characters'));
 
   const popup = ref(false);
   const charId = ref(0);
@@ -22,10 +25,12 @@
   const openPopup = (id) => {
     charId.value = id;
     popup.value = true;
-    charPopup.value.classList.add('opacity-0', 'blur-2xl');
+    // charPopup.value.classList.add('opacity-0', 'blur-2xl');
+    charPopup.value.classList.add('opacity-0');
     document.body.classList.add('overflow-hidden');
     setTimeout(() => {
-      charPopup.value.classList.remove('opacity-0', 'blur-2xl');
+      // charPopup.value.classList.remove('opacity-0', 'blur-2xl');
+      charPopup.value.classList.remove('opacity-0');
     }, 100);
   };
   const closePopup = (e) => {
@@ -43,9 +48,9 @@ section.characters.wrapper
   #characters.wrapper_hash
 
   .mb-5.flex(class="lg:mb-3")
-    h2.title.text-gray-500(title="CHARACTER") CHARACTER
+    h2.title.text-gray-500(:title="navText") CHARACTER
   .mb-10.flex(class="lg:mb-8 sm:mb-5")
-    RouterLink.characters_button(to="/prediction")
+    RouterLink.characters_button(:to="{ name: 'prediction', query: { lang: lang } }")
       span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
 
   CharacterCard.relative.z-20.-mx-12(@open="openPopup", class="lg:-mx-10 sm:-mx-8")

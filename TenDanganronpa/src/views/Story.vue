@@ -1,11 +1,16 @@
-<script setup></script>
+<script setup>
+  import { ref, computed } from 'vue';
+  import { useNav } from '../stores/useNav.js';
+
+  const navText = computed(() => useNav().getNavItem('story'));
+</script>
 
 <template lang="pug">
 section.story.wrapper
   #story.wrapper_hash
 
   .mb-12.flex(class="lg:mb-6")
-    h2.title.text-gray-300(title="STORY") STORY
+    h2.title.text-gray-300(:title="navText") STORY
 
   .story_container
     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quia libero ea fugit earum esse cupiditate nesciunt aspernatur dignissimos tempore dolorem, rem ipsum quibusdam dolor laboriosam. Quod recusandae maiores aspernatur consequatur debitis cumque aliquam tempora delectus possimus animi vel voluptatum perferendis, optio minus hic! Minus fugiat ex placeat eveniet. Dolores reiciendis sequi illo iusto ipsum, aspernatur dolor facilis non, unde neque, quibusdam eveniet nobis? Obcaecati illum reiciendis consectetur, quasi voluptates quam esse, sed delectus veritatis non veniam dolor illo, nemo ducimus similique soluta. Fuga eveniet optio sint! Error, animi quod! Voluptatum accusantium fuga officia consequuntur, aliquam culpa distinctio debitis a similique repellat? Necessitatibus accusantium odio amet distinctio laborum eligendi repudiandae eius facere, rerum architecto aspernatur at esse, ex, itaque quia ullam velit aliquid. Error autem rem vero nam provident asperiores distinctio reiciendis alias eos dolor, odio totam perferendis tempore illo deleniti sed ipsa pariatur eligendi. Ullam ipsum voluptates quod nihil?
@@ -15,7 +20,7 @@ section.story.wrapper
       img(src="../assets/image/bg_2.png", class="w-1/2 sm:w-full")
 
 .story_hr
-  img.w-full(src="../assets/image/wave-haikei.svg")
+  img.w-full.scale-105(src="../assets/image/wave-haikei.svg")
 </template>
 
 <style lang="scss" scoped>
@@ -24,7 +29,7 @@ section.story.wrapper
 
     &_container {
       @apply relative mx-auto max-w-[1000px] px-12 py-8 text-justify text-lg text-gray-100 sm:text-base;
-      @apply sm:px-8 sm:py-5 xs:px-6 xs:py-4;
+      @apply sm:p-2;
     }
 
     &_hr {

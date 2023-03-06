@@ -1,5 +1,7 @@
 <script setup>
   import IconTwitter from './icons/IconTwitter.vue';
+  import { RouterLink } from 'vue-router';
+
   const twitterList = ['yajirusi_dr', 'DRDS_Ooinn', 'DRDS_hanji', 'Zoexiao27'];
 </script>
 
@@ -17,7 +19,9 @@ footer.relative.z-20.bg-jumbotron.text-white
           IconTwitter
           span @{{ twitter }}
       p.footer_copyright © 2023 Tennan Gakuen Seisaku Iinkai lnc.
-    img.m-3.h-16.w-16(src="/image/tennan.svg", title="天南学園製作委員会")
+
+    RouterLink.block.shrink-0(:to="{ name: 'index', hash: '#home' }")
+      img.m-3.h-16.w-16(src="/image/tennan.svg", title="天南学園製作委員会")
 </template>
 
 <style lang="scss" scoped>

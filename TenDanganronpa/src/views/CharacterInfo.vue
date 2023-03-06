@@ -1,13 +1,14 @@
 <script setup>
   import IconArrow from '~icons/ic/baseline-double-arrow';
-  import { ref, computed, watch } from 'vue';
   import { storeToRefs } from 'pinia';
+  import { ref, computed, watch } from 'vue';
   import { useLang } from '../stores/useLang.js';
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
 
-  const store = useLang();
-  const { lang } = storeToRefs(store);
+  const langStore = useLang();
+  const { lang } = storeToRefs(langStore);
+
   const { characterData, abilityText } = useCharacter();
   const { publicSrc } = useImage();
 
@@ -105,9 +106,10 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
 
     .character_aside
       .character_mantra
-        .text-white(:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
+        //- (:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
+        .text-white
           p.whitespace-nowrap(v-for="mantra of charMantra") {{ mantra }}
-      img.character_image(src="/ability/shape_test.png")
+      img.character_image(src="/image/shape_test.png")
 
     button.character_next.left-0.-scale-100(@click="changeChar(-1)")
       IconArrow

@@ -1,12 +1,33 @@
 <script setup>
   import izayoi from '../components/prediction/izayoi.vue';
-  import { RouterLink } from 'vue-router';
-  import { ref, computed, watch } from 'vue';
+  import { RouterLink, useRoute, useRouter } from 'vue-router';
+  import { ref, computed } from 'vue';
+  import { useLang } from '../stores/useLang.js';
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
 
-  const { characterData, abilityText } = useCharacter();
+  const route = useRoute();
+  const router = useRouter();
+  const lang = ref(route.query.lang);
+
+  const { langKey } = useLang();
+
+  const { getAbilityText, getCharData } = useCharacter();
+  const abilityText = computed(() => getAbilityText(lang.value));
+  const charData = computed(() => getCharData(lang.value));
+
   const { publicSrc } = useImage();
+
+  const changeLang = (val) => {
+    lang.value = val;
+    router.push({ name: 'prediction', query: { lang: val } });
+  };
+  const goBack = () => {
+    const isEN = lang.value === 'en';
+    const langIndex = localStorage.getItem(langKey);
+    const langVal = isEN ? langIndex : lang.value;
+    router.push({ name: 'index', hash: '#home' });
+  };
 
   const statusList = () => {
     const result = [];
@@ -16,11 +37,11 @@
     return result;
   };
   const status = ref(statusList());
-
   const changeStatus = (id) => {
     const target = status.value.find((item) => item.id === id);
     target.status += 1;
   };
+
   const pickStyle = (id) => {
     const target = status.value.find((item) => item.id === id);
     const num = target.status % 3;
@@ -31,16 +52,16 @@
 <template lang="pug">
 main.prediction
   .prediction_side
-    RouterLink.logo(to="/")
+    button.logo(@click="goBack")
     .flex.items-center.self-end
-      button.prediction_lang 中文
-      button.prediction_lang 日本語
-      button.prediction_lang English
+      button.prediction_lang(@click="changeLang('jp')") 日本語
+      button.prediction_lang(@click="changeLang('zh')") 中文
+      button.prediction_lang(@click="changeLang('en')") English
 
-  .flex.grow.items-center.justify-center.p-10
+  .flex.grow.items-center.justify-center.p-10(class="md:p-5 sm:p-2")
     .flex
       .flex.flex-wrap.p-1(class="max-w-[992px]")
-        .z-10(v-for="charData of characterData", class="w-1/4")
+        .z-10(v-for="charData of charData", class="w-1/4")
           .test.group.relative.z-10.m-1
             img.invisible.relative.-z-10.h-full.w-full(src="../assets/image/iei_bg.png")
             //- img.absolute.top-0.-z-10.w-full(
@@ -79,6 +100,7 @@ main.prediction
     }
     &_lang {
       @apply m-3 px-2 font-medium hover:text-primary;
+      @apply sm:m-1 sm:px-1 sm:text-sm;
     }
   }
 </style>

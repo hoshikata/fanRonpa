@@ -6,7 +6,7 @@
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
 
-  const { characterData, abilityText } = useCharacter();
+  const { characterData } = useCharacter();
   const { publicSrc } = useImage();
 
   const emit = defineEmits(['open']);
@@ -24,7 +24,7 @@
 
   const cardStyle = (color) => `color: ${color};`;
   const cardImg = (name, id) => {
-    const hasImg = [0, 7, 9, 12].includes(id * 1);
+    const hasImg = [0, 7, 9, 12, 4].includes(id * 1);
     return hasImg ? publicSrc(`/ability/${name}.png`) : '';
   };
   const schoolMask = (name) => {
@@ -102,6 +102,10 @@ div
     &_0 .splide_img {
       @apply -translate-x-[39%] -translate-y-[4%];
       transform-origin: 55% 22%;
+    }
+    &_4 .splide_img {
+      @apply h-[140%] -translate-x-[32%] translate-y-[0%];
+      transform-origin: 50% 28%;
     }
     &_7 .splide_img {
       @apply -translate-x-[48%] -translate-y-[10%];

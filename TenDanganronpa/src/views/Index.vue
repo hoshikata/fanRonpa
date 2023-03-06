@@ -12,11 +12,10 @@
 <template lang="pug">
 Snow/
 Jumbotron/
-//- .bg-gradient-to-b.from-jumbotron
 Navigation/
 Story/
 Character/
-//- Special/
+Special/
 Products/
 </template>
 

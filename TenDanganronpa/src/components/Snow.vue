@@ -3,6 +3,7 @@
   import { ref, nextTick } from 'vue';
 
   const canvas = ref(null);
+
   nextTick(() => {
     new Particles(canvas.value, {
       size: { min: 0, max: 2.5 },

@@ -3,23 +3,20 @@
   import IconDrop from '~icons/ic/baseline-arrow-drop-down';
   import IconMenu from '~icons/ic/baseline-menu';
   import IconClose from '~icons/ic/baseline-close';
+  import { storeToRefs } from 'pinia';
   import { RouterLink } from 'vue-router';
   import { ref } from 'vue';
-  import { storeToRefs } from 'pinia';
   import { useLang } from '../stores/useLang.js';
+  import { useNav } from '../stores/useNav.js';
 
-  const store = useLang();
-  const { changeLang } = store;
-  const { lang } = storeToRefs(store);
+  const langStore = useLang();
+  const { changeLang } = langStore;
+  const { lang } = storeToRefs(langStore);
+
+  const navStore = useNav();
+  const { navData } = storeToRefs(navStore);
 
   const navShow = ref(false);
-
-  const navList = [
-    { id: 0, name: 'story', title: 'STORY', zh: '故事簡介', jp: 'ストーリー' },
-    { id: 1, name: 'characters', title: 'CHARACTER', zh: '角色介紹', jp: 'キャラクター' },
-    { id: 2, name: 'special', title: 'SPECIAL', zh: '特典', jp: '特典' },
-    { id: 3, name: 'product', title: 'PRODUCT', zh: '作品信息', jp: '製品情報' },
-  ];
 
   const switchNav = (status) => {
     navShow.value = status;
@@ -28,13 +25,17 @@
 
 <template lang="pug">
 .header_hr
-  img.w-full(src="../assets/image/wave-haikei_5.svg")
+  img.w-full.scale-105(src="../assets/image/wave-haikei_5.svg")
 
 header.header
   RouterLink.logo(to="#home")
   ul.nav_list(:class="{ 'md:!right-0': navShow }")
-    li(v-for="item of navList")
-      RouterLink.nav_link(@click="switchNav(false)", :to="`#${item.name}`", :title="item[lang]") {{ item.title }}
+    li(v-for="item of navData")
+      RouterLink.nav_link(
+        @click="switchNav(false)",
+        :to="{ name: 'index', hash: `#${item.name}`, query: { lang: lang } }",
+        :title="item.text"
+      ) {{ item.title }}
 
     li.relative.ml-4.self-end
       button.nav_lang.peer
@@ -63,6 +64,9 @@ header.header
     &_hr {
       @apply relative z-30 -mb-[88px] w-full bg-jumbotron-700 md:hidden;
       &::before {
+        @apply absolute top-0 left-0 -z-10 h-4 w-full bg-jumbotron content-[''];
+      }
+      &::after {
         @apply absolute top-0 left-0 h-full w-full opacity-50 content-[''];
         @apply bg-cover bg-top bg-no-repeat;
         background-image: url('../assets/image/wave-haikei_6.svg');
@@ -89,11 +93,13 @@ header.header
       @apply md:mr-5;
 
       &_list {
-        @apply absolute right-0 bottom-0 w-full translate-y-full;
+        @apply absolute right-0 bottom-0 w-full translate-y-full pt-2;
         @apply invisible hover:visible peer-hover:visible;
+        @apply md:mr-2 md:bg-jumbotron-800;
       }
       &_item {
-        @apply w-full whitespace-nowrap pt-3 text-center font-sans hover:text-primary;
+        @apply w-full whitespace-nowrap py-2 text-center font-sans hover:text-primary;
+        @apply md:px-3;
       }
     }
     &_close {
