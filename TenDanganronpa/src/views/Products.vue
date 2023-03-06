@@ -91,7 +91,7 @@ section.products.wrapper
       }
     }
     &_th {
-      @apply mr-3 flex shrink-0 justify-between whitespace-nowrap border border-current px-1.5 py-0.5 sm:mb-2;
+      @apply mr-3 flex shrink-0 justify-between whitespace-nowrap border border-current px-1.5 py-0.5;
     }
   }
 </style>
