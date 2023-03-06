@@ -26,11 +26,9 @@
     charId.value = id;
     popup.value = true;
     // charPopup.value.classList.add('opacity-0', 'blur-2xl');
-    charPopup.value.classList.add('opacity-0');
     document.body.classList.add('overflow-hidden');
     setTimeout(() => {
       // charPopup.value.classList.remove('opacity-0', 'blur-2xl');
-      charPopup.value.classList.remove('opacity-0');
     }, 100);
   };
   const closePopup = (e) => {

@@ -22,11 +22,19 @@
     autoScroll: { speed: 0.8 },
   };
 
-  const cardStyle = (color) => `color: ${color};`;
+  const imgList = [
+    { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
+    { id: 9, src: 'https://images.plurk.com/6Mg8JI7Bvw4I7ejHtXIIEg.png' },
+    { id: 12, src: 'https://images.plurk.com/OMcZwSfj8Qmvi9dd2CDzE.png' },
+    { id: 4, src: 'https://images.plurk.com/7o2JOEHgVTwFmXi4JfUCVT.png' },
+  ];
   const cardImg = (name, id) => {
-    const hasImg = [0, 7, 9, 12, 4].includes(id * 1);
-    return hasImg ? publicSrc(`/ability/${name}.png`) : '';
+    // const hasImg = [0, 7, 9, 12, 4].includes(id * 1);
+    // return hasImg ? publicSrc(`/ability/${name}.png`) : '';
+    const imgSrc = imgList.find((item) => item.id === id)?.src;
+    return imgSrc ?? '';
   };
+  const cardStyle = (color) => `color: ${color};`;
   const schoolMask = (name) => {
     const src = publicSrc(`/school/${name}.svg`);
     return `mask-image: url(${src}); -webkit-mask-image: url(${src});`;

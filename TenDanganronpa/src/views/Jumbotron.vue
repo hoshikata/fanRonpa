@@ -1,10 +1,22 @@
 <script setup>
-  import { ref } from 'vue';
+  import { ref, onMounted } from 'vue';
   import { usePosition } from '../composable/usePosition.js';
+  import { useImage } from '../composable/useImage.js';
+
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
+  const { publicSrc } = useImage();
 
   const hasAnimate = ref(true);
   const jumbotron = ref(null);
+
+  // const loadImage = () => {
+  //   const img = new Image();
+  //   img.onload = (e) => {
+  //     console.log(e);
+  //   };
+  //   img.src = publicSrc('/jumbotron/logo_bg05.png');
+  // };
+  // onMounted(loadImage);
 
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
