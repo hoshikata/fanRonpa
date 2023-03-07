@@ -1,22 +1,13 @@
 <script setup>
-  import { ref, onMounted } from 'vue';
+  import { ref, reactive, computed, watch } from 'vue';
+  import { useLoad } from '../stores/useLoad.js';
   import { usePosition } from '../composable/usePosition.js';
-  import { useImage } from '../composable/useImage.js';
 
+  const loadStore = useLoad();
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
-  const { publicSrc } = useImage();
 
-  const hasAnimate = ref(true);
+  //== mouse effect
   const jumbotron = ref(null);
-
-  // const loadImage = () => {
-  //   const img = new Image();
-  //   img.onload = (e) => {
-  //     console.log(e);
-  //   };
-  //   img.src = publicSrc('/jumbotron/logo_bg05.png');
-  // };
-  // onMounted(loadImage);
 
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
@@ -39,42 +30,77 @@
     else windowMousing();
   };
   mountedEvent();
+
+  //== loading
+  const hasAnimate = ref(false);
+  const imgLoading = reactive({
+    bg01: false,
+    bg02: false,
+    bg03: false,
+    bg04: false,
+    bg05: false,
+    fish01: false,
+    fish02: false,
+    fish03: false,
+    fish04: false,
+    fish05: false,
+    // fish06: false,
+    fish07: false,
+    fish08: false,
+    fish09: false,
+    fish10: false,
+  });
+  const loadingProgress = computed(() => {
+    const loads = Object.values(imgLoading);
+    const finishList = loads.filter((val) => val);
+    return finishList.length / loads.length;
+  });
+  const loadingImg = (name) => (imgLoading[name] = true);
+
+  watch(
+    loadingProgress,
+    (nVal) => {
+      hasAnimate.value = nVal === 1;
+      loadStore.changeLoadProgress(nVal);
+    },
+    { immediate: true },
+  );
 </script>
 
 <template lang="pug">
 #home.jumbotron(ref="jumbotron")
-  img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png")
+  img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png", @load="loadingImg('bg05')")
 
   .jumbotron_bg(:style="setMove(0.8)")
     img.jumbotron_cage(src="/jumbotron/torikago_big.png")
 
   .jumbotron_bg(:style="setMove(1)")
-    img.jumbotron_fish.fish-10(src="/jumbotron/fish10.png")
+    img.jumbotron_fish.fish-10(src="/jumbotron/fish10.png", @load="loadingImg('fish10')")
   .jumbotron_bg(:style="setMove(1)")
-    img.jumbotron_fish.fish-9(src="/jumbotron/fish09.png")
+    img.jumbotron_fish.fish-9(src="/jumbotron/fish09.png", @load="loadingImg('fish09')")
   .jumbotron_bg(:style="setMove(1)")
-    img.jumbotron_fish.fish-8(src="/jumbotron/fish08.png")
-  img.jumbotron_bg(src="/jumbotron/logo_bg04-2.png", :style="setMove(2)")
+    img.jumbotron_fish.fish-8(src="/jumbotron/fish08.png", @load="loadingImg('fish08')")
+  img.jumbotron_bg(src="/jumbotron/logo_bg04-2.png", :style="setMove(2)", @load="loadingImg('bg04')")
 
   .jumbotron_bg(:style="setMove(3)")
-    img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png")
+    img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png", @load="loadingImg('fish07')")
   .jumbotron_bg(:style="setMove(3)")
-    //- img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png")
-  img.jumbotron_bg(src="/jumbotron/logo_bg03-2.png", :style="setMove(4)")
+    //- img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png", @load="loadingImg('fish06')")
+  img.jumbotron_bg(src="/jumbotron/logo_bg03-2.png", :style="setMove(4)", @load="loadingImg('bg03')")
 
   .jumbotron_bg(:style="setMove(5)")
-    img.jumbotron_fish.fish-5(src="/jumbotron/fish05.png")
+    img.jumbotron_fish.fish-5(src="/jumbotron/fish05.png", @load="loadingImg('fish05')")
   .jumbotron_bg(:style="setMove(6)")
-    img.jumbotron_fish.fish-4(src="/jumbotron/fish04.png")
+    img.jumbotron_fish.fish-4(src="/jumbotron/fish04.png", @load="loadingImg('fish04')")
   .jumbotron_bg(:style="setMove(7)")
-    img.jumbotron_fish.fish-3(src="/jumbotron/fish03.png")
-  img.jumbotron_bg(src="/jumbotron/logo_bg02-2.png", :style="setMove(8)")
+    img.jumbotron_fish.fish-3(src="/jumbotron/fish03.png", @load="loadingImg('fish03')")
+  img.jumbotron_bg(src="/jumbotron/logo_bg02-2.png", :style="setMove(8)", @load="loadingImg('bg02')")
 
   .jumbotron_bg(:style="setMove(10)")
-    img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png")
+    img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png", @load="loadingImg('fish02')")
   .jumbotron_bg(:style="setMove(12)")
-    img.jumbotron_fish.fish-1(src="/jumbotron/fish01.png")
-  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01-3.png", :style="setMove(14)")
+    img.jumbotron_fish.fish-1(src="/jumbotron/fish01.png", @load="loadingImg('fish01')")
+  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01-3.png", :style="setMove(14)", @load="loadingImg('bg01')")
 
   .jumbotron_logo
 </template>

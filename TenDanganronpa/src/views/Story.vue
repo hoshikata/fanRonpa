@@ -1,6 +1,9 @@
 <script setup>
+  import bg_1 from '../assets/image/bg_1.png';
+  import bg_2 from '../assets/image/bg_2.png';
   import { ref, computed } from 'vue';
   import { useNav } from '../stores/useNav.js';
+  import { vSrc } from '../assets/js/directive.js';
 
   const navText = computed(() => useNav().getNavItem('story'));
 </script>
@@ -16,8 +19,8 @@ section.story.wrapper
     p Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis quia libero ea fugit earum esse cupiditate nesciunt aspernatur dignissimos tempore dolorem, rem ipsum quibusdam dolor laboriosam. Quod recusandae maiores aspernatur consequatur debitis cumque aliquam tempora delectus possimus animi vel voluptatum perferendis, optio minus hic! Minus fugiat ex placeat eveniet. Dolores reiciendis sequi illo iusto ipsum, aspernatur dolor facilis non, unde neque, quibusdam eveniet nobis? Obcaecati illum reiciendis consectetur, quasi voluptates quam esse, sed delectus veritatis non veniam dolor illo, nemo ducimus similique soluta. Fuga eveniet optio sint! Error, animi quod! Voluptatum accusantium fuga officia consequuntur, aliquam culpa distinctio debitis a similique repellat? Necessitatibus accusantium odio amet distinctio laborum eligendi repudiandae eius facere, rerum architecto aspernatur at esse, ex, itaque quia ullam velit aliquid. Error autem rem vero nam provident asperiores distinctio reiciendis alias eos dolor, odio totam perferendis tempore illo deleniti sed ipsa pariatur eligendi. Ullam ipsum voluptates quod nihil?
 
     .mt-10.flex(class="sm:flex-col")
-      img.mr-10(src="../assets/image/bg_1.png", class="w-1/2 sm:mr-0 sm:mb-5 sm:w-full")
-      img(src="../assets/image/bg_2.png", class="w-1/2 sm:w-full")
+      img.mr-10(v-src="bg_1", class="w-1/2 sm:mr-0 sm:mb-5 sm:w-full")
+      img(v-src="bg_2", class="w-1/2 sm:w-full")
 
 .story_hr
   img.w-full.scale-105(src="../assets/image/wave-haikei.svg")

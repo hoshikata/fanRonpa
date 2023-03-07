@@ -3,11 +3,13 @@
   import { ref, computed } from 'vue';
   import { useLang } from '../stores/useLang.js';
   import { useNav } from '../stores/useNav.js';
+  import { vSrc } from '../assets/js/directive.js';
+  import { useImage } from '../composable/useImage.js';
 
   const langStore = useLang();
   const { lang } = storeToRefs(langStore);
-
   const navText = computed(() => useNav().getNavItem('product'));
+  const { publicSrc } = useImage();
 
   const productsList = {
     zh: [
@@ -52,7 +54,7 @@ section.products.wrapper
     h2.title.text-gray-100(:title="navText") PRODUCT
 
   .products_container
-    img.w-80(src="/image/37f.jpg")
+    img.w-80(v-src="publicSrc('/image/37f.jpg')")
     .ml-10(class="lg:ml-0 lg:mt-10 sm:mt-6")
       .products_tr(v-for="product of productsData", :class="product.tr")
         p.products_th(:class="product.class")
@@ -63,7 +65,7 @@ section.products.wrapper
 <style lang="scss" scoped>
   .products {
     @apply flex min-h-screen flex-col items-center justify-center overflow-hidden bg-cover bg-no-repeat;
-    background-image: linear-gradient(0deg, #00000080, #00000080), url('/image/cover2.png');
+    background-image: linear-gradient(0deg, #00000080, #00000080), url('../assets/image/product_bg.png');
     background-position: center 45%;
     background-attachment: fixed;
 
@@ -73,7 +75,7 @@ section.products.wrapper
     }
     &_container {
       @apply relative z-20 flex items-center justify-center bg-back/75 py-8 px-16;
-      @apply lg:flex-col lg:px-8 sm:p-5;
+      @apply lg:flex-col lg:py-10 lg:px-8 sm:p-5 sm:py-7;
       // &::before {
       //   @apply absolute top-0 left-0 h-32 w-full -translate-y-full bg-back/75 content-[''];
       //   clip-path: polygon(0 0, 0 100%, 100% 100%, 0 0);

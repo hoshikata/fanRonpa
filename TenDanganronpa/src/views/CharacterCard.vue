@@ -3,6 +3,7 @@
   import { Splide, SplideSlide } from '@splidejs/vue-splide';
   import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
   import { ref } from 'vue';
+  import { vSrc } from '../assets/js/directive.js';
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
 
@@ -23,10 +24,12 @@
   };
 
   const imgList = [
-    { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
     { id: 9, src: 'https://images.plurk.com/6Mg8JI7Bvw4I7ejHtXIIEg.png' },
+    { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
     { id: 12, src: 'https://images.plurk.com/OMcZwSfj8Qmvi9dd2CDzE.png' },
     { id: 4, src: 'https://images.plurk.com/7o2JOEHgVTwFmXi4JfUCVT.png' },
+    { id: 0, src: 'https://images.plurk.com/68XlvFrX1wzMCeAWg7XuOi.png' },
+    { id: 8, src: 'https://images.plurk.com/6ybVT5ENpkfjnPoTnw3Ux8.png' },
   ];
   const cardImg = (name, id) => {
     // const hasImg = [0, 7, 9, 12, 4].includes(id * 1);
@@ -108,7 +111,7 @@ div
 
   .splide_card {
     &_0 .splide_img {
-      @apply -translate-x-[39%] -translate-y-[4%];
+      @apply -translate-x-[40%] -translate-y-[7%];
       transform-origin: 55% 22%;
     }
     &_4 .splide_img {
@@ -118,6 +121,10 @@ div
     &_7 .splide_img {
       @apply -translate-x-[48%] -translate-y-[10%];
       transform-origin: 50% 35%;
+    }
+    &_8 .splide_img {
+      @apply -translate-x-[39%] -translate-y-[20%] -rotate-12;
+      transform-origin: 50% 44%;
     }
     &_9 .splide_img {
       @apply -translate-x-[58%] -translate-y-[2%];
