@@ -17,13 +17,9 @@ export const usePosition = () => {
     mouseY.value = target.pageY;
   };
 
-  const windowMousing = () => {
-    onMounted(() => {
-      window.addEventListener(events.value, mousePosition);
-    });
-    onUnmounted(() => {
-      window.removeEventListener(events.value, mousePosition);
-    });
+  const windowMousing = (status) => {
+    if (status) window.addEventListener(events.value, mousePosition);
+    else window.removeEventListener(events.value, mousePosition);
   };
 
   //== scroll
@@ -35,13 +31,9 @@ export const usePosition = () => {
     scrollY.value = window.pageYOffset;
   };
 
-  const windowScrolling = () => {
-    onMounted(() => {
-      window.addEventListener('scroll', scrollPosition);
-    });
-    onUnmounted(() => {
-      window.removeEventListener('scroll', scrollPosition);
-    });
+  const windowScrolling = (status) => {
+    if (status) window.addEventListener('scroll', scrollPosition);
+    else window.removeEventListener('scroll', scrollPosition);
   };
 
   return { isMobile, mouseX, mouseY, mousePosition, windowMousing, scrollX, scrollY, scrollPosition, windowScrolling };

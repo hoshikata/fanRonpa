@@ -2,7 +2,7 @@
   import '@splidejs/vue-splide/css';
   import { Splide, SplideSlide } from '@splidejs/vue-splide';
   import { AutoScroll } from '@splidejs/splide-extension-auto-scroll';
-  import { ref } from 'vue';
+  import { ref, nextTick } from 'vue';
   import { vSrc } from '../assets/js/directive.js';
   import { useCharacter } from '../composable/useCharacter.js';
   import { useImage } from '../composable/useImage.js';
@@ -12,17 +12,36 @@
 
   const emit = defineEmits(['open']);
 
+  //== splide handler
+  const splide = ref();
+  const splideExtensions = { AutoScroll };
   const splideOption = {
     type: 'loop',
-    // perPage: 6,
     perMove: 1,
     gap: '2%',
     autoWidth: true,
     arrows: false,
     pagination: false,
-    autoScroll: { speed: 0.8 },
+    autoScroll: { speed: 0.8, autoStart: false },
   };
 
+  const clickSplide = (e, slide, target) => {
+    const id = slide.slide.dataset.id * 1 ?? 0;
+    emit('open', id);
+  };
+
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      const status = entry.isIntersecting;
+      const { AutoScroll } = splide.value.splide.Components;
+      if (status) AutoScroll.play();
+      else AutoScroll.pause();
+    },
+    { threshold: 0.25 },
+  );
+  nextTick(() => observer.observe(splide.value.root));
+
+  //== character card
   const imgList = [
     { id: 9, src: 'https://images.plurk.com/6Mg8JI7Bvw4I7ejHtXIIEg.png' },
     { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
@@ -32,8 +51,6 @@
     { id: 8, src: 'https://images.plurk.com/6ybVT5ENpkfjnPoTnw3Ux8.png' },
   ];
   const cardImg = (name, id) => {
-    // const hasImg = [0, 7, 9, 12, 4].includes(id * 1);
-    // return hasImg ? publicSrc(`/ability/${name}.png`) : '';
     const imgSrc = imgList.find((item) => item.id === id)?.src;
     return imgSrc ?? '';
   };
@@ -42,19 +59,13 @@
     const src = publicSrc(`/school/${name}.svg`);
     return `mask-image: url(${src}); -webkit-mask-image: url(${src});`;
   };
-
-  const cardOpen = (id) => emit('open', id);
 </script>
 
 <template lang="pug">
 div
-  Splide(:options="splideOption", :extensions="{ AutoScroll }")
-    SplideSlide.splide_box(v-for="charData of characterData")
-      .splide_card.group(
-        @click="cardOpen(charData.id)",
-        :class="`splide_card_${charData.id}`",
-        :style="cardStyle(charData.color)"
-      )
+  Splide(@splide:click="clickSplide", :options="splideOption", :extensions="splideExtensions", ref="splide")
+    SplideSlide.splide_box(v-for="charData of characterData", :data-id="charData.id")
+      .splide_card.group(:class="`splide_card_${charData.id}`", :style="cardStyle(charData.color)")
         .splide_school(:style="schoolMask(charData.school_img)")
         img.splide_img(:src="cardImg(charData.img_name, charData.id)")
         button.splide_button

@@ -22,7 +22,7 @@
   watch(
     showLoad,
     (nVal) => {
-      // hideScrollBar(nVal);
+      hideScrollBar(nVal);
       if (!nVal) clearInterval(loadVal.timer);
       else {
         loadVal.time = 0;
@@ -34,7 +34,7 @@
 </script>
 
 <template lang="pug">
-.fixed.top-0.left-0.z-50.flex.h-screen.w-full.items-center.justify-center.bg-secondary.opacity-80(v-show="showLoad")
+.fixed.top-0.left-0.z-50.flex.h-screen.w-full.items-center.justify-center.bg-secondary(v-show="showLoad")
   p.font-sans.text-white Loading... {{ progress }}
 </template>
 

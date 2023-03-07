@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, reactive, computed, watch } from 'vue';
+  import { ref, reactive, computed, watch, nextTick } from 'vue';
   import { useLoad } from '../stores/useLoad.js';
   import { usePosition } from '../composable/usePosition.js';
 
@@ -25,11 +25,13 @@
     }
     return hasAnimate.value ? style : [];
   };
-  const mountedEvent = () => {
-    if (isMobile) windowScrolling();
-    else windowMousing();
-  };
-  mountedEvent();
+
+  const observer = new IntersectionObserver(([entry]) => {
+    const status = entry.isIntersecting;
+    if (isMobile) windowScrolling(status);
+    else windowMousing(status);
+  });
+  nextTick(() => observer.observe(jumbotron.value));
 
   //== loading
   const hasAnimate = ref(false);

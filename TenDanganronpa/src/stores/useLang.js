@@ -15,7 +15,8 @@ export const useLang = defineStore('lang', () => {
   };
 
   watch(
-    () => route.fullPath,
+    // () => route.fullPath,
+    () => route.name,
     () => {
       const ls = localStorage.getItem(langKey);
       const query = route.query.lang;

@@ -23,9 +23,9 @@
       { title: 'CERO', content: 'D（17歲以上對象）', class: 'w-28 sm:w-20' },
       { title: '角色設計、劇本', content: '全員', class: 'w-36 sm:w-32', tr: 'mt-5' },
       { title: '主辦人', content: 'ヤジルシ', class: 'w-36 sm:w-32' },
-      { title: '美術 & 3D', content: 'いもまる', class: 'w-36 sm:w-32' },
+      { title: '美術&3D', content: 'いもまる', class: 'w-36 sm:w-32' },
       { title: 'CG美術', content: '地瓜探員', class: 'w-36 sm:w-32' },
-      { title: '設計 & 翻譯', content: 'Zoe', class: 'w-36 sm:w-32' },
+      { title: '設計&翻譯', content: 'Zoe', class: 'w-36 sm:w-32' },
     ],
     jp: [
       { title: 'タイトル', content: 'ダンガンロンパ10MINS ～ドキメキ修学旅行 in the ocean～', class: 'w-28 sm:w-20' },
@@ -37,10 +37,10 @@
       { title: 'テーマ', content: 'サイコオーシャン', class: 'w-28 sm:w-20' },
       { title: 'CERO', content: 'D（17才以上対象）', class: 'w-28 sm:w-20' },
       { title: 'キャラクターデザイン', content: '全員', class: 'w-48 sm:w-40', tr: 'mt-5' },
-      { title: '主催', content: 'ヤジルシ', class: 'w-48 sm:w-40' },
-      { title: 'アーティスト & 3D', content: 'いもまる', class: 'w-48 sm:w-40' },
-      { title: 'CGアーティスト', content: '地瓜探員', class: 'w-48 sm:w-40' },
-      { title: 'デザイナー & 翻訳', content: 'Zoe', class: 'w-48 sm:w-40' },
+      { title: '主催&サイト制作', content: 'ヤジルシ', class: 'w-48 sm:w-40' },
+      { title: '立ち絵&3D', content: 'いもまる', class: 'w-48 sm:w-40' },
+      { title: 'CG&シナリオ', content: '地瓜探員', class: 'w-48 sm:w-40' },
+      { title: 'CG&デザイン&翻訳', content: 'Zoe', class: 'w-48 sm:w-40' },
     ],
   };
   const productsData = computed(() => productsList[lang.value]);
