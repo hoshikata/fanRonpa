@@ -11,7 +11,7 @@
 </script>
 
 <template lang="pug">
-PageLoad/
+//- PageLoad/
 Snow/
 Jumbotron/
 Navigation/

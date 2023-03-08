@@ -33,9 +33,15 @@
   const observer = new IntersectionObserver(
     ([entry]) => {
       const status = entry.isIntersecting;
+      const splideList = splide.value.root.firstChild.firstChild;
       const { AutoScroll } = splide.value.splide.Components;
-      if (status) AutoScroll.play();
-      else AutoScroll.pause();
+      if (status) {
+        splideList.style.willChange = 'transform';
+        AutoScroll.play();
+      } else {
+        splideList.style.willChange = '';
+        AutoScroll.pause();
+      }
     },
     { threshold: 0.25 },
   );
@@ -43,12 +49,13 @@
 
   //== character card
   const imgList = [
-    { id: 9, src: 'https://images.plurk.com/6Mg8JI7Bvw4I7ejHtXIIEg.png' },
+    { id: 9, src: 'https://images.plurk.com/5GO8xZITRXkJLLQlRx747X.png' },
     { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
     { id: 12, src: 'https://images.plurk.com/OMcZwSfj8Qmvi9dd2CDzE.png' },
-    { id: 4, src: 'https://images.plurk.com/7o2JOEHgVTwFmXi4JfUCVT.png' },
+    { id: 4, src: 'https://images.plurk.com/3t6xeOyZ0QZ3MtieQblINy.png' },
     { id: 0, src: 'https://images.plurk.com/68XlvFrX1wzMCeAWg7XuOi.png' },
     { id: 8, src: 'https://images.plurk.com/6ybVT5ENpkfjnPoTnw3Ux8.png' },
+    { id: 11, src: 'https://images.plurk.com/5FdxBLaH152pxxiImaMaeR.png' },
   ];
   const cardImg = (name, id) => {
     const imgSrc = imgList.find((item) => item.id === id)?.src;
@@ -63,7 +70,7 @@
 
 <template lang="pug">
 div
-  Splide(@splide:click="clickSplide", :options="splideOption", :extensions="splideExtensions", ref="splide")
+  Splide.py-5(@splide:click="clickSplide", :options="splideOption", :extensions="splideExtensions", ref="splide")
     SplideSlide.splide_box(v-for="charData of characterData", :data-id="charData.id")
       .splide_card.group(:class="`splide_card_${charData.id}`", :style="cardStyle(charData.color)")
         .splide_school(:style="schoolMask(charData.school_img)")
@@ -75,11 +82,8 @@ div
 
 <style lang="scss" scoped>
   .splide {
-    &_box {
-      @apply py-5;
-      &:nth-child(odd) {
-        @apply mt-5;
-      }
+    &_box:nth-child(odd) {
+      @apply mt-5;
     }
     &_card {
       @apply relative z-10 h-[600px] w-48 overflow-hidden border-2 border-current duration-300;
@@ -98,7 +102,7 @@ div
       mask-repeat: no-repeat;
     }
     &_img {
-      @apply h-[200%] max-w-none -translate-x-[8%] duration-300 group-hover:scale-125;
+      @apply h-[200%] max-w-none duration-300 group-hover:scale-125;
       transform-origin: center 20%;
     }
     &_button {
@@ -141,6 +145,10 @@ div
       @apply -translate-x-[58%] -translate-y-[2%];
       transform-origin: 70% 30%;
     }
+    &_11 .splide_img {
+      @apply h-[250%] -translate-x-[46%] -translate-y-[5%];
+      transform-origin: 50% 23%;
+    }
     &_12 .splide_img {
       @apply -translate-x-[32%] translate-y-[1%];
       transform-origin: 45% 20%;
@@ -148,8 +156,11 @@ div
   }
 
   .splide_card {
-    &_7 .splide_school {
-      mask-position: 50% center;
+    &_7,
+    &_11 {
+      .splide_school {
+        mask-position: 50% center;
+      }
     }
   }
 </style>

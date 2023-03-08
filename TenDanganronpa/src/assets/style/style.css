@@ -7,13 +7,13 @@
 
 * {
   @apply font-serif;
-  scroll-behavior: smooth;
 }
 ::selection {
   @apply bg-highlight text-secondary;
 }
 
 .scrollBody {
+  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #2b5eab80 #14244d;
 }
@@ -32,6 +32,7 @@
 }
 
 .scrollbar {
+  scroll-behavior: smooth;
   scrollbar-width: thin;
   scrollbar-color: #cdcdcd80 transparent;
 }

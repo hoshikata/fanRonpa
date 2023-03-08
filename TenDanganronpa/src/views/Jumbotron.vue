@@ -1,5 +1,5 @@
 <script setup>
-  import { ref, reactive, computed, watch, nextTick } from 'vue';
+  import { ref, reactive, computed, watch, onMounted } from 'vue';
   import { useLoad } from '../stores/useLoad.js';
   import { usePosition } from '../composable/usePosition.js';
 
@@ -7,6 +7,7 @@
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
   //== mouse effect
+  const hasAnimate = ref(false);
   const jumbotron = ref(null);
 
   const setMove = (num) => {
@@ -16,25 +17,32 @@
     if (isMobile) {
       const scrollT = (scrollY.value / h) * -3 * num;
       const isScrollOver = scrollY.value >= h;
-      if (!isScrollOver) style = [`top: calc(50% + ${scrollT}%)`];
+      if (!isScrollOver) style = [`top: calc(${50 + scrollT}%)`];
+      // if (!isScrollOver) style = [`transform: translate(-50%, ${-50 + scrollT}%)`];
     } else {
-      const mouseT = (mouseY.value - h / 2) * 0.001 * num;
-      const mouseL = (mouseX.value - w / 2) * 0.001 * num;
+      const parm = 0.001;
+      const mouseT = (mouseY.value - h / 2) * parm * num;
+      const mouseL = (mouseX.value - w / 2) * parm * num;
       const isMouseOver = mouseY.value >= h || mouseX.value >= w;
-      if (!isMouseOver) style = [`top: calc(50% + ${mouseT}%)`, `left: calc(50% + ${mouseL}%)`];
+      if (!isMouseOver) style = [`top: calc(${50 + mouseT}%)`, `left: calc(${50 + mouseL}%)`];
+      // if (!isMouseOver) style = [`transform: translate(${-50 + mouseL}%, ${-50 + mouseT}%)`];
     }
     return hasAnimate.value ? style : [];
   };
 
-  const observer = new IntersectionObserver(([entry]) => {
-    const status = entry.isIntersecting;
-    if (isMobile) windowScrolling(status);
-    else windowMousing(status);
-  });
-  nextTick(() => observer.observe(jumbotron.value));
+  // const observer = new IntersectionObserver(([entry]) => {
+  //   const status = entry.isIntersecting;
+  //   hasAnimate.value = status;
+  // });
+  // onMounted(() => observer.observe(jumbotron.value));
+
+  const mountedEvent = () => {
+    if (isMobile) windowScrolling();
+    else windowMousing();
+  };
+  mountedEvent();
 
   //== loading
-  const hasAnimate = ref(false);
   const imgLoading = reactive({
     bg01: false,
     bg02: false,
@@ -110,6 +118,10 @@
 <style lang="scss" scoped>
   .jumbotron {
     @apply relative z-20 flex w-full items-center justify-center overflow-hidden bg-jumbotron;
+    &:hover {
+      will-change: top, left;
+      // will-change: transform;
+    }
 
     &_bg {
       @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-[0.05s];
