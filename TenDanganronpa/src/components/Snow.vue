@@ -1,23 +1,18 @@
 <script setup>
-  import '../assets/js/particles';
-  import { ref, nextTick } from 'vue';
+  import { loadFull } from 'tsparticles';
+  import particlesConfig from '../assets/js/particlesjs-config.json';
 
-  const canvas = ref(null);
-
-  nextTick(() => {
-    new Particles(canvas.value, {
-      size: { min: 0, max: 2.5 },
-      density: 200,
-      speed: 1.2,
-      fps: 30,
-      color: '#FFFFFF',
-    });
-  });
+  const particlesInit = async (engine) => {
+    await loadFull(engine);
+  };
+  const particlesLoaded = (container) => {
+    // console.log('Particles container loaded', container);
+  };
 </script>
 
 <template lang="pug">
 .pointer-events-none.absolute.z-20.h-full.w-full
-  canvas.block.h-full.w-full.opacity-30(ref="canvas")
+  Particles#tsparticles(:particlesInit="particlesInit", :particlesLoaded="particlesLoaded", :options="particlesConfig")
 </template>
 
 <style lang="scss" scoped></style>

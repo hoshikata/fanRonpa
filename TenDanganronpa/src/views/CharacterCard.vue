@@ -20,6 +20,7 @@
     perMove: 1,
     gap: '2%',
     autoWidth: true,
+    focus: 'center',
     arrows: false,
     pagination: false,
     autoScroll: { speed: 0.8, autoStart: false },

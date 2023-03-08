@@ -13,28 +13,32 @@
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
     const h = jumbotron.value?.clientHeight ?? 2;
+    const will = { scroll: 'will-change: top', mouse: 'will-change: transform', mouseL: 'will-change: top, left' };
     let style = [];
     if (isMobile) {
       const scrollT = (scrollY.value / h) * -3 * num;
       const isScrollOver = scrollY.value >= h;
-      if (!isScrollOver) style = [`top: calc(${50 + scrollT}%)`];
-      // if (!isScrollOver) style = [`transform: translate(-50%, ${-50 + scrollT}%)`];
+      if (!isScrollOver) style = [`top: calc(${50 + scrollT}%)`, will.scroll];
+      // if (!isScrollOver) style = [`transform: translate(-50%, ${-50 + scrollT}%)`, will.mouse];
     } else {
       const parm = 0.001;
       const mouseT = (mouseY.value - h / 2) * parm * num;
       const mouseL = (mouseX.value - w / 2) * parm * num;
       const isMouseOver = mouseY.value >= h || mouseX.value >= w;
-      if (!isMouseOver) style = [`top: calc(${50 + mouseT}%)`, `left: calc(${50 + mouseL}%)`];
-      // if (!isMouseOver) style = [`transform: translate(${-50 + mouseL}%, ${-50 + mouseT}%)`];
+      // if (!isMouseOver) style = [`top: calc(${50 + mouseT}%)`, `left: calc(${50 + mouseL}%)`, will.mouseL];
+      if (!isMouseOver) style = [`transform: translate(${-50 + mouseL}%, ${-50 + mouseT}%)`, will.mouse];
     }
     return hasAnimate.value ? style : [];
   };
 
-  // const observer = new IntersectionObserver(([entry]) => {
-  //   const status = entry.isIntersecting;
-  //   hasAnimate.value = status;
-  // });
-  // onMounted(() => observer.observe(jumbotron.value));
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      const status = entry.isIntersecting;
+      hasAnimate.value = status;
+    },
+    { threshold: 0.1 },
+  );
+  onMounted(() => observer.observe(jumbotron.value));
 
   const mountedEvent = () => {
     if (isMobile) windowScrolling();
@@ -78,7 +82,7 @@
 </script>
 
 <template lang="pug">
-#home.jumbotron(ref="jumbotron")
+#home.jumbotron(:class="{ 'jumbotron-pause': !hasAnimate }", ref="jumbotron")
   img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png", @load="loadingImg('bg05')")
 
   .jumbotron_bg(:style="setMove(0.8)")
@@ -94,8 +98,8 @@
 
   .jumbotron_bg(:style="setMove(3)")
     img.jumbotron_fish.fish-7(src="/jumbotron/fish07.png", @load="loadingImg('fish07')")
-  .jumbotron_bg(:style="setMove(3)")
-    //- img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png", @load="loadingImg('fish06')")
+  //- .jumbotron_bg(:style="setMove(3)")
+    img.jumbotron_fish.fish-6(src="/jumbotron/fish06.png", @load="loadingImg('fish06')")
   img.jumbotron_bg(src="/jumbotron/logo_bg03-2.png", :style="setMove(4)", @load="loadingImg('bg03')")
 
   .jumbotron_bg(:style="setMove(5)")
@@ -110,7 +114,11 @@
     img.jumbotron_fish.fish-2(src="/jumbotron/fish02.png", @load="loadingImg('fish02')")
   .jumbotron_bg(:style="setMove(12)")
     img.jumbotron_fish.fish-1(src="/jumbotron/fish01.png", @load="loadingImg('fish01')")
-  img.jumbotron_bg.jumbotron_cover(src="/jumbotron/logo_bg01-3.png", :style="setMove(14)", @load="loadingImg('bg01')")
+  img.jumbotron_bg.jumbotron_cover(
+    src="/jumbotron/logo_bg01-3.png",
+    :style="setMove(isMobile ? 14 : 4)",
+    @load="loadingImg('bg01')"
+  )
 
   .jumbotron_logo
 </template>
@@ -118,13 +126,13 @@
 <style lang="scss" scoped>
   .jumbotron {
     @apply relative z-20 flex w-full items-center justify-center overflow-hidden bg-jumbotron;
-    &:hover {
-      will-change: top, left;
-      // will-change: transform;
+
+    &-pause .jumbotron_fish {
+      animation-play-state: paused;
     }
 
     &_bg {
-      @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2 duration-[0.05s];
+      @apply absolute top-1/2 left-1/2 h-full min-w-full max-w-none -translate-x-1/2 -translate-y-1/2;
       &.bg {
         @apply relative top-0 left-0 min-h-screen translate-x-0 translate-y-0;
       }
@@ -137,6 +145,7 @@
     }
     &_cover {
       @apply box-content border-[2000px] border-jumbotron;
+      @apply duration-[0.025s];
     }
     &_logo {
       @apply absolute h-[60%] w-[60%] bg-white/80;

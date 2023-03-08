@@ -13,8 +13,10 @@
     "@splidejs/vue-splide": "^0.6.12",
     "axios": "^1.3.2",
     "pinia": "^2.0.28",
+    "tsparticles": "^2.9.3",
     "vue": "^3.2.45",
-    "vue-router": "^4.1.6"
+    "vue-router": "^4.1.6",
+    "vue3-particles": "^2.9.3"
   },
   "devDependencies": {
     "@iconify-json/ic": "^1.1.12",

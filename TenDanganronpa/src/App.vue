@@ -4,13 +4,13 @@
 </script>
 
 <template lang="pug">
-#app
+#main
   RouterView/
   Footer/
 </template>
 
 <style lang="scss" scoped>
-  #app {
+  #main {
     @apply relative min-h-screen w-full overflow-clip;
     // contain: paint;
   }

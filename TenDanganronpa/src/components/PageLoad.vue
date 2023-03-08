@@ -11,7 +11,7 @@
   const progress = computed(() => {
     const loading = loadProgress.value;
     const timing = loadVal.time / loadVal.limit;
-    return Math.round(loading * timing * 100);
+    return Math.round(loading * (timing > 1 ? 1 : timing) * 100);
   });
 
   const hideScrollBar = (val) => {
