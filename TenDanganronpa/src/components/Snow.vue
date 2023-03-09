@@ -17,6 +17,6 @@ Particles#snow.snow(:particlesInit="particlesInit", :particlesLoaded="particlesL
 
 <style lang="scss" scoped>
   .snow {
-    @apply pointer-events-none absolute z-20 h-full w-full;
+    @apply pointer-events-none absolute z-20 h-screen w-full;
   }
 </style>
