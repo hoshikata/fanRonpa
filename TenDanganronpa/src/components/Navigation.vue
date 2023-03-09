@@ -33,7 +33,7 @@ header.header
     li(v-for="item of navData")
       RouterLink.nav_link(
         @click="switchNav(false)",
-        :to="{ name: 'index', hash: `#${item.name}`, query: { lang: lang } }",
+        :to="{ name: 'index', hash: `#${item.name}` }",
         :title="item.text"
       ) {{ item.title }}
 

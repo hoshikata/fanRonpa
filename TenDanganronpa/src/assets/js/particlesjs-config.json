@@ -1,7 +1,12 @@
 {
+  "fpsLimit": 30,
+  "fullScreen": {
+    "enable": false,
+    "zIndex": -1
+  },
   "particles": {
     "number": {
-      "value": 25,
+      "value": 40,
       "density": {
         "enable": true,
         "value_area": 800
@@ -54,7 +59,7 @@
     },
     "move": {
       "enable": true,
-      "speed": 0.5,
+      "speed": 0.8,
       "direction": "none",
       "random": true,
       "straight": false,
@@ -106,5 +111,5 @@
       }
     }
   },
-  "retina_detect": false
+  "retina_detect": true
 }

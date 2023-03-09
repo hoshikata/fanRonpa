@@ -1,4 +1,6 @@
 <script setup>
+  import IconPause from '~icons/ic/baseline-pause';
+  import IconPlay from '~icons/ic/baseline-play-arrow';
   import { ref, reactive, computed, watch, onMounted } from 'vue';
   import { useLoad } from '../stores/useLoad.js';
   import { usePosition } from '../composable/usePosition.js';
@@ -7,8 +9,10 @@
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
   //== mouse effect
+  const playing = ref(true);
   const hasAnimate = ref(false);
   const jumbotron = ref(null);
+  const isPlay = computed(() => hasAnimate.value && playing.value);
 
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
@@ -28,7 +32,7 @@
       // if (!isMouseOver) style = [`top: calc(${50 + mouseT}%)`, `left: calc(${50 + mouseL}%)`, will.mouseL];
       if (!isMouseOver) style = [`transform: translate(${-50 + mouseL}%, ${-50 + mouseT}%)`, will.mouse];
     }
-    return hasAnimate.value ? style : [];
+    return isPlay.value ? style : [];
   };
 
   const observer = new IntersectionObserver(
@@ -82,7 +86,7 @@
 </script>
 
 <template lang="pug">
-#home.jumbotron(:class="{ 'jumbotron-pause': !hasAnimate }", ref="jumbotron")
+#home.jumbotron(:class="{ 'jumbotron-pause': !isPlay }", ref="jumbotron")
   img.jumbotron_bg.bg(src="/jumbotron/logo_bg05.png", @load="loadingImg('bg05')")
 
   .jumbotron_bg(:style="setMove(0.8)")
@@ -121,6 +125,10 @@
   )
 
   .jumbotron_logo
+
+  button.jumbotron_play(@click="playing = !playing", title="動畫暫停")
+    IconPause(v-show="playing")
+    IconPlay(v-show="!playing")
 </template>
 
 <style lang="scss" scoped>
@@ -128,7 +136,8 @@
     @apply relative z-20 flex w-full items-center justify-center overflow-hidden bg-jumbotron;
 
     &-pause .jumbotron_fish {
-      animation-play-state: paused;
+      // animation-play-state: paused;
+      animation: none !important;
     }
 
     &_bg {
@@ -153,6 +162,9 @@
       @apply md:h-[90%] md:w-[90%];
       @apply sm:h-[95%] sm:w-[95%];
       mask: url('/image/LOGO.svg') no-repeat center center;
+    }
+    &_play {
+      @apply absolute top-0 right-0 m-2 rounded bg-white/5 p-1 text-secondary hover:bg-white/20 hover:text-primary;
     }
   }
 

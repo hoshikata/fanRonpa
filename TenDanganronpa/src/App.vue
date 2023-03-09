@@ -4,17 +4,11 @@
 </script>
 
 <template lang="pug">
-#main
-  RouterView/
-  Footer/
+RouterView/
+Footer/
 </template>
 
-<style lang="scss" scoped>
-  #main {
-    @apply relative min-h-screen w-full overflow-clip;
-    // contain: paint;
-  }
-</style>
+<style lang="scss" scoped></style>
 
 <!-- <script setup>
   import { RouterLink, RouterView } from 'vue-router';

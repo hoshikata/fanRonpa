@@ -1,7 +1,7 @@
 <script setup>
   import IconClose from '~icons/ic/round-close';
-  import CharacterInfo from './CharacterInfo.vue';
   import CharacterCard from './CharacterCard.vue';
+  import CharacterInfo from './CharacterInfo.vue';
   import { storeToRefs } from 'pinia';
   import { RouterLink } from 'vue-router';
   import { ref, computed } from 'vue';
@@ -45,13 +45,14 @@
 section.characters.wrapper
   #characters.wrapper_hash
 
-  .mb-5.flex(class="lg:mb-3")
-    h2.title.text-gray-500(:title="navText") CHARACTER
-  .mb-10.flex(class="lg:mb-8 sm:mb-5")
-    RouterLink.characters_button(:to="{ name: 'prediction', query: { lang: lang } }")
-      span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
+  .characters_container
+    .mb-5.flex(class="lg:mb-3")
+      h2.title.text-gray-500(:title="navText") CHARACTER
+    .mb-10.flex(class="lg:mb-8 sm:mb-5")
+      RouterLink.characters_button(:to="{ name: 'prediction', query: { lang: lang } }")
+        span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
 
-  CharacterCard.relative.z-20.-mx-12(@open="openPopup", class="lg:-mx-10 sm:-mx-8")
+    CharacterCard.-mx-12(@open="openPopup", class="lg:-mx-10 sm:-mx-8")
 
   .characters_popup(@click="closePopup", v-show="popup", ref="charPopup")
     button.characters_close
@@ -64,6 +65,9 @@ section.characters.wrapper
   .characters {
     @apply bg-stone-100;
 
+    &_container {
+      @apply relative z-20;
+    }
     &_button {
       @apply relative ml-auto border border-current px-5 py-3 tracking-wide hover:bg-jumbotron/10;
       @apply lg:px-3 lg:py-2;
