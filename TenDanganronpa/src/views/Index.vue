@@ -7,7 +7,6 @@
   import Character from './Character.vue';
   import Special from './Special.vue';
   import Products from './Products.vue';
-  import { ref } from 'vue';
 </script>
 
 <template lang="pug">

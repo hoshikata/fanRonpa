@@ -5,6 +5,7 @@
   import { useNav } from '../stores/useNav.js';
   import { vSrc } from '../assets/js/directive.js';
   import { useImage } from '../composable/useImage.js';
+  import { vParallax } from '../assets/js/directive.js';
 
   const langStore = useLang();
   const { lang } = storeToRefs(langStore);
@@ -21,11 +22,11 @@
       { title: '類型', content: '超高速推理動作遊戲', class: 'w-28 sm:w-20' },
       { title: '主題', content: 'PSYCHO OCEAN', class: 'w-28 sm:w-20' },
       { title: 'CERO', content: 'D（17歲以上對象）', class: 'w-28 sm:w-20' },
-      { title: '角色設計、劇本', content: '全員', class: 'w-36 sm:w-32', tr: 'mt-5' },
-      { title: '主辦人', content: 'ヤジルシ', class: 'w-36 sm:w-32' },
-      { title: '美術&3D', content: 'いもまる', class: 'w-36 sm:w-32' },
-      { title: 'CG美術', content: '地瓜探員', class: 'w-36 sm:w-32' },
-      { title: '設計&翻譯', content: 'Zoe', class: 'w-36 sm:w-32' },
+      { title: '角色設計', content: '全員', class: 'w-40 sm:w-36', tr: 'mt-5' },
+      { title: '主辦人&網頁製作', content: 'ヤジルシ', class: 'w-40 sm:w-36' },
+      { title: '立繪&3D建模', content: 'いもまる', class: 'w-40 sm:w-36' },
+      { title: 'CG&遊戲腳本', content: '地瓜探員', class: 'w-40 sm:w-36' },
+      { title: 'CG&設計&翻譯', content: 'Zoe', class: 'w-40 sm:w-36' },
     ],
     jp: [
       { title: 'タイトル', content: 'ダンガンロンパ10MINS ～ドキメキ修学旅行 in the ocean～', class: 'w-28 sm:w-20' },
@@ -54,8 +55,8 @@ section.products.wrapper
     h2.title.text-gray-100(:title="navText") PRODUCT
 
   .products_container
-    img.w-80(v-src="publicSrc('/image/37f.jpg')")
-    .ml-10(class="lg:ml-0 lg:mt-10 sm:mt-6")
+    img.w-80(v-src="publicSrc('/image/37f.jpg')", v-parallax:l="500")
+    .ml-10(v-parallax:b="500", class="lg:ml-0 lg:mt-10 sm:mt-6")
       .products_tr(v-for="product of productsData", :class="product.tr")
         p.products_th(:class="product.class")
           span(v-for="text of product.title") {{ text }}

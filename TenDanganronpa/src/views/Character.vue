@@ -8,13 +8,12 @@
   import { useLang } from '../stores/useLang.js';
   import { useNav } from '../stores/useNav.js';
   import { useCharacter } from '../composable/useCharacter.js';
-  import { useImage } from '../composable/useImage.js';
+  import { vParallax } from '../assets/js/directive.js';
 
   const langStore = useLang();
   const { lang } = storeToRefs(langStore);
 
   const { characterData } = useCharacter();
-  const { publicSrc } = useImage();
 
   const navText = computed(() => useNav().getNavItem('characters'));
 
@@ -25,10 +24,10 @@
   const openPopup = (id) => {
     charId.value = id;
     popup.value = true;
-    // charPopup.value.classList.add('opacity-0', 'blur-2xl');
+    charPopup.value.classList.add('opacity-0', 'blur-2xl');
     document.body.classList.add('overflow-hidden');
     setTimeout(() => {
-      // charPopup.value.classList.remove('opacity-0', 'blur-2xl');
+      charPopup.value.classList.remove('opacity-0', 'blur-2xl');
     }, 100);
   };
   const closePopup = (e) => {
@@ -45,29 +44,25 @@
 section.characters.wrapper
   #characters.wrapper_hash
 
-  .characters_container
-    .mb-5.flex(class="lg:mb-3")
-      h2.title.text-gray-500(:title="navText") CHARACTER
-    .mb-10.flex(class="lg:mb-8 sm:mb-5")
-      RouterLink.characters_button(:to="{ name: 'prediction', query: { lang: lang } }")
-        span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
+  .mb-5.flex(class="lg:mb-3")
+    h2.title.text-gray-500(:title="navText") CHARACTER
+  .mb-10.flex(class="lg:mb-8 sm:mb-5")
+    RouterLink.characters_button(:to="{ name: 'prediction', query: { lang: lang } }")
+      span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
 
-    CharacterCard.-mx-12(@open="openPopup", class="lg:-mx-10 sm:-mx-8")
+  CharacterCard.-mx-12(@open="openPopup", v-parallax="500", class="lg:-mx-10 sm:-mx-8")
 
-  .characters_popup(@click="closePopup", v-show="popup", ref="charPopup")
-    button.characters_close
-      IconClose
-    .characters_window
-      CharacterInfo(:id="charId")
+.characters_popup(@click="closePopup", v-show="popup", ref="charPopup")
+  button.characters_close
+    IconClose
+  .characters_window
+    CharacterInfo(:id="charId")
 </template>
 
 <style lang="scss" scoped>
   .characters {
-    @apply bg-stone-100;
+    @apply z-20 bg-stone-100;
 
-    &_container {
-      @apply relative z-20;
-    }
     &_button {
       @apply relative ml-auto border border-current px-5 py-3 tracking-wide hover:bg-jumbotron/10;
       @apply lg:px-3 lg:py-2;

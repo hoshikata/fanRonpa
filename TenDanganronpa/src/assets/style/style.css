@@ -50,6 +50,19 @@
   background-color: #a6a6a6d6;
 }
 
+.parallax-b {
+  @apply !translate-y-60;
+}
+.parallax-t {
+  @apply !-translate-y-60;
+}
+.parallax-r {
+  @apply !translate-x-60;
+}
+.parallax-l {
+  @apply !-translate-x-60;
+}
+
 #app {
   @apply relative min-h-screen w-full overflow-clip;
 }

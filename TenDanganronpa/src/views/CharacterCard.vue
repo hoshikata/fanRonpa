@@ -17,7 +17,6 @@
   const splideExtensions = { AutoScroll };
   const splideOption = {
     type: 'loop',
-    perMove: 1,
     gap: '2%',
     autoWidth: true,
     focus: 'center',
@@ -162,11 +161,11 @@ div
       transform-origin: 54% 30%;
     }
     &_11 .splide_img {
-      @apply h-[250%] -translate-x-[46%] -translate-y-[5%];
+      @apply h-[255%] -translate-x-[46%] -translate-y-[5%];
       transform-origin: 50% 23%;
     }
     &_12 .splide_img {
-      @apply -translate-x-[32%] translate-y-[1%];
+      @apply h-[195%] -translate-x-[32%] translate-y-[1%];
       transform-origin: 45% 20%;
     }
   }

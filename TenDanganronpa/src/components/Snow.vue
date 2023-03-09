@@ -1,6 +1,6 @@
 <script setup>
   import { loadFull } from 'tsparticles';
-  import particlesConfig from '../assets/js/particlesjs-config.json';
+  import config from '../assets/js/marine-snow-config.json';
 
   const particlesInit = async (engine) => {
     await loadFull(engine);
@@ -12,7 +12,7 @@
 </script>
 
 <template lang="pug">
-Particles#snow.snow(:particlesInit="particlesInit", :particlesLoaded="particlesLoaded", :options="particlesConfig")
+Particles#snow.snow(:particlesInit="particlesInit", :particlesLoaded="particlesLoaded", :options="config")
 </template>
 
 <style lang="scss" scoped>
