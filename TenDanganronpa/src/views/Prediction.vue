@@ -52,7 +52,7 @@
 <template lang="pug">
 main.prediction
   .prediction_side
-    button.logo(@click="goBack")
+    button.logo(@click="goBack", :class="`logo-${lang}`")
     .flex.items-center.self-end
       button.prediction_lang(@click="changeLang('jp')") 日本語
       button.prediction_lang(@click="changeLang('zh')") 中文

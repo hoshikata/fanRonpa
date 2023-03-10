@@ -28,7 +28,7 @@
   img.w-full.scale-105(src="../assets/image/wave-haikei_5.svg")
 
 header.header
-  RouterLink.logo(to="#home")
+  RouterLink.logo(to="#home", :class="`logo-${lang}`")
   ul.nav_list(:class="{ 'md:!right-0': navShow }")
     li(v-for="item of navData")
       RouterLink.nav_link(

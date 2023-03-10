@@ -77,7 +77,13 @@
 .logo {
   @apply mr-auto block h-20 w-44 bg-current;
   @apply md:h-14 md:w-32;
-  mask: url('/image/LOGO.svg') no-repeat center;
+}
+.logo-jp,
+.logo-en {
+  mask: url('/image/LOGO_jp.svg') no-repeat center;
+}
+.logo-zh {
+  mask: url('/image/LOGO_zh.svg') no-repeat center;
 }
 
 /* .title {

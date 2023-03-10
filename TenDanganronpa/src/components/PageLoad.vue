@@ -57,7 +57,11 @@
 <style lang="scss" scoped>
   .loading {
     @apply fixed top-0 left-0 z-50 flex h-screen w-full flex-col items-center justify-center duration-300;
-    @apply bg-white bg-gradient-to-t from-secondary/80 to-primary/80;
+    &::before {
+      @apply absolute top-0 left-0 -z-10 h-[300%] w-full content-[''];
+      @apply bg-white bg-gradient-to-b from-primary via-secondary to-jumbotron-800;
+      animation: load_bg 3s linear forwards;
+    }
 
     &_bar {
       @apply relative mt-2 h-3 w-1/2 rounded-full text-white/25;
@@ -70,7 +74,8 @@
     &_progress {
       @apply absolute top-0 left-0 h-full overflow-hidden rounded-full bg-current duration-300;
       &::before {
-        @apply absolute top-0 left-0 h-full w-[150%] rounded-full content-[''];
+        @apply absolute top-0 left-0 h-full rounded-full content-[''];
+        width: calc(100% + 1.75rem);
         background-image: repeating-linear-gradient(
           60deg,
           transparent,
@@ -78,11 +83,19 @@
           currentColor 0.75rem,
           currentColor 1.5rem
         );
-        animation: load 1s infinite linear;
+        animation: load_bar 1s infinite linear;
       }
     }
   }
-  @keyframes load {
+  @keyframes load_bg {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-66%);
+    }
+  }
+  @keyframes load_bar {
     from {
       transform: translateX(0);
     }

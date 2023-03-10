@@ -1,11 +1,16 @@
 <script setup>
   import IconPause from '~icons/ic/baseline-pause';
   import IconPlay from '~icons/ic/baseline-play-arrow';
+  import { storeToRefs } from 'pinia';
   import { ref, reactive, computed, watch, onMounted } from 'vue';
+  import { useLang } from '../stores/useLang.js';
   import { useLoad } from '../stores/useLoad.js';
   import { usePosition } from '../composable/usePosition.js';
 
+  const langStore = useLang();
+  const { lang } = storeToRefs(langStore);
   const loadStore = useLoad();
+
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
   //== mouse effect
@@ -124,7 +129,7 @@
     @load="loadingImg('bg01')"
   )
 
-  .jumbotron_logo
+  .jumbotron_logo(:class="`logo-${lang}`")
 
   button.jumbotron_play(@click="playing = !playing", title="動畫暫停")
     IconPause(v-show="playing")
@@ -161,7 +166,6 @@
       @apply lg:h-[75%] lg:w-[75%];
       @apply md:h-[90%] md:w-[90%];
       @apply sm:h-[95%] sm:w-[95%];
-      mask: url('/image/LOGO.svg') no-repeat center center;
     }
     &_play {
       @apply absolute top-0 right-0 m-2 rounded bg-white/5 p-1 text-secondary hover:bg-white/20 hover:text-primary;
@@ -377,7 +381,7 @@ section.jumbotron(ref="header")
   }
   .logo {
     @apply relative h-2/3 w-2/3 overflow-hidden bg-contain bg-center bg-no-repeat;
-    mask: url('/image/LOGO.svg') no-repeat center center;
+    mask: url('/image/LOGO_jp.svg') no-repeat center center;
     &_color {
       @apply h-full w-full bg-gradient-to-t from-primary to-secondary;
     }

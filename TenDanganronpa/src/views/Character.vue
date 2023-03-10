@@ -14,7 +14,6 @@
   const { lang } = storeToRefs(langStore);
 
   const { characterData } = useCharacter();
-
   const navText = computed(() => useNav().getNavItem('characters'));
 
   const popup = ref(false);
