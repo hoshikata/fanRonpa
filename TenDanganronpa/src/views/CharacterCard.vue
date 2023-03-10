@@ -43,7 +43,7 @@
         AutoScroll.pause();
       }
     },
-    { threshold: 0.25 },
+    { threshold: 0 },
   );
   nextTick(() => observer.observe(splide.value.root));
 
@@ -53,12 +53,13 @@
     { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
     { id: 12, src: 'https://images.plurk.com/OMcZwSfj8Qmvi9dd2CDzE.png' },
     { id: 4, src: 'https://images.plurk.com/3t6xeOyZ0QZ3MtieQblINy.png' },
-    { id: 0, src: 'https://images.plurk.com/68XlvFrX1wzMCeAWg7XuOi.png' },
-    { id: 8, src: 'https://images.plurk.com/6ybVT5ENpkfjnPoTnw3Ux8.png' },
+    { id: 0, src: 'https://images.plurk.com/7Cs3PcrDKxfDf5VDx9j6iD.png' },
+    { id: 8, src: 'https://images.plurk.com/1hPH0uM6NVc0OKjbl67997.png' },
     { id: 11, src: 'https://images.plurk.com/5FdxBLaH152pxxiImaMaeR.png' },
     { id: 5, src: 'https://images.plurk.com/1THWkDxQGj8UgGVuF0sVh9.png' },
-    { id: 6, src: 'https://images.plurk.com/6fHL1qvy8lv27ySv6XKxZ7.png' },
-    { id: 10, src: 'https://images.plurk.com/3TGQlMSHamev5RKPbnpejq.png' },
+    { id: 6, src: 'https://images.plurk.com/1pA35DJZdC12zRlvnbph0L.png' },
+    { id: 10, src: 'https://images.plurk.com/5bfjjniLPUEnXkCdcLaYo3.png' },
+    { id: 1, src: 'https://images.plurk.com/6Y4QzhsQ6nwJ3qbty5ZFpu.png' },
   ];
   const cardImg = (name, id) => {
     const imgSrc = imgList.find((item) => item.id === id)?.src;
@@ -129,8 +130,12 @@ div
 
   .splide_card {
     &_0 .splide_img {
-      @apply -translate-x-[40%] -translate-y-[7%];
-      transform-origin: 55% 22%;
+      @apply h-[190%] -translate-x-[40%] -translate-y-[6%];
+      transform-origin: 55% 28%;
+    }
+    &_1 .splide_img {
+      @apply -translate-x-[41%] -translate-y-[1%];
+      transform-origin: 50% 28%;
     }
     &_4 .splide_img {
       @apply h-[140%] -translate-x-[32%] translate-y-[0%];
@@ -141,8 +146,8 @@ div
       transform-origin: 58% 25%;
     }
     &_6 .splide_img {
-      @apply h-[210%] -translate-x-[48%] translate-y-[2%];
-      transform-origin: 52% 20%;
+      @apply h-[210%] -translate-x-[48%] translate-y-[1%];
+      transform-origin: 52% 25%;
     }
     &_7 .splide_img {
       @apply -translate-x-[48%] -translate-y-[10%];
@@ -157,8 +162,8 @@ div
       transform-origin: 70% 30%;
     }
     &_10 .splide_img {
-      @apply h-[160%] -translate-x-[45%] -translate-y-[2%];
-      transform-origin: 54% 30%;
+      @apply h-[170%] -translate-x-[40%] translate-y-[2%];
+      transform-origin: 54% 25%;
     }
     &_11 .splide_img {
       @apply h-[255%] -translate-x-[46%] -translate-y-[5%];
@@ -176,6 +181,11 @@ div
     &_11 {
       .splide_school {
         mask-position: 50% center;
+      }
+    }
+    &_1 {
+      .splide_school {
+        mask-position: 0% center;
       }
     }
   }

@@ -48,21 +48,46 @@
 
 <template lang="pug">
 .loading(:class="{ 'opacity-0 invisible': !showLoad }")
-  .loading_bar LOADING...
+  span.font-sans.font-medium.tracking-widest.text-white LOADING...
+  .loading_bar
     .loading_progress(:style="`width: ${progress}%`")
   Particles#bubble.bubble(:particlesInit="particlesInit", :particlesLoaded="particlesLoaded", :options="config")
 </template>
 
 <style lang="scss" scoped>
   .loading {
-    @apply fixed top-0 left-0 z-50 flex h-screen w-full items-center justify-center overflow-hidden bg-white duration-300;
-    @apply bg-gradient-to-t from-secondary/80 to-primary/80;
+    @apply fixed top-0 left-0 z-50 flex h-screen w-full flex-col items-center justify-center duration-300;
+    @apply bg-white bg-gradient-to-t from-secondary/80 to-primary/80;
 
     &_bar {
-      @apply relative border border-white/25 px-20 py-3 font-sans font-medium tracking-widest text-white;
+      @apply relative mt-2 h-3 w-1/2 rounded-full text-white/25;
+      &::before {
+        @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-current content-[''];
+        width: calc(100% + 8px);
+        height: calc(100% + 6px);
+      }
     }
     &_progress {
-      @apply absolute top-0 left-0 h-full bg-white/25 duration-300;
+      @apply absolute top-0 left-0 h-full overflow-hidden rounded-full bg-current duration-300;
+      &::before {
+        @apply absolute top-0 left-0 h-full w-[150%] rounded-full content-[''];
+        background-image: repeating-linear-gradient(
+          60deg,
+          transparent,
+          transparent 0.75rem,
+          currentColor 0.75rem,
+          currentColor 1.5rem
+        );
+        animation: load 1s infinite linear;
+      }
+    }
+  }
+  @keyframes load {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-1.75rem);
     }
   }
 </style>
