@@ -21,6 +21,7 @@
 
   //== char
   const charContainer = ref(null);
+  const charDescription = ref(null);
   const activeId = ref(0);
   const activeChar = computed(() => {
     const target = characterData.value.find((datum) => datum.id === activeId.value) ?? {};
@@ -48,10 +49,14 @@
   });
   const charDesc = computed(() => activeChar.value.description?.split('\n'));
   const charMantra = computed(() => activeChar.value.mantra?.split('\n'));
-  const chatSchool = computed(() => {
+  const charSchool = computed(() => {
     const name = activeChar.value.school_img;
     const src = publicSrc(`/school/${name}.svg`);
     return name ? src : '';
+  });
+  const charAuthor = computed(() => {
+    const name = activeChar.value.author_img;
+    return `character_author-${name}`;
   });
 
   //== table
@@ -60,15 +65,16 @@
     { title_zh: '體重', title_jp: '体重', dataName: 'weight', size: 'w-1/2 lg:w-full' },
     { title_zh: '胸圍', title_jp: '胸囲', dataName: 'chest', size: 'w-1/2 lg:w-full' },
     { title_zh: '血型', title_jp: '血液型', dataName: 'blood', size: 'w-1/2 lg:w-full' },
-    { title_zh: '生日', title_jp: '誕生日', dataName: 'birth', size: 'w-1/2 xxl:w-full' },
+    { title_zh: '生日', title_jp: '誕生日', dataName: 'birth', size: 'w-1/2 xxl:w-full character_table-col' },
     { title_zh: '原作者', title_jp: '原作者', dataName: 'author', size: 'w-1/2 xxl:w-full xxl:order-2' },
-    { title_zh: '喜歡的東西', title_jp: '好きなもの', dataName: 'like', size: 'w-full' },
-    { title_zh: '討厭的東西', title_jp: '嫌いなもの', dataName: 'unlike', size: 'w-full' },
-    { title_zh: '原學校', title_jp: '元学校', dataName: 'school', size: 'w-full' },
+    { title_zh: '喜歡的東西', title_jp: '好きなもの', dataName: 'like', size: 'w-full character_table-col' },
+    { title_zh: '討厭的東西', title_jp: '嫌いなもの', dataName: 'unlike', size: 'w-full character_table-col' },
+    { title_zh: '原學校', title_jp: '元学校', dataName: 'school', size: 'w-full character_table-col' },
   ];
 
   watch(activeId, () => {
     charContainer.value?.parentNode.scrollTo(0, 0);
+    charDescription.value?.scrollTo(0, 0);
   });
   watch(
     () => props.id,
@@ -80,9 +86,9 @@
 <template lang="pug">
 section.character.scrollbar.overflow-y-auto.overscroll-none
   .character_container(ref="charContainer")
-    img.character_school(:src="chatSchool")
-    .character_author.left-0(src="/image/profile_2.png")
-    .character_author.right-0.rotate-180(src="/image/profile_2.png") 
+    img.character_school(:src="charSchool")
+    .character_author.left-0(:class="charAuthor")
+    .character_author.right-0.rotate-180(:class="charAuthor") 
 
     .relative.z-10.flex.shrink-0.flex-col.py-5(class="lg:w-4/7 w-1/2 md:w-full")
       .character_title
@@ -101,19 +107,18 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
           p {{ activeChar[info.dataName] }}
             span(v-if="info.dataName === 'birth'", :title="activeChar.birth_remark") ({{ activeChar.star_sign }}座)
       .hr
-      .character_description.scrollbar
+      .character_description.scrollbar(ref="charDescription")
         p(v-for="text of charDesc") {{ text }}
 
     .character_aside
       .character_mantra
-        //- (:style="`text-shadow: 2px 2px 0 ${activeChar.color}80;`")
         .text-white
           p.whitespace-nowrap(v-for="mantra of charMantra") {{ mantra }}
       img.character_image(src="/image/shape_test.png")
 
-    button.character_next.left-0.-scale-100(@click="changeChar(-1)")
+    button.character_next.left-0.-scale-100(@click="changeChar(1)")
       IconArrow
-    button.character_next.right-0(@click="changeChar(1)")
+    button.character_next.right-0(@click="changeChar(-1)")
       IconArrow
 </template>
 
@@ -146,8 +151,17 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     }
     &_table {
       @apply flex items-center px-4 py-3.5;
-      @apply lg:py-3;
-      @apply md:py-2.5;
+      @apply lg:py-3 md:py-2.5;
+
+      &-col {
+        @apply sm:flex-col sm:items-start;
+        .character_th {
+          @apply sm:mr-0 sm:mb-3;
+        }
+        .character_th + p {
+          @apply sm:ml-3;
+        }
+      }
     }
     &_th {
       @apply relative mr-9 py-1 px-6;
@@ -182,6 +196,9 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       p:nth-child(3) {
         @apply indent-[6em] md:indent-[4em];
       }
+      p:nth-child(4) {
+        @apply indent-[9em] md:indent-[6em];
+      }
     }
     &_image {
       @apply absolute right-5 top-5 w-[95%] object-contain;
@@ -198,12 +215,21 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       mask-position: bottom right;
     }
     &_author {
-      @apply absolute top-0 h-full w-56 opacity-80 mix-blend-multiply;
-      @apply bg-contain bg-top bg-no-repeat;
-      @apply xl:w-40;
-      @apply md:w-32;
-      @apply sm:w-28;
-      background-image: url('../assets/image/profile_zoe.png');
+      @apply absolute top-0 h-full w-40 bg-no-repeat opacity-80 mix-blend-multiply;
+      @apply xl:w-32 md:w-28 sm:w-20;
+      background-size: 100% auto;
+      &-zoe {
+        background-image: url('../assets/image/profile_zoe.svg');
+      }
+      &-imomaru {
+        background-image: url('../assets/image/profile_imomaru.svg');
+      }
+      &-hanji {
+        background-image: url('../assets/image/profile_hanji.svg');
+      }
+      &-yajirusi {
+        background-image: url('../assets/image/profile_yajirusi.svg');
+      }
     }
     &_next {
       @apply absolute top-0 z-10 h-full w-20 px-3 text-white/50 opacity-0 hover:opacity-100;

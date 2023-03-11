@@ -1,6 +1,7 @@
 <script setup>
   import { loadFull } from 'tsparticles';
   import config from '../assets/js/marine-snow-config.json';
+  import { ref, nextTick } from 'vue';
 
   const particlesInit = async (engine) => {
     await loadFull(engine);

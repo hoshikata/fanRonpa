@@ -68,10 +68,11 @@ section.characters.wrapper
     }
 
     &_popup {
-      @apply fixed top-0 left-0 z-50 h-full w-full cursor-pointer bg-back p-14 duration-300 xl:p-12 md:p-10 sm:p-8;
+      @apply fixed top-0 left-0 z-50 h-full w-full cursor-pointer bg-back duration-300;
+      @apply p-14 xl:p-12 md:p-10 sm:p-8;
     }
     &_close {
-      @apply absolute right-0 top-0 text-gray-400 hover:text-gray-600;
+      @apply absolute right-0 top-0 z-20 text-gray-400 hover:text-gray-100;
       svg {
         @apply m-2 h-12 w-12 xl:h-10 xl:w-10 md:h-8 md:w-8 sm:h-6 sm:w-6;
       }

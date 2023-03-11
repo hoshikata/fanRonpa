@@ -20,6 +20,8 @@
     gap: '2%',
     autoWidth: true,
     focus: 'center',
+    lazyLoad: 'nearby',
+    preloadPages: 3,
     arrows: false,
     pagination: false,
     autoScroll: { speed: 0.8, autoStart: false },
@@ -32,9 +34,10 @@
 
   const observer = new IntersectionObserver(
     ([entry]) => {
+      if (!splide.value) return;
       const status = entry.isIntersecting;
-      const splideList = splide.value.root.firstChild.firstChild;
-      const { AutoScroll } = splide.value.splide.Components;
+      const splideList = splide.value?.root.firstChild.firstChild;
+      const { AutoScroll } = splide.value?.splide.Components;
       if (status) {
         splideList.style.willChange = 'transform';
         AutoScroll.play();
@@ -52,14 +55,14 @@
     { id: 9, src: 'https://images.plurk.com/5GO8xZITRXkJLLQlRx747X.png' },
     { id: 7, src: 'https://images.plurk.com/wnajJXSYGOusXuqkqkkTD.png' },
     { id: 12, src: 'https://images.plurk.com/OMcZwSfj8Qmvi9dd2CDzE.png' },
-    { id: 4, src: 'https://images.plurk.com/3t6xeOyZ0QZ3MtieQblINy.png' },
+    { id: 4, src: 'https://images.plurk.com/2SZWYkilMV3mkYegp6hCI1.png ' },
     { id: 0, src: 'https://images.plurk.com/7Cs3PcrDKxfDf5VDx9j6iD.png' },
-    { id: 8, src: 'https://images.plurk.com/1hPH0uM6NVc0OKjbl67997.png' },
+    { id: 8, src: 'https://images.plurk.com/4Md3auuvHOUv1191vD6b14.png' },
     { id: 11, src: 'https://images.plurk.com/5FdxBLaH152pxxiImaMaeR.png' },
     { id: 5, src: 'https://images.plurk.com/1THWkDxQGj8UgGVuF0sVh9.png' },
     { id: 6, src: 'https://images.plurk.com/1pA35DJZdC12zRlvnbph0L.png' },
     { id: 10, src: 'https://images.plurk.com/5bfjjniLPUEnXkCdcLaYo3.png' },
-    { id: 1, src: 'https://images.plurk.com/6Y4QzhsQ6nwJ3qbty5ZFpu.png' },
+    { id: 1, src: 'https://images.plurk.com/5ZvcGP6CaFIZzdx8yIoMeq.png' },
   ];
   const cardImg = (name, id) => {
     const imgSrc = imgList.find((item) => item.id === id)?.src;
@@ -142,12 +145,12 @@ div
       transform-origin: 50% 28%;
     }
     &_5 .splide_img {
-      @apply h-[180%] -translate-x-[52%] -translate-y-[2%];
+      @apply h-[185%] -translate-x-[52%] -translate-y-[3%];
       transform-origin: 58% 25%;
     }
     &_6 .splide_img {
-      @apply h-[210%] -translate-x-[48%] translate-y-[1%];
-      transform-origin: 52% 25%;
+      @apply h-[225%] -translate-x-[48%] translate-y-[0%];
+      transform-origin: 52% 20%;
     }
     &_7 .splide_img {
       @apply -translate-x-[48%] -translate-y-[10%];
@@ -155,14 +158,14 @@ div
     }
     &_8 .splide_img {
       @apply -translate-x-[39%] -translate-y-[20%] -rotate-12;
-      transform-origin: 50% 44%;
+      transform-origin: 52% 42%;
     }
     &_9 .splide_img {
-      @apply -translate-x-[58%] -translate-y-[2%];
+      @apply h-[190%] -translate-x-[58%] -translate-y-[2%];
       transform-origin: 70% 30%;
     }
     &_10 .splide_img {
-      @apply h-[170%] -translate-x-[40%] translate-y-[2%];
+      @apply h-[170%] -translate-x-[41%] translate-y-[2%];
       transform-origin: 54% 25%;
     }
     &_11 .splide_img {
