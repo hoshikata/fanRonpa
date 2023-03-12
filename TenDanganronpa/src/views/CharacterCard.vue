@@ -89,8 +89,13 @@ div
 
 <style lang="scss" scoped>
   .splide {
-    &_box:nth-child(odd) {
-      @apply mt-5;
+    &_box {
+      &:nth-child(odd) {
+        @apply mt-5;
+      }
+      &:nth-child(even) {
+        @apply mb-5;
+      }
     }
     &_card {
       @apply relative z-10 h-[600px] w-48 overflow-hidden border-2 border-current duration-300;
