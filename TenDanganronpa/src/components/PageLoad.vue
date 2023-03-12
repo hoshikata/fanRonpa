@@ -64,7 +64,7 @@
     }
 
     &_bar {
-      @apply relative mt-2 h-3 w-1/2 rounded-full text-white/25;
+      @apply relative mt-2 h-3 w-1/2 max-w-[500px] rounded-full text-white/25;
       &::before {
         @apply absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full border border-current content-[''];
         width: calc(100% + 8px);

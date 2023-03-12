@@ -1,5 +1,6 @@
 <script setup>
   import izayoi from '../components/prediction/izayoi.vue';
+  import Footer from '../components/Footer.vue';
   import { RouterLink, useRoute, useRouter } from 'vue-router';
   import { ref, computed } from 'vue';
   import { useLang } from '../stores/useLang.js';
@@ -53,28 +54,31 @@
 </script>
 
 <template lang="pug">
-nav.prediction_nav
-  button.logo(@click="goBack", :class="`logo-${lang}`")
-  .flex.items-center.self-end
-    button.prediction_lang(@click="changeLang('jp')") 日本語
-    button.prediction_lang(@click="changeLang('zh')") 中文
-    button.prediction_lang(@click="changeLang('en')") English
+.flex.min-h-screen.flex-col
+  nav.prediction_nav
+    button.logo(@click="goBack", :class="`logo-${lang}`")
+    .flex.items-center.self-end
+      button.prediction_lang(@click="changeLang('jp')") 日本語
+      button.prediction_lang(@click="changeLang('zh')") 中文
+      button.prediction_lang(@click="changeLang('en')") English
 
-main.prediction
-  .prediction_container
-    .relative(v-for="charData of charData", class="w-1/4")
-      .prediction_box.group
-        img.invisible.relative.-z-10.h-full.w-full(src="../assets/image/iei_bg.png")
-        img.prediction_item.object-contain(:src="publicSrc(`/prediction/${charData.img_name}.png`)")
-        img.prediction_item.prediction_frame(:class="ieiStyle(charData.id)", src="../assets/image/iei_frame.png")
-        izayoi.prediction_item(:class="crossStyle(charData.id)")
-        img.prediction_item.prediction_frame(:class="ieiStyle(charData.id)", src="../assets/image/iei_ribbon.png")
-        button.prediction_item(@click="changeStatus(charData.id)")
+  main.prediction
+    .prediction_container
+      .relative(v-for="charData of charData", class="w-1/4")
+        .prediction_box.group
+          img.invisible.relative.-z-10.h-full.w-full(src="../assets/image/iei_bg.png")
+          img.prediction_item.object-contain(:src="publicSrc(`/prediction/${charData.img_name}.png`)")
+          img.prediction_item.prediction_frame(:class="ieiStyle(charData.id)", src="../assets/image/iei_frame.png")
+          izayoi.prediction_item(:class="crossStyle(charData.id)")
+          img.prediction_item.prediction_frame(:class="ieiStyle(charData.id)", src="../assets/image/iei_ribbon.png")
+          button.prediction_item.pointer-events-auto(@click="changeStatus(charData.id)")
 
-      .prediction_detail
-        p.prediction_ability {{ charData.ability }}
-        p.prediction_name(:class="`prediction_name-${lang}`")
-          span(v-for="(text, index) of charData.name.split(' ')", :class="{ 'mx-1': index }") {{ text }}
+        .prediction_detail
+          p.prediction_ability {{ charData.ability }}
+          p.prediction_name(:class="`prediction_name-${lang}`")
+            span(v-for="(text, index) of charData.name.split(' ')", :class="{ 'mx-1': index }") {{ text }}
+
+  Footer/
 </template>
 
 <style lang="scss" scoped>
@@ -88,7 +92,7 @@ main.prediction
     }
   }
   .prediction {
-    @apply flex min-h-screen items-start justify-center bg-back px-10 text-white;
+    @apply flex grow items-center justify-center bg-back px-10 text-white;
     @apply md:p-5 sm:p-0;
     @apply bg-cover bg-center bg-no-repeat;
     background-size: 101% 101%;
@@ -105,7 +109,7 @@ main.prediction
       }
     }
     &_box {
-      @apply relative m-1;
+      @apply pointer-events-none relative m-1;
       background: url('../assets/image/iei_bg_shape.png') no-repeat center;
       background-size: contain;
       mask: url('../assets/image/iei_shape.svg') no-repeat center;

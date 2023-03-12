@@ -14,10 +14,16 @@
   const { isMobile, mouseX, mouseY, windowMousing, scrollY, windowScrolling } = usePosition();
 
   //== mouse effect
+  const playKey = '10mins_play';
   const playing = ref(true);
   const hasAnimate = ref(false);
   const jumbotron = ref(null);
   const isPlay = computed(() => hasAnimate.value && playing.value);
+
+  const togglePlay = () => {
+    playing.value = !playing.value;
+    localStorage.setItem(playKey, playing.value * 1);
+  };
 
   const setMove = (num) => {
     const w = jumbotron.value?.clientWidth ?? 2;
@@ -47,7 +53,11 @@
     },
     { threshold: 0.1 },
   );
-  onMounted(() => observer.observe(jumbotron.value));
+  onMounted(() => {
+    const status = localStorage.getItem(playKey) ?? true;
+    playing.value = status * 1 ? true : false;
+    observer.observe(jumbotron.value);
+  });
 
   const mountedEvent = () => {
     if (isMobile) windowScrolling();
@@ -131,14 +141,14 @@
 
   .jumbotron_logo(:class="`logo-${lang}`")
 
-  button.jumbotron_play(@click="playing = !playing", title="動畫暫停")
+  button.jumbotron_play(@click="togglePlay")
     IconPause(v-show="playing")
     IconPlay(v-show="!playing")
 </template>
 
 <style lang="scss" scoped>
   .jumbotron {
-    @apply relative z-20 flex w-full items-center justify-center overflow-hidden bg-jumbotron;
+    @apply pointer-events-none relative z-20 flex w-full items-center justify-center overflow-hidden bg-jumbotron;
 
     &-pause .jumbotron_fish {
       // animation-play-state: paused;
@@ -168,7 +178,7 @@
       @apply sm:h-[95%] sm:w-[95%];
     }
     &_play {
-      @apply absolute top-0 right-0 m-2 rounded bg-white/5 p-1 text-secondary hover:bg-white/20 hover:text-primary;
+      @apply pointer-events-auto absolute top-0 right-0 m-2 rounded bg-white/5 p-1 text-secondary hover:bg-white/20 hover:text-primary;
     }
   }
 

@@ -16,7 +16,7 @@
     zh: [
       { title: '標題', content: '槍彈辯駁10MINS ～驚心動魄修學旅行 in the ocean～', class: 'w-28 sm:w-20' },
       { title: '平台', content: 'PC', class: 'w-28 sm:w-20' },
-      { title: '發售日', content: '2023年04月01日', class: 'w-28 sm:w-20' },
+      { title: '發售日', content: '2024年04月01日', class: 'w-28 sm:w-20' },
       { title: '價格', content: 'FREE', class: 'w-28 sm:w-20' },
       { title: '對應語言', content: '中文、日文', class: 'w-28 sm:w-20' },
       { title: '類型', content: '超高速推理動作遊戲', class: 'w-28 sm:w-20' },
@@ -31,7 +31,7 @@
     jp: [
       { title: 'タイトル', content: 'ダンガンロンパ10MINS ～ドキメキ修学旅行 in the ocean～', class: 'w-28 sm:w-20' },
       { title: '機種', content: 'PC', class: 'w-28 sm:w-20' },
-      { title: '発売日', content: '2023年04月01日', class: 'w-28 sm:w-20' },
+      { title: '発売日', content: '2024年04月01日', class: 'w-28 sm:w-20' },
       { title: '価格', content: 'FREE', class: 'w-28 sm:w-20' },
       { title: '対応言語', content: '中国語、日本語', class: 'w-28 sm:w-20' },
       { title: 'ジャンル', content: 'ハイスピード推理アクション', class: 'w-28 sm:w-20' },
@@ -55,7 +55,7 @@ section.products.wrapper
     h2.title.text-gray-100(:title="navText") PRODUCT
 
   .products_container
-    img.w-80(v-src="publicSrc('/image/37f.jpg')", v-parallax:l="500")
+    img.pointer-events-none.w-80(v-src="publicSrc('/image/37f.jpg')", v-parallax:l="500")
     .ml-10(v-parallax:b="500", class="lg:ml-0 lg:mt-10 sm:mt-6")
       .products_tr(v-for="product of productsData", :class="product.tr")
         p.products_th(:class="product.class")
@@ -65,14 +65,14 @@ section.products.wrapper
 
 <style lang="scss" scoped>
   .products {
-    @apply flex min-h-screen flex-col items-center justify-center overflow-hidden bg-cover bg-no-repeat;
-    background-image: linear-gradient(0deg, #00000080, #00000080), url('../assets/image/product_bg.png');
-    background-position: center 45%;
-    background-attachment: fixed;
+    @apply flex min-h-screen flex-col items-center justify-center overflow-hidden;
 
     &::before {
       @apply absolute top-0 left-0 block h-full w-full content-[''];
-      backdrop-filter: blur(10px);
+      @apply bg-cover bg-no-repeat;
+      background-image: linear-gradient(0deg, #00000080, #00000080), url('../assets/image/product_bg.png');
+      background-position: center 45%;
+      background-attachment: fixed;
     }
     &_container {
       @apply relative z-20 flex items-center justify-center bg-back/75 py-8 px-16;

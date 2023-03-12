@@ -29,15 +29,18 @@
     result.birth = (result.birth ?? '').split('-').join('月') + '日';
     return result;
   });
+  const changeCharId = (num) => {
+    const last = characterData.value.length;
+    let newId = activeId.value + num;
+    if (newId < 0) newId = last + newId;
+    if (newId >= last) newId = last - newId;
+    activeId.value = newId;
+  };
   const changeChar = (num) => {
     const container = charContainer.value;
     container.classList.add('opacity-0');
+    setTimeout(() => changeCharId(num), 600);
     setTimeout(() => {
-      const last = characterData.value.length;
-      let newId = activeId.value + num;
-      if (newId < 0) newId = last + newId;
-      if (newId >= last) newId = last - newId;
-      activeId.value = newId;
       container.classList.remove('opacity-0');
     }, 700);
   };
@@ -90,7 +93,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     .character_author.left-0(:class="charAuthor")
     .character_author.right-0.rotate-180(:class="charAuthor") 
 
-    .relative.z-10.flex.shrink-0.flex-col.py-5(class="lg:w-4/7 w-1/2 md:w-full")
+    .character_detail
       .character_title
         .flex.justify-center
           p.mx-5(v-for="name of charName")
@@ -129,7 +132,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     background-image: url('../assets/image/profile_bg.png');
 
     &_container {
-      @apply relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[600ms];
+      @apply pointer-events-none relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[600ms];
       @apply xxl:px-16 xxl:text-lg xxl:tracking-[0.15em];
       @apply xl:px-14;
       @apply lg:px-10;
@@ -138,6 +141,9 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       // &:before {
       //   @apply absolute top-0 left-0 h-full w-full bg-gradient-to-l from-primary to-transparent opacity-20 content-[''];
       // }
+    }
+    &_detail {
+      @apply pointer-events-auto relative z-10 flex w-1/2 shrink-0 flex-col py-5 lg:w-3/5 md:w-full;
     }
     &_title {
       @apply whitespace-nowrap text-center;
@@ -184,11 +190,10 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       mask-position: bottom right;
     }
     &_mantra {
-      @apply box-content flex w-[4em] shrink-0 items-center justify-start px-4 pt-10 text-3xl leading-10 opacity-80;
+      @apply box-content flex w-[5em] shrink-0 items-center justify-start px-4 pt-10 leading-10 opacity-80;
       @apply bg-gradient-to-b from-back via-back to-transparent;
-      @apply xl:text-2xl;
-      @apply lg:text-xl;
-      @apply md:h-[500px] md:px-2 md:py-5 md:text-lg;
+      @apply md:h-[500px] md:px-2 md:py-5;
+      @apply text-2xl xl:text-xl lg:text-base md:text-sm;
       writing-mode: vertical-rl;
       p:nth-child(2) {
         @apply indent-[3em] md:indent-[2em];
@@ -232,7 +237,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       }
     }
     &_next {
-      @apply absolute top-0 z-10 h-full w-20 px-3 text-white/50 opacity-0 hover:opacity-100;
+      @apply pointer-events-auto absolute top-0 z-10 h-full w-20 px-3 text-white/50 opacity-0 hover:opacity-100;
       @apply bg-gradient-to-l from-white/20  to-transparent;
       @apply md:w-16;
       svg {
@@ -240,6 +245,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       }
     }
   }
+
   .hr {
     @apply my-3 h-0.5 w-full shrink-0 bg-gradient-to-r from-primary via-primary to-transparent;
   }

@@ -34,6 +34,7 @@ header.header
       RouterLink.nav_link(
         @click="switchNav(false)",
         :to="{ name: 'index', hash: `#${item.name}` }",
+        :class="{ 'pointer-events-none line-through': item.disabled }",
         :title="item.text"
       ) {{ item.title }}
 

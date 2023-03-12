@@ -49,7 +49,7 @@ section.characters.wrapper
     RouterLink.characters_button(:to="{ name: 'prediction', query: { lang: lang } }")
       span.font-sans.tracking-widest {{ lang === 'jp' ? '生死予想シート' : '生死預測表' }} →
 
-  CharacterCard.-mx-12(@open="openPopup", v-parallax="500", class="lg:-mx-10 sm:-mx-8")
+  CharacterCard.fullpage(@open="openPopup", v-parallax="500")
 
 .characters_popup(@click="closePopup", v-show="popup", ref="charPopup")
   button.characters_close

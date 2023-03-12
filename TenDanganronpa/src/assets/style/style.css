@@ -73,6 +73,9 @@
 .wrapper_hash {
   @apply absolute top-0 left-0 h-0 w-full -translate-y-full md:h-[64px];
 }
+.fullpage {
+  @apply -mx-12 lg:-mx-10 sm:-mx-5;
+}
 
 .logo {
   @apply mr-auto block h-20 w-44 bg-current;

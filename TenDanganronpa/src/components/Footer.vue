@@ -21,7 +21,7 @@ footer.relative.z-20.bg-jumbotron.text-white
       p.footer_copyright © 2023 Tennan Gakuen Seisaku Iinkai lnc.
 
     RouterLink.block.shrink-0(:to="{ name: 'index', hash: '#home' }")
-      img.m-3.h-16.w-16(class="sm:m-0", src="/image/tennan.svg", title="天南学園製作委員会")
+      img.pointer-events-none.m-3.h-16.w-16(class="sm:m-0", src="/image/tennan.svg", title="天南学園製作委員会")
 </template>
 
 <style lang="scss" scoped>
@@ -38,7 +38,7 @@ footer.relative.z-20.bg-jumbotron.text-white
       }
     }
     &_copyright {
-      @apply mt-3 border-t border-secondary pt-1 font-sans tracking-widest sm:mt-5 sm:text-center sm:tracking-normal sm:text-sm;
+      @apply mt-3 border-t border-secondary pt-1 font-sans tracking-widest sm:mt-5 sm:text-center sm:text-sm sm:tracking-normal;
     }
   }
 </style>

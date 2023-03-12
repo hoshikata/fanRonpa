@@ -1,5 +1,6 @@
 <script setup>
   import Navigation from '../components/Navigation.vue';
+  import Footer from '../components/Footer.vue';
   import PageLoad from '../components/PageLoad.vue';
   import Snow from '../components/Snow.vue';
   import Jumbotron from './Jumbotron.vue';
@@ -16,8 +17,9 @@ Jumbotron/
 Navigation/
 Story/
 Character/
-Special/
+//- Special/
 Products/
+Footer/
 </template>
 
 <style lang="scss" scoped></style>

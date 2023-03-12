@@ -61,7 +61,7 @@
     { id: 11, src: 'https://images.plurk.com/5FdxBLaH152pxxiImaMaeR.png' },
     { id: 5, src: 'https://images.plurk.com/1THWkDxQGj8UgGVuF0sVh9.png' },
     { id: 6, src: 'https://images.plurk.com/1pA35DJZdC12zRlvnbph0L.png' },
-    { id: 10, src: 'https://images.plurk.com/5bfjjniLPUEnXkCdcLaYo3.png' },
+    { id: 10, src: 'https://images.plurk.com/3AC77jy65UNFqQ90hRaYPl.png' },
     { id: 1, src: 'https://images.plurk.com/5ZvcGP6CaFIZzdx8yIoMeq.png' },
   ];
   const cardImg = (name, id) => {
@@ -137,7 +137,7 @@ div
       transform-origin: 55% 28%;
     }
     &_1 .splide_img {
-      @apply -translate-x-[41%] -translate-y-[1%];
+      @apply h-[210%] -translate-x-[41%] -translate-y-[1%];
       transform-origin: 50% 28%;
     }
     &_4 .splide_img {
@@ -165,11 +165,11 @@ div
       transform-origin: 70% 30%;
     }
     &_10 .splide_img {
-      @apply h-[170%] -translate-x-[41%] translate-y-[2%];
-      transform-origin: 54% 25%;
+      @apply h-[170%] -translate-x-[39%] -translate-y-[1%];
+      transform-origin: 54% 30%;
     }
     &_11 .splide_img {
-      @apply h-[255%] -translate-x-[46%] -translate-y-[5%];
+      @apply h-[250%] -translate-x-[46%] -translate-y-[5%];
       transform-origin: 50% 23%;
     }
     &_12 .splide_img {
