@@ -8,7 +8,7 @@
 <template lang="pug">
 footer.relative.z-20.bg-jumbotron.text-white
   .footer
-    .m-3.grow
+    .m-3.grow(class="sm:mt-0")
       .-mx-2.flex.flex-wrap(class="sm:justify-center")
         a.footer_link(
           v-for="twitter of twitterList",
@@ -38,7 +38,7 @@ footer.relative.z-20.bg-jumbotron.text-white
       }
     }
     &_copyright {
-      @apply mt-3 border-t border-secondary pt-1 font-sans tracking-widest sm:mt-5 sm:text-center sm:text-sm sm:tracking-normal;
+      @apply mt-3 border-t border-secondary pt-1 font-sans text-sm tracking-widest sm:mt-5 sm:text-center sm:text-xs sm:tracking-normal;
     }
   }
 </style>

@@ -97,7 +97,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
       .character_title
         .flex.justify-center
           p.mx-5(v-for="name of charName")
-            h1.text-7xl.font-semibold {{ name[0] }}
+            h1 {{ name[0] }}
             h2.text-primary {{ name[1] }}
         h3.mt-3.flex.flex-wrap.justify-center.text-2xl(class="md:mt-2 md:text-xl")
           span {{ abilityText }}
@@ -132,11 +132,11 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     background-image: url('../assets/image/profile_bg.png');
 
     &_container {
-      @apply pointer-events-none relative z-10 flex w-full grow px-20 text-xl tracking-[0.2em] duration-[600ms];
-      @apply xxl:px-16 xxl:text-lg xxl:tracking-[0.15em];
+      @apply pointer-events-none relative z-10 flex w-full grow px-20 text-lg tracking-[0.2em] duration-[600ms];
+      @apply xxl:px-16 xxl:text-base xxl:tracking-[0.15em];
       @apply xl:px-14;
       @apply lg:px-10;
-      @apply md:flex-col-reverse md:px-8 md:text-base;
+      @apply md:flex-col-reverse md:px-8 md:text-sm md:tracking-[0.12em];
       @apply sm:px-5;
       // &:before {
       //   @apply absolute top-0 left-0 h-full w-full bg-gradient-to-l from-primary to-transparent opacity-20 content-[''];
@@ -148,8 +148,7 @@ section.character.scrollbar.overflow-y-auto.overscroll-none
     &_title {
       @apply whitespace-nowrap text-center;
       h1 {
-        @apply xl:text-5xl;
-        @apply md:text-4xl;
+        @apply text-7xl font-semibold xl:text-5xl md:text-4xl;
       }
     }
     &_info {

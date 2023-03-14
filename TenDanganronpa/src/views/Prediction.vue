@@ -28,6 +28,7 @@
     router.push({ name: 'index', hash: '#home' });
   };
 
+  //== iei style
   const statusList = () => {
     const result = [];
     for (let n = 0; n < 16; n++) {
@@ -84,11 +85,12 @@
 <style lang="scss" scoped>
   .prediction {
     &_nav {
-      @apply relative z-10 flex items-center bg-jumbotron py-1 px-5 text-white;
+      @apply relative z-10 flex bg-jumbotron py-1 px-5 text-white;
+      @apply md:px-3;
     }
     &_lang {
       @apply m-3 px-2 font-sans font-medium hover:text-primary;
-      @apply sm:m-1 sm:px-1 sm:text-sm;
+      @apply md:m-1.5 sm:m-1 sm:px-1 sm:text-sm;
     }
   }
   .prediction {
@@ -123,7 +125,7 @@
     }
     &_detail {
       @apply absolute bottom-0 left-0 w-full bg-back/75 p-1.5 text-center tracking-widest;
-      @apply lg:text-sm md:relative md:p-0.5 md:text-sm sm:p-0;
+      @apply lg:text-sm md:relative md:p-0.5 md:text-xs sm:p-0;
     }
     &_ability {
       @apply text-sm lg:text-xs md:text-[0.6rem] sm:hidden;

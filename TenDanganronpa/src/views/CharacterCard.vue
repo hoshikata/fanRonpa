@@ -142,7 +142,7 @@ div
       transform-origin: 55% 28%;
     }
     &_1 .splide_img {
-      @apply h-[210%] -translate-x-[41%] -translate-y-[1%];
+      @apply h-[215%] -translate-x-[41%] -translate-y-[1%];
       transform-origin: 50% 28%;
     }
     &_4 .splide_img {
